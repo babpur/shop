@@ -17,8 +17,10 @@
 
 <%
 	// request 
+	String empId = request.getParameter("empId");
 	String active = request.getParameter("active");
 	
+	System.out.println(empId);
 	System.out.println(active);
 
 	Class.forName("org.mariadb.jdbc.Driver");
@@ -38,9 +40,11 @@
 	if("ON".equals(active)) {
 		stmt.setString(1, "OFF");
 		stmt.setString(2, "ON");
+		stmt.setString(3, "empId");
 	} else {
 		stmt.setString(1, "ON");
 		stmt.setString(2, "OFF");
+		stmt.setString(3, "empId");
 	}
 	System.out.println("stmt: " + stmt);
 

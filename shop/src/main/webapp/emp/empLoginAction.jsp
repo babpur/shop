@@ -45,7 +45,7 @@
 	
 	if(rs.next()){
 		System.out.println("로그인 성공");
-		response.sendRedirect("./empList.jsp");
+		response.sendRedirect("/shop/emp/empList.jsp");
 		session.setAttribute("loginEmp", rs.getString("empId"));
 	} else {
 		System.out.println("로그인 실패");

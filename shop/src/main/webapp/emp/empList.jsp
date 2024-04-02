@@ -14,54 +14,92 @@
 		response.sendRedirect("/shop/emp/empLoginForm.jsp");
 		return;
 	}
+%>	
+<%
+	// DB
+	Class.forName("org.mariadb.jdbc.Driver");
+	Connection conn = null;
+
 %>
-<!-- Model Layer -->
+
 <%
 	// request 분석
+	// 현재 페이지
 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null) {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	
+	// 한 페이지에 출력할 직원 리스트
 	int rowPerPage = 10;
+	
+	// 시작 페이지 = (현재 페이지 -1) * 한 페이지에 출력할 직원 리스트 
 	int startRow = (currentPage-1) * rowPerPage;
+	
+	// 전체 직원의 수
+	String sql1 = "SELECT count(*) cnt FROM emp WHERE emp_id LIKE '%%'";
+	PreparedStatement stmt1 = null;
+	ResultSet rs1 = null; 
+	stmt1 = conn.prepareStatement(sql1);
+	rs1 = stmt1.executeQuery();
+	
+	
+	int totalRow = 0;
+	
+	if(rs1.next()){
+		totalRow = rs1.getInt("cnt");
+	}
+	
+	// 마지막 페이지 계산하기 = 전체 회원수 / 한 페이지에서 보이는 인원수
+	int lastPage = totalRow / rowPerPage;
+	
+	// 인원이 딱 맞게 나누어 떨어지지 않을 때 마지막 페이지 + 1 해 준다. 
+	if(totalRow % rowPerPage != 0){
+		lastPage = lastPage +1 ;
+	}
+	
+	System.out.println("lastPage: " + lastPage);
+	System.out.println("totalRow: " + totalRow);
+	System.out.println("rowPerPage: " + rowPerPage);
+	System.out.println("startRow: " + startRow);
+	System.out.println("rowPerPage: " + rowPerPage);
+	
 %>
 
+<!-- Model Layer -->
 <%
-	// 모델: 특후나 형태의 데이터 (RDBMS: mariadb)
+	// 모델: 특수한 형태의 데이터 (RDBMS: mariadb)
 	// -> API 사용하여 (JDBC API) 자료 구조(ResultSet) 취득
 	// -> 일반화된 자료 구조로(ArrayList<HashMap> 변경 -> 모델 취득
 
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection conn = null;
-	PreparedStatement stmt = null;
-	ResultSet rs = null;
 	
+	PreparedStatement stmt2 = null;
+	ResultSet rs2 = null;
 	/*
 		select emp_id empId, emp_name empName, emp_job empJob, hire_date hireDate active from emp order by active asc, hire_date desc;
 	*/
-	String sql = "select emp_id empId, emp_name empName, emp_job empJob, hire_date hireDate, active from emp order by hire_date desc limit ?, ?;";
+	String sql2 = "select emp_id empId, emp_name empName, emp_job empJob, hire_date hireDate, active from emp order by hire_date desc limit ?, ?;";
 	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 
-	stmt = conn.prepareStatement(sql);
-	stmt.setInt(1, startRow);
-	stmt.setInt(2, rowPerPage);
+	stmt2 = conn.prepareStatement(sql2);
+	stmt2.setInt(1, startRow);
+	stmt2.setInt(2, rowPerPage);
 	
-	System.out.println("stmt: " + stmt);
+	System.out.println("stmt2: " + stmt2);
 	
-	rs = stmt.executeQuery(); 
+	rs2 = stmt2.executeQuery(); 
 	// JDBC API에 종속된 자료 구조 모델 ResultSet-> 기본 API 자료 구조로 변경(ArrayList)
 	ArrayList<HashMap<String, Object>> list // Object: 모든 타입의 부모
 		= new ArrayList<HashMap<String, Object>>();
 	
 	// ResultSet -> ArrayList<HashMap<String, Object>>
-	while(rs.next()) {
+	while(rs2.next()) {
 		HashMap<String, Object> m = new HashMap<String, Object>();
-		m.put("empId", rs.getString("empId"));
-		m.put("empName", rs.getString("empName"));
-		m.put("empJob", rs.getString("empJob"));
-		m.put("hireDate", rs.getString("hireDate"));
-		m.put("active", rs.getString("active"));
+		m.put("empId", rs2.getString("empId"));
+		m.put("empName", rs2.getString("empName"));
+		m.put("empJob", rs2.getString("empJob"));
+		m.put("hireDate", rs2.getString("hireDate"));
+		m.put("active", rs2.getString("active"));
 		list.add(m);
 	}
 	
@@ -111,7 +149,10 @@
 	    
 	    /* https://kor.pngtree.com/back/down?id=MTE1NzkyMA==&type=1&time=1712045765&token=YzUyZTdlMThlZmE0N2MxY2YxMDQ5NTI4OGE4OWRhYjA=&t=0 */
 	    background-image: url("/shop/img/backgroundLoginForm.png");
-	    opacity: 50;
+	    background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100vh;
 	}
 	
 	main {
@@ -142,9 +183,21 @@
 		margin: auto;
 		align-items: center;
 	}
+	.navHead {
+		color: #FFFFFF;
+		font-size: 30px;
+	}
 	</style>
 </head>
 <body>
+	<nav class="navbar navbar-dark bg-dark">
+		<div class="navbar-nav">
+		    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/empList">SHOP</a>
+	    </div>
+	    <div class="navbar-nav">
+		    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/empLogout.jsp">LOGOUT</a>
+	    </div>
+	</nav><br>
 	<head>
 		<h1>사원 목록</h1>
 	</head>
@@ -169,7 +222,7 @@
 						<td><%=(String)(m.get("empJob"))%></td>
 						<td><%=(String)(m.get("hireDate"))%></td>
 						<td>
-							<a href="/shop/emp/modifyEmpActive.jsp?active=<%=(String)(m.get("active"))%>">
+							<a href="/shop/emp/modifyEmpActive.jsp?empId=<%=(String)(m.get("empId"))%>&active=<%=(String)(m.get("active"))%>">
 								<%=(String)(m.get("active"))%>
 								<!-- 스위치 역할을 함 -->
 							</a>
@@ -180,6 +233,51 @@
 			%>
 		</tbody>
 		</table>
+		<nav aria-label="Page navigation"><br>
+			<ul class="pagination justify-content-center">
+				<%
+					if (currentPage > 1) {
+				%>
+						<li class="page-item">
+							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=1">처음</a>
+						</li>
+						<li class="page-item">	 
+							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=currentPage - 1%>">이전</a>
+						</li>
+				<%
+					} else {
+				%>	
+						<li class="page-item disabled">
+							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=1">처음</a>
+						</li>
+						<li class="page-item disabled">
+							<a class="page-link" href="/shop/emp/empist.jsp?currentPage=<%=currentPage - 1%>">이전</a>
+						</li>
+				<%		
+					}
+				
+					if(currentPage < lastPage) {
+				%>
+						<li class="page-item">
+							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=lastPage+1%>">마지막</a>
+						</li>
+				<%		
+					} else {
+				%>
+						<li class="page-item disabled">
+							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
+						</li>
+						<li class="page-item disabled">
+							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=lastPage+1%>">마지막</a>
+						</li>
+				<%		
+					}
+				%>
+			</ul>
+		</nav>
 	</main>
 </body>
 </html>
