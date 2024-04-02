@@ -17,14 +17,20 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<style>
-		main {
-			justify-content: center;
-		}
-		
-		.form-container {
-			justify-content: center;
-		}
-	
+	@font-face {
+		/* 고령딸기체 */	
+	    font-family: 'GoryeongStrawberry';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/GoryeongStrawberry.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	body {
+		/* 고령딸기체 전체 적용 */	
+	    font-family: 'GoryeongStrawberry';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/GoryeongStrawberry.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
 	
 	</style>
 </head>
