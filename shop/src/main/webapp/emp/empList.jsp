@@ -19,6 +19,7 @@
 	// DB
 	Class.forName("org.mariadb.jdbc.Driver");
 	Connection conn = null;
+	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 
 %>
 
@@ -37,12 +38,11 @@
 	int startRow = (currentPage-1) * rowPerPage;
 	
 	// 전체 직원의 수
-	String sql1 = "SELECT count(*) cnt FROM emp WHERE emp_id LIKE '%%'";
+	String sql1 = "SELECT count(*) cnt FROM emp";
 	PreparedStatement stmt1 = null;
 	ResultSet rs1 = null; 
 	stmt1 = conn.prepareStatement(sql1);
 	rs1 = stmt1.executeQuery();
-	
 	
 	int totalRow = 0;
 	
@@ -192,7 +192,7 @@
 <body>
 	<nav class="navbar navbar-dark bg-dark">
 		<div class="navbar-nav">
-		    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/empList">SHOP</a>
+		    <a class="nav-link active navHead" aria-current="page" href="">SHOP</a>
 	    </div>
 	    <div class="navbar-nav">
 		    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/empLogout.jsp">LOGOUT</a>
@@ -222,10 +222,17 @@
 						<td><%=(String)(m.get("empJob"))%></td>
 						<td><%=(String)(m.get("hireDate"))%></td>
 						<td>
-							<a href="/shop/emp/modifyEmpActive.jsp?empId=<%=(String)(m.get("empId"))%>&active=<%=(String)(m.get("active"))%>">
-								<%=(String)(m.get("active"))%>
-								<!-- 스위치 역할을 함 -->
-							</a>
+							<%
+								HashMap<String, Object> sm = (HashMap<String, Object>)(session.getAttribute("loginEmp"));
+								if((Integer)(sm.get("grade")) > 0) {
+							%>	 --%>
+								<a href="/shop/emp/modifyEmpActive.jsp?empId=<%=(String)(m.get("empId"))%>&active=<%=(String)(m.get("active"))%>">
+									<%=(String)(m.get("active"))%>
+									<!-- 스위치 역할을 함 -->
+								</a>
+							<%		
+								}
+							%>
 						</td>
 					</tr>	
 			<%		
@@ -271,7 +278,7 @@
 							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
 						</li>
 						<li class="page-item disabled">
-							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=lastPage+1%>">마지막</a>
+							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=lastPage%>">마지막</a>
 						</li>
 				<%		
 					}

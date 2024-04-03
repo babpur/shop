@@ -85,7 +85,7 @@
 		margin: auto;
 		align-items: center;
 		background-color: #FFFFFF;
-		width: 20%;
+		width: 25%;
 		padding: 20px;
 	}
 	table {

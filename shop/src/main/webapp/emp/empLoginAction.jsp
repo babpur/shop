@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.net.*" %>
+<%@ page import="java.util.*"%>
 
 <%
 	System.out.println("----------");
@@ -24,7 +25,7 @@
 	/* 
 		select emp_id empId from emp where active='ON' and emp_id = ? and emp_pw = password(?)
 	*/
-	String sql = "select emp_id empId from emp where active='ON' and emp_id = ? and emp_pw = password(?)";
+	String sql = "select emp_id empId, emp_name empName, grade from emp where active='ON' and emp_id = ? and emp_pw = password(?)";
 	
 	Class.forName("org.mariadb.jdbc.Driver");
 	
@@ -45,8 +46,22 @@
 	
 	if(rs.next()){
 		System.out.println("로그인 성공");
+		// 세션 변수 안에 여러 개의 값을 저장하기 위해서 HashMap을 사용하겠다.
+		HashMap<String, Object> loginEmp = new HashMap<String, Object>();
+		loginEmp.put("empId", rs.getString("empId"));
+		loginEmp.put("empName", rs.getString("empName"));
+		loginEmp.put("grade", rs.getString("grade"));
+		
+		session.setAttribute("loginEmp", loginEmp);
+
+		// 디버깅 (로그인 세션 변수)
+		HashMap<String, Object> m = (HashMap<String, Object>)(session.getAttribute("loginEmp"));
+		System.out.println((String)(m.get("empId")));
+		System.out.println((String)(m.get("empName")));
+		System.out.println((Integer)(m.get("grade")));
+		
 		response.sendRedirect("/shop/emp/empList.jsp");
-		session.setAttribute("loginEmp", rs.getString("empId"));
+
 	} else {
 		System.out.println("로그인 실패");
 		String errMsg = URLEncoder.encode("잘못된 접근입니다. \n ID와 비밀번호를 확인해 주세요", "utf-8");
