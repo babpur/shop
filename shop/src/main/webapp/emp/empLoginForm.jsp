@@ -115,11 +115,11 @@
 			
 				<tr>
 					<td>아이디: </td>
-					<td><input type="text" name="empId" placeholder="아이디를 입력해 주세요"></td>
+					<td><input type="text" name="empId" placeholder="아이디를 입력해 주세요" ></td>
 				</tr>
 				<tr>
 					<td>비밀번호: </td>
-					<td><input type="password" name="empPw" placeholder="비밀번호를 입력해 주세요"></td>
+					<td><input type="password" name="empPw" placeholder="비밀번호를 입력해 주세요" ></td>
 				</tr>
 				<br>
 				<tr>

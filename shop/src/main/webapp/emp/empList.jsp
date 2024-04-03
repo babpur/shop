@@ -79,7 +79,6 @@
 		select emp_id empId, emp_name empName, emp_job empJob, hire_date hireDate active from emp order by active asc, hire_date desc;
 	*/
 	String sql2 = "select emp_id empId, emp_name empName, emp_job empJob, hire_date hireDate, active from emp order by hire_date desc limit ?, ?;";
-	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 
 	stmt2 = conn.prepareStatement(sql2);
 	stmt2.setInt(1, startRow);
@@ -135,10 +134,11 @@
 		color: #000000;
 	}
 	a:hover {
-		color: #FFFFFF;
+		color: #000000;
 	}
 	a:active {
 		color: #FFFFFF;
+		background-color: #000000;
 	}
 	body {
 		/* 고령딸기체 전체 적용 */	
@@ -198,6 +198,9 @@
 		    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/empLogout.jsp">LOGOUT</a>
 	    </div>
 	</nav><br>
+	<!-- empMenu.jsp include: 주체(서버) vs redirect: 주체(클라이언트) -->
+	<!-- 주체가 클라이언트가 아니기 때문에 sendRedirect처럼 경로가 /shop/.... 아님 -->
+	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 	<head>
 		<h1>사원 목록</h1>
 	</head>
@@ -223,16 +226,16 @@
 						<td><%=(String)(m.get("hireDate"))%></td>
 						<td>
 							<%
-								HashMap<String, Object> sm = (HashMap<String, Object>)(session.getAttribute("loginEmp"));
-								if((Integer)(sm.get("grade")) > 0) {
-							%>	 --%>
+								HashMap<String, Object> sm = (HashMap<String, Object>)session.getAttribute("loginEmp");
+								if((Integer) sm.get("grade") > 0) {
+							%>	
 								<a href="/shop/emp/modifyEmpActive.jsp?empId=<%=(String)(m.get("empId"))%>&active=<%=(String)(m.get("active"))%>">
 									<%=(String)(m.get("active"))%>
 									<!-- 스위치 역할을 함 -->
 								</a>
 							<%		
 								}
-							%>
+							%> 
 						</td>
 					</tr>	
 			<%		

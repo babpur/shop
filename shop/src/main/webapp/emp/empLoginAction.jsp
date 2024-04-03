@@ -50,12 +50,12 @@
 		HashMap<String, Object> loginEmp = new HashMap<String, Object>();
 		loginEmp.put("empId", rs.getString("empId"));
 		loginEmp.put("empName", rs.getString("empName"));
-		loginEmp.put("grade", rs.getString("grade"));
+		loginEmp.put("grade", rs.getInt("grade"));
 		
 		session.setAttribute("loginEmp", loginEmp);
 
 		// 디버깅 (로그인 세션 변수)
-		HashMap<String, Object> m = (HashMap<String, Object>)(session.getAttribute("loginEmp"));
+		HashMap<String, Object> m = (HashMap<String, Object>)session.getAttribute("loginEmp");
 		System.out.println((String)(m.get("empId")));
 		System.out.println((String)(m.get("empName")));
 		System.out.println((Integer)(m.get("grade")));
