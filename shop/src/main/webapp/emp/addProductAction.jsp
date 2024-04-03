@@ -18,8 +18,16 @@
 <!-- Session 설정값 -->
 <!-- 입력 시 emp의 emp_id값이 필요함. -->
 <%
-	String loginEmp = (String)(session.getAttribute("loginEmp"));
-	System.out.println("loginEmp" + loginEmp);
+	// 로그인 세션에서  emp_id 가져오기 
+	HashMap<String, Object> loginEmp = (HashMap<String, Object>)session.getAttribute("loginEmp");
+    String empId = null;
+    if(loginEmp != null) {
+        // HashMap에서 empId 값 가져오기
+        empId = (String)loginEmp.get("empId");
+    }
+    
+    System.out.println("empId: " + empId);
+
 
 %>
 <!-- Model Layer -->
@@ -29,6 +37,8 @@
 	int productPrice = Integer.parseInt(request.getParameter("productPrice"));
 	int productAmount = Integer.parseInt(request.getParameter("productAmount"));
 	String productContent = request.getParameter("productContent");
+	
+	
 	
 	System.out.println("category: " + category);
 	System.out.println("productTitle: " + productTitle);
@@ -45,17 +55,16 @@
 	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 	
 
-	String sql = "INSERT INTO product(category, emp_id, product_title, product_price, product_amount, product_content) VALUES(?, ?, ?, ?, ?, ?) where category = ?";	
+	String sql = "INSERT INTO product(category, emp_id, product_title, product_price, product_amount, product_content) VALUES(?, ?, ?, ?, ?, ?)";	
 	
 	stmt = conn.prepareStatement(sql);
 	
 	stmt.setString(1, category);
-	stmt.setString(2, emp_id);
+	stmt.setString(2, empId);
 	stmt.setString(3, productTitle);
 	stmt.setInt(4, productPrice);
 	stmt.setInt(5, productAmount);
 	stmt.setString(6, productContent);
-	stmt.setString(7, category);
 	
 	System.out.println("stmt: " + stmt);
 	

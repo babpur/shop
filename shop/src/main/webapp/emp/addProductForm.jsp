@@ -77,7 +77,7 @@
 			productContent 
 			<textarea type="text" row="5" cols="50" name="productContent"></textarea>
 		</div>
-		<button type="button">상품 등록</button>
+		<button type="submit">상품 등록</button>
 	</form>
 </body>
 </html>
