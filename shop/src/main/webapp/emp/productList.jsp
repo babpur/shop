@@ -287,7 +287,7 @@
 							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=1">처음</a>
 						</li>
 						<li class="page-item">	 
-							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage - 1%>">이전</a>
+							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
 						</li>
 				<%
 					} else {
@@ -296,7 +296,7 @@
 							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=1">처음</a>
 						</li>
 						<li class="page-item disabled">
-							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage - 1%>">이전</a>
+							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
 						</li>
 				<%		
 					}
@@ -304,7 +304,7 @@
 					if(currentPage < lastPage) {
 				%>
 						<li class="page-item">
-							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
+							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
 						</li>
 						<li class="page-item">
 							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
@@ -313,7 +313,7 @@
 					} else {
 				%>
 						<li class="page-item disabled">
-							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
+							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
 						</li>
 						<li class="page-item disabled">
 							<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
