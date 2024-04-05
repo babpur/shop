@@ -183,21 +183,9 @@
 		margin: auto;
 		align-items: center;
 	}
-	.navHead {
-		color: #FFFFFF;
-		font-size: 30px;
-	}
 	</style>
 </head>
 <body>
-	<nav class="navbar navbar-dark bg-dark">
-		<div class="navbar-nav">
-		    <a class="nav-link active navHead" aria-current="page" href="">SHOP</a>
-	    </div>
-	    <div class="navbar-nav">
-		    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/empLogout.jsp">LOGOUT</a>
-	    </div>
-	</nav><br>
 	<!-- empMenu.jsp include: 주체(서버) vs redirect: 주체(클라이언트) -->
 	<!-- 주체가 클라이언트가 아니기 때문에 sendRedirect처럼 경로가 /shop/.... 아님 -->
 	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>

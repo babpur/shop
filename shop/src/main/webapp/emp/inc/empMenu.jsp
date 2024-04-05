@@ -24,15 +24,44 @@
 	System.out.println("empName: " + empName);
 	
 %>
+
+<style>
+	.shop-logo {
+		height: 50px;
+		width: 50px;
+		margin-top: 1px;
+		margin-left
+	}
+	.navHead {
+		color: #FFFFFF;
+		font-size: 20px;
+	}
+	.navContainer {
+		height: 70px;
+	}
+</style>
 <!-- include -->
 
-<div>
-	<a href="/shop/emp/empList.jsp">사원 관리</a>
 	<!-- category CRUD -->
-	<a href="/shop/emp/categoryList.jsp">카테고리 관리</a>
-	<a href="/shop/emp/productList.jsp">상품 관리</a>
-	<span>
-		<a href="/shop/emp/empOne.jsp"><%=empName%> 님</a> 반갑습니다
+<nav class="navbar navbar-dark bg-dark navContainer">
+	<div class="navbar-nav">
+	    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/empList.jsp">
+			<img class="shop-logo" src="/shop/img/shopLogo1.png">
+		</a>
+    </div>
+    <div class="navbar-nav">
+	    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/empList.jsp">사원 관리</a>
+    </div>
+    <div class="navbar-nav">
+	    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/categoryList.jsp">카테고리 관리</a>
+    </div>
+    <div class="navbar-nav">
+	    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/productList.jsp">상품 관리</a>
+    </div>
+    <span>
+		<a class="nav-link active navHead" href="/shop/emp/empOne.jsp"><%=empName%> 님 반갑습니다</a> 
 	</span> 
-</div>
-
+    <div class="navbar-nav">
+	    <a class="nav-link active navHead" aria-current="page" href="/shop/emp/empLogout.jsp">LOGOUT</a>
+    </div>
+</nav><br>

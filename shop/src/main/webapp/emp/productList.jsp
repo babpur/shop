@@ -19,6 +19,7 @@
 	Connection conn = null;
 	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
 %>
+
 <%
 	// 현재 페이지
 	int currentPage = 1;
@@ -28,7 +29,7 @@
 	
 	
 	// 한 페이지에 보여질 상품 개수
-	int rowPerPage = 5;
+	int rowPerPage = 8;
 	
 	int startRow = (currentPage -1) * rowPerPage;
 	
@@ -37,8 +38,6 @@
 	PreparedStatement stmt1 = null;
 	ResultSet rs1 = null; 
 	stmt1 = conn.prepareStatement(sql1);
-	stmt1.setInt(1, startRow);
-	stmt1.setInt(2, rowPerPage);
 
 	System.out.println("stmt1: " + stmt1);
 	
@@ -132,6 +131,8 @@
 		m2.put("createDate", rs3.getString("create_date"));
 		productList.add(m2);
 	}
+	
+	
 
 %>
 <!-- view -->
@@ -174,7 +175,13 @@
 	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/GoryeongStrawberry.woff2') format('woff2');
 	    font-weight: normal;
 	    font-style: normal;
-	    
+	     /* https://kor.pngtree.com/back/down?id=MTE1NzkyMA==&type=1&time=1712045765&token=YzUyZTdlMThlZmE0N2MxY2YxMDQ5NTI4OGE4OWRhYjA=&t=0 */
+	    background-image: url("/shop/img/backgroundLoginForm.png");
+	    background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100vh;
+	}
 	}
 	
 	main {
@@ -205,21 +212,15 @@
 		margin: auto;
 		align-items: center;
 	}
-	.navHead {
-		color: #FFFFFF;
-		font-size: 30px;
-	}
 	.card-container {
 		margin: 45px;
 	}
 	.card {
-		height: 70vh;
+		height: 50vh;
+		font-size: 15px;
 	}
 	h2 {
 		margin: 10px;
-	}
-	.cardInCenter {
-		text-align: center;
 	}
 	</style>
 </head>
@@ -246,15 +247,6 @@
 			}
 		%>
 	</div>
-		<!-- 상품 리스트 -->
-			
-					<%-- <tr>
-						<td><%=(Integer)(m2.get("product_no"))%></td>
-						<td><%=(String)(m2.get("category"))%></td>
-						<td><%=(Integer)(m2.get("product_price"))%></td>
-						<td><%=(Integer)(m2.get("product_amount"))%></td>
-						<td><%=(String)(m2.get("create_date"))%></td>
-					</tr> --%>
 	<h2>상품 리스트</h2>
 	<div class="d-flex flex-row flex-wrap">
 		<%
@@ -262,19 +254,10 @@
 		%>
 				<div class="card-container">
 					<div class="card" style="width: 18rem;">
-						<h6 class="card-title m-1"><%=(String)(m2.get("category"))%></h6>
-							<%
-								String fileName = (String)(m2.get("filename"));
-								if("default.jpg".equals(fileName)){
-							%> 
-									<img src="/shop/upload/default.jpg" class="card-img-top" alt="...">
-							<%		
-								} else {
-							%>
-									<img src="/shop/upload/<%=fileName%>" class="card-img-top" alt="...">
-							<%
-								}
-							%> 
+						<h6 class="card-title m-3"><%=(String)(m2.get("category"))%></h6>
+						<!-- 수정 예정 -->
+						<img src="/shop/upload/default.jpg" class="card-img-top p-2" alt="...">
+						<!-- 수정 예정 -->
 						<div class="card-body">
 							<p class="card-text"><%=(String)(m2.get("productTitle"))%></p>
 							<p class="card-text">
@@ -308,24 +291,24 @@
 	
 	<!-- 페이징 -->
 	<nav aria-label="Page navigation"><br>
-		<ul class="pagination justify-content-center">
+		<ul class="pagination justify-content-center ">
 			<%
 				if (currentPage > 1) {
 			%>
 					<li class="page-item">
-						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=1&category=">처음</a>
+						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=1&category=">처음</a>
 					</li>
 					<li class="page-item">	 
-						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
 					</li>
 			<%
 				} else {
 			%>	
 					<li class="page-item disabled">
-						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=1">처음</a>
+						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=1">처음</a>
 					</li>
 					<li class="page-item disabled">
-						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
 					</li>
 			<%		
 				}
@@ -333,19 +316,19 @@
 				if(currentPage < lastPage) {
 			%>
 					<li class="page-item">
-						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
+						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
 					</li>
 			<%		
 				} else {
 			%>
 					<li class="page-item disabled">
-						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
 					</li>
 					<li class="page-item disabled">
-						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
+						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
 					</li>
 			<%		
 				}

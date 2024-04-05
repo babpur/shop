@@ -41,6 +41,48 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+	<!-- bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<!-- bootstrap -->
+	<style>
+	@font-face {
+		/* 고령딸기체 */	
+	    font-family: 'GoryeongStrawberry';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/GoryeongStrawberry.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	a {
+		text-decoration: none;
+	}
+	a:link {
+		color: #000000;
+	}
+	a:visied {
+		color: #000000;
+	}
+	a:hover {
+		color: #FFFFFF;
+	}
+	a:active {
+		color: #FFFFFF;
+	}
+	body {
+		/* 고령딸기체 전체 적용 */	
+	    font-family: 'GoryeongStrawberry';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/GoryeongStrawberry.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	    
+	    /* https://kor.pngtree.com/back/down?id=MTE1NzkyMA==&type=1&time=1712045765&token=YzUyZTdlMThlZmE0N2MxY2YxMDQ5NTI4OGE4OWRhYjA=&t=0 */
+	    background-image: url("/shop/img/backgroundLoginForm.png");
+	    background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100vh;
+	}
+	</style>
 </head>
 <body>
 	<!-- main menu -->
@@ -48,41 +90,55 @@
 	<h1>상품 등록</h1>
 	<form method="post" action="/shop/emp/addProductAction.jsp"
 			enctype="multipart/form-data">
-		<div>
-			category :
-			<select name="category">
-				<option value="">선택</option>
-				<%
-					for(String c : categoryList){
-				%>
-						<option value="<%=c%>"><%=c%></option>
-				<%		
-					}
-				%>
-			</select>
-		</div>
-		<!-- emp_id값은 세션 변수에서 바인딩 from action-->
-		<div>
-			productTitle: 
-			<input type="text" name="productTitle">
-		</div>
-		<div>
-			productImage: 
-			<input type="file" name="productImg">
-		</div>
-		<div>
-			productPrice: 
-			<input type="number" name="productPrice">
-		</div>
-		<div>
-			productAmount: 
-			<input type="number" name="productAmount">
-		</div>
-		<div>
-			productContent 
-			<textarea type="text" row="5" cols="50" name="productContent"></textarea>
-		</div>
-		<button type="submit">상품 등록</button>
+		<table class="table table-hover">
+			<tr>
+				<th>카테고리</th>
+				<td>
+					<select name="category">
+						<option value="">선택</option>
+							<%
+								for(String c : categoryList){
+							%>
+									<option value="<%=c%>"><%=c%></option>
+							<%		
+								}
+							%>
+						</select>
+				</td>
+			</tr>
+			<!-- emp_id값은 세션 변수에서 바인딩 from action-->
+			<tr>
+				<th>제품명</th>
+				<td>
+					<input type="text" name="productTitle">
+				</td>
+			</tr>		
+			<tr>
+				<th>제품 이미지</th>
+				<td>
+					<input type="file" name="productImg">
+				</td>
+			</tr>
+			<tr>
+				<th>제품 가격</th>
+				<td><input type="number" name="productPrice"></td>
+			</tr>
+			<tr>
+				<th>제품 수량</th>
+				<td><input type="number" name="productAmount"></td>
+			</tr>
+			<tr>
+				<th>제품 정보</th>
+				<td>
+					<textarea type="text" row="5" cols="50" name="productContent"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<button type="submit">상품 등록</button>
+				</th>
+			</tr>
+		</table>
 	</form>
 </body>
 </html>

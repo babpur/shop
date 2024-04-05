@@ -96,19 +96,27 @@
 		margin-top: 20px;
 		font-size: 30px;
 	}
-	.navHead {
-		color: #FFFFFF;
-		font-size: 30px;
+	.shop-logo {
+		height: 50px;
+		width: 50px;
+		margin-top: 1px;
+		margin-left
+	}
+	.navContainer {
+		height: 70px;
 	}
 	</style>
 </head>
 <body>
-	<nav class="navbar navbar-dark bg-dark">
+	<nav class="navbar navbar-dark bg-dark navContainer">
 		<div class="navbar-nav">
-		    <a class="nav-link active navHead" aria-current="page">SHOP</a>
+		    <a class="nav-link active navHead" aria-current="page" href="">
+				<img class="shop-logo" src="/shop/img/shopLogo1.png">
+			</a>
 	    </div>
-	</nav><br>
+	</nav>
 	<main>
+		<h1>Login</h1>
 		<div class="form-container">
 			<form method="post" action="/shop/emp/empLoginAction.jsp">
 			<table class="table table-hover table-content shadow rounded">
