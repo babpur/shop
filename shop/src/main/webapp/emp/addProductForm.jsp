@@ -46,7 +46,8 @@
 	<!-- main menu -->
 	<div><jsp:include page="/emp/inc/empMenu.jsp"></jsp:include></div>
 	<h1>상품 등록</h1>
-	<form method="post" action="/shop/emp/addProductAction.jsp">
+	<form method="post" action="/shop/emp/addProductAction.jsp"
+			enctype="multipart/form-data">
 		<div>
 			category :
 			<select name="category">
@@ -64,6 +65,10 @@
 		<div>
 			productTitle: 
 			<input type="text" name="productTitle">
+		</div>
+		<div>
+			productImage: 
+			<input type="file" name="productImg">
 		</div>
 		<div>
 			productPrice: 

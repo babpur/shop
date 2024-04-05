@@ -122,11 +122,14 @@
 			new ArrayList<HashMap<String, Object>>();
 	while(rs3.next()){
 		HashMap<String, Object> m2 = new HashMap<String, Object>();
-		m2.put("product_no", rs3.getInt("product_no"));
+		m2.put("productNo", rs3.getInt("product_no"));
 		m2.put("category", rs3.getString("category"));
-		m2.put("product_price", rs3.getInt("product_price"));
-		m2.put("product_amount", rs3.getInt("product_amount"));
-		m2.put("create_date", rs3.getString("create_date"));
+		m2.put("productTitle", rs3.getString("product_title"));
+		m2.put("fileName", rs3.getString("filename"));
+		m2.put("productContent", rs3.getString("product_content"));
+		m2.put("productPrice", rs3.getInt("product_price"));
+		m2.put("productAmount", rs3.getInt("product_amount"));
+		m2.put("createDate", rs3.getString("create_date"));
 		productList.add(m2);
 	}
 
@@ -215,6 +218,9 @@
 	h2 {
 		margin: 10px;
 	}
+	.cardInCenter {
+		text-align: center;
+	}
 	</style>
 </head>
 <body>
@@ -256,10 +262,40 @@
 		%>
 				<div class="card-container">
 					<div class="card" style="width: 18rem;">
-						<img src="..." class="card-img-top" alt="...">
+						<h6 class="card-title m-1"><%=(String)(m2.get("category"))%></h6>
+							<%
+								String fileName = (String)(m2.get("filename"));
+								if("default.jpg".equals(fileName)){
+							%> 
+									<img src="/shop/upload/default.jpg" class="card-img-top" alt="...">
+							<%		
+								} else {
+							%>
+									<img src="/shop/upload/<%=fileName%>" class="card-img-top" alt="...">
+							<%
+								}
+							%> 
 						<div class="card-body">
-							<h6 class="card-title"><%=(String)(m2.get("category"))%></h6>
-							<p class="card-text"><%=(Integer)(m2.get("product_price"))%></p>
+							<p class="card-text"><%=(String)(m2.get("productTitle"))%></p>
+							<p class="card-text">
+								제품 소개: 
+									<%
+										String productContent = (String)(m2.get("productContent")); 
+										if(productContent.length() > 20){
+									%>
+											<br>								
+											<%=productContent.substring(0, 20)%><span>...</span>
+									<%		
+										} else {
+									%>
+											<%=productContent%>								
+									<%
+									
+										}
+									%>
+							</p>
+							<p class="card-text">남은 수량: <%=(Integer)(m2.get("productAmount"))%></p>
+							<p class="card-text">금액: <%=(Integer)(m2.get("productPrice"))%></p>
 							<a href="#" class="btn btn-primary">제품 상세 보기</a>
 						</div>
 					</div>
@@ -277,7 +313,7 @@
 				if (currentPage > 1) {
 			%>
 					<li class="page-item">
-						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=1">처음</a>
+						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=1&category=">처음</a>
 					</li>
 					<li class="page-item">	 
 						<a class="page-link" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
