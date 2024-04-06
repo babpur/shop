@@ -88,13 +88,31 @@
 		background-size: cover;
 		height: 100vh;
 	}
+	thead {
+		font-size: 30px;
+	}
+	tbody {
+		font-size: 20px;
+	}
+	h1 {
+		text-align: center;
+		margin-bottom: 30px;
+		font-size: 70px;
+		margin-top: 30px;
+	}
+	main {
+		text-align: center;
+		padding: 10px;
+	}
 	</style>
 </head>
 <body>
 	<div><jsp:include page="/emp/inc/empMenu.jsp"></jsp:include></div>
-	<main>
-	<h1>카테고리 목록</h1>
-	<table class="table table-hover">
+	<head>
+		<h1>카테고리 목록</h1>
+	</head>
+	<main class="bg-light">
+	<table class="table table-hover shadow rounded">
 		<thead>
 			<tr>
 				<th>카테고리</th>
@@ -121,7 +139,7 @@
 	<form method="post" action="/shop/emp/addCategoryAction.jsp"><br>
 		<label for="addCategory">제품 카테고리</label>
 		<input type="text" name="addCategory" id="addCategory">
-		<button type="submit">추가</button>
+		<button type="submit" class="btn btn-secondary">추가</button>
 	</form>
 	</main>
 </body>
