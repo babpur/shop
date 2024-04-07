@@ -82,63 +82,87 @@
 		background-size: cover;
 		height: 100vh;
 	}
+	h1 {
+		text-align: center;
+		margin-bottom: 30px;
+		font-size: 70px;
+		margin-top: 30px;
+	}
+	main {
+		text-align: center;
+		padding: 30px;
+		
+	}
+	th {
+		font-size: 30px;
+	}
+	td {
+		font-size: 20px;
+		text-align: left;
+		margin-left: 30px;
+	}
 	</style>
 </head>
 <body>
 	<!-- main menu -->
 	<div><jsp:include page="/emp/inc/empMenu.jsp"></jsp:include></div>
-	<h1>상품 등록</h1>
-	<form method="post" action="/shop/emp/addProductAction.jsp"
-			enctype="multipart/form-data">
-		<table class="table table-hover">
-			<tr>
-				<th>카테고리</th>
-				<td>
-					<select name="category">
-						<option value="">선택</option>
-							<%
-								for(String c : categoryList){
-							%>
-									<option value="<%=c%>"><%=c%></option>
-							<%		
-								}
-							%>
-						</select>
-				</td>
-			</tr>
-			<!-- emp_id값은 세션 변수에서 바인딩 from action-->
-			<tr>
-				<th>제품명</th>
-				<td>
-					<input type="text" name="productTitle">
-				</td>
-			</tr>		
-			<tr>
-				<th>제품 이미지</th>
-				<td>
-					<input type="file" name="productImg">
-				</td>
-			</tr>
-			<tr>
-				<th>제품 가격</th>
-				<td><input type="number" name="productPrice"></td>
-			</tr>
-			<tr>
-				<th>제품 수량</th>
-				<td><input type="number" name="productAmount"></td>
-			</tr>
-			<tr>
-				<th>제품 정보</th>
-				<td>
-					<textarea type="text" row="5" cols="50" name="productContent"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<button type="submit">상품 등록</button>
-				</th>
-			</tr>
-		</table>
-	</form>
+	<head>
+		<h1>상품 등록</h1>
+	</head>
+	<main class="bg-light">
+		<form method="post" action="/shop/emp/addProductAction.jsp"
+				enctype="multipart/form-data">
+			<table class="table table-hover shadow rounded">
+				<tr>
+					<th>카테고리</th>
+					<td>
+						<select name="category">
+							<option value="">선택</option>
+								<%
+									for(String c : categoryList){
+								%>
+										<option value="<%=c%>"><%=c%></option>
+								<%		
+									}
+								%>
+							</select>
+					</td>
+				</tr>
+				<!-- emp_id값은 세션 변수에서 바인딩 from action-->
+				<tr>
+					<th>제품명</th>
+					<td>
+						<input type="text" name="productTitle">
+					</td>
+				</tr>		
+				<tr>
+					<th>제품 이미지</th>
+					<td>
+						<input type="file" name="productImg">
+					</td>
+				</tr>
+				<tr>
+					<th>제품 가격</th>
+					<td><input type="number" name="productPrice"></td>
+				</tr>
+				<tr>
+					<th>제품 수량</th>
+					<td><input type="number" name="productAmount"></td>
+				</tr>
+				<tr>
+					<th>제품 정보</th>
+					<td>
+						<textarea type="text" row="5" cols="50" name="productContent"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="2">
+						<button type="submit" class="btn btn-secondary">상품 등록</button>
+						<button type="reset" class="btn btn-secondary">초기화</button>
+					</th>
+				</tr>
+			</table>
+		</form>
+	</main>
 </body>
 </html>

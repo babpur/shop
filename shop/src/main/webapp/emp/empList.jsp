@@ -237,19 +237,19 @@
 					if (currentPage > 1) {
 				%>
 						<li class="page-item">
-							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=1">처음</a>
+							<a class="page-link btn btn-secondary" href="/shop/emp/empList.jsp?currentPage=1">처음</a>
 						</li>
 						<li class="page-item">	 
-							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=currentPage - 1%>">이전</a>
+							<a class="page-link btn btn-secondary" href="/shop/emp/empList.jsp?currentPage=<%=currentPage - 1%>">이전</a>
 						</li>
 				<%
 					} else {
 				%>	
 						<li class="page-item disabled">
-							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=1">처음</a>
+							<a class="page-link btn btn-secondary" href="/shop/emp/empList.jsp?currentPage=1">처음</a>
 						</li>
 						<li class="page-item disabled">
-							<a class="page-link" href="/shop/emp/empist.jsp?currentPage=<%=currentPage - 1%>">이전</a>
+							<a class="page-link btn btn-secondary" href="/shop/emp/empist.jsp?currentPage=<%=currentPage - 1%>">이전</a>
 						</li>
 				<%		
 					}
@@ -257,19 +257,19 @@
 					if(currentPage < lastPage) {
 				%>
 						<li class="page-item">
-							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
+							<a class="page-link btn btn-secondary" href="/shop/emp/empList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
 						</li>
 						<li class="page-item">
-							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=lastPage+1%>">마지막</a>
+							<a class="page-link btn btn-secondary" href="/shop/emp/empList.jsp?currentPage=<%=lastPage+1%>">마지막</a>
 						</li>
 				<%		
 					} else {
 				%>
 						<li class="page-item disabled">
-							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
+							<a class="page-link btn btn-secondary" href="/shop/emp/empList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
 						</li>
 						<li class="page-item disabled">
-							<a class="page-link" href="/shop/emp/empList.jsp?currentPage=<%=lastPage%>">마지막</a>
+							<a class="page-link btn btn-secondary" href="/shop/emp/empList.jsp?currentPage=<%=lastPage%>">마지막</a>
 						</li>
 				<%		
 					}
