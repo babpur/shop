@@ -40,6 +40,7 @@
 	
 	rs = stmt.executeQuery();
 	
+	System.out.println("로그인 성공");
 	response.sendRedirect("/shop/customer/productList.jsp");
 %>
 
