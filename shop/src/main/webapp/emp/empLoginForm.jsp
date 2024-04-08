@@ -99,22 +99,21 @@
 	.shop-logo {
 		height: 50px;
 		width: 50px;
-		margin-top: 1px;
-		margin-left
 	}
-	.navContainer {
-		height: 70px;
+	.commBar {
+		height: 50px;
+		background-color: navy;
+		display: flex;
+		font-size: 20px;
 	}
 	</style>
 </head>
 <body>
-	<nav class="navbar navbar-dark bg-dark navContainer">
-		<div class="navbar-nav">
-		    <a class="nav-link active navHead" aria-current="page" href="">
-				<img class="shop-logo" src="/shop/img/shopLogo1.png">
-			</a>
-	    </div>
-	</nav>
+	<div class="commBar bg-dark bg-gradient">
+		 <a href="/shop/emp/empList.jsp">
+			<img class="shop-logo" src="/shop/img/shopLogo1.png">
+		</a>
+	</div>
 	<main>
 		<h1>Login</h1>
 		<div class="form-container">

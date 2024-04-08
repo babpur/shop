@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="java.net.*" %>
 <!-- controller -->
 <%
 	System.out.println("----------");
@@ -29,7 +30,7 @@
 	
 	
 	// 한 페이지에 보여질 상품 개수
-	int rowPerPage = 8;
+	int rowPerPage = 5;
 	
 	int startRow = (currentPage -1) * rowPerPage;
 	
@@ -120,19 +121,18 @@
 	ArrayList<HashMap<String, Object>> productList = 
 			new ArrayList<HashMap<String, Object>>();
 	while(rs3.next()){
+		String imagePath = rs3.getString("filename");
 		HashMap<String, Object> m2 = new HashMap<String, Object>();
 		m2.put("productNo", rs3.getInt("product_no"));
 		m2.put("category", rs3.getString("category"));
 		m2.put("productTitle", rs3.getString("product_title"));
-		m2.put("fileName", rs3.getString("filename"));
 		m2.put("productContent", rs3.getString("product_content"));
 		m2.put("productPrice", rs3.getInt("product_price"));
 		m2.put("productAmount", rs3.getInt("product_amount"));
 		m2.put("createDate", rs3.getString("create_date"));
+		m2.put("imagePath,", imagePath);
 		productList.add(m2);
 	}
-	
-	
 
 %>
 <!-- view -->
@@ -213,11 +213,16 @@
 		align-items: center;
 	}
 	.card-container {
-		margin: 45px;
+		margin: 10px;
+		text-align: center;
+	}
+	.card-title {
+		text-align: left;
+		font-size: 25px;
 	}
 	.card {
-		height: 50vh;
-		font-size: 15px;
+		height: 70vh;
+		font-size: 20px;
 	}
 	h2 {
 		margin: 10px;
@@ -228,11 +233,12 @@
 	<!-- main menu -->
 	<div><jsp:include page="/emp/inc/empMenu.jsp"></jsp:include></div>
 	
-	<div>
-		<a href="/shop/emp/addProductForm.jsp">상품 등록</a>
-	</div>
-	
 	<!-- sub menu: 카테고리별 상품 리스트 -->
+	<aside>
+		<div>
+			<a href="/shop/emp/addProductForm.jsp">상품 등록</a>
+		</div>
+	</aside>
 	<div>
 		<a href="/shop/emp/productList.jsp">전체 상품</a>
 		<%
@@ -248,16 +254,25 @@
 		%>
 	</div>
 	<h2>상품 리스트</h2>
-	<div class="d-flex flex-row flex-wrap">
+	<div class="d-flex flex-row flex-wrap justify-content-center">
 		<%
 			for(HashMap<String, Object> m2 : productList){
 		%>
 				<div class="card-container">
-					<div class="card" style="width: 18rem;">
+					<div class="card" style="width: 23rem;">
 						<h6 class="card-title m-3"><%=(String)(m2.get("category"))%></h6>
-						<!-- 수정 예정 -->
-						<img src="/shop/upload/default.jpg" class="card-img-top p-2" alt="...">
-						<!-- 수정 예정 -->
+						<%
+							if((String)(m2.get("imagePath")) == null ){
+						%>
+								<img src='/shop/upload/default.jpg' class="card-img-top p-2" alt="...">
+						<%		
+								
+							} else {
+						%>
+								<img src='<%=request.getContextPath()%>/upload/<%=(String)(m2.get("imagePath"))%>' class="card-img-top p-2" alt="...">
+						<%		
+							}
+						%>
 						<div class="card-body">
 							<p class="card-text"><%=(String)(m2.get("productTitle"))%></p>
 							<p class="card-text">
