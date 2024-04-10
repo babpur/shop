@@ -35,6 +35,13 @@
 </head>
 <body>
 	<div><jsp:include page="/customer/inc/customerMenu.jsp"></jsp:include></div>
-	<div>test</div>
+	<header>
+		<h1>상품 정보</h1>
+	</header>
+	
+	<main>
+		
+	
+	</main>	
 </body>
 </html>

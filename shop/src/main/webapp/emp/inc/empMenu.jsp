@@ -16,13 +16,15 @@
 <%
 	HashMap<String, Object> loginEmp = (HashMap<String, Object>)session.getAttribute("loginEmp");
 	String empName = null;
+	String empId = null;
 	if(loginEmp != null) {
 	    // HashMap에서 empName 값 가져오기
 	    empName = (String)loginEmp.get("empName");
+	    empId = (String)loginEmp.get("empId");
 	}
 	
 	System.out.println("empName: " + empName);
-	
+	System.out.println("empId: " + empId);
 %>
 
 <style>
@@ -64,6 +66,6 @@
 </div>
 <div class="user-id">
 	<span class="barContent">
-		<a href="/shop/emp/empOne.jsp">'<%=empName%>' 님 반갑습니다</a> 
+		<a href="/shop/emp/empOne.jsp?empId=<%=empId%>">'<%=empName%>' 님 반갑습니다</a> 
 	</span> 
 </div>
