@@ -13,7 +13,13 @@
 %>
 
 <%
-	// 세션 -> customerName 가져오기
+	String customerName = null;
+	if(loginCustomer != null) {
+	    // HashMap에서 empName 값 가져오기
+	    customerName = (String)loginCustomer.get("name");
+	}
+	
+	System.out.println("customerName: " + customerName);
 %>
 <style>
 	.shop-logo {
