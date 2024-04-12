@@ -54,10 +54,11 @@
 	row = stmt.executeUpdate();
 	if(row == 1){
 		response.sendRedirect("/shop/customer/customerLoginForm.jsp");		
+		System.out.println("회원 가입 성공");
 	} else {
 		response.sendRedirect("/shop/customer/addCustomerForm.jsp");
+		System.out.println("회원 가입 실패");
 	}
-	
 %>
 	
 

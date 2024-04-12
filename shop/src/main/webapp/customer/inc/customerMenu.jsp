@@ -13,13 +13,13 @@
 %>
 
 <%
-	String customerName = null;
-	if(loginCustomer != null) {
+	/* Object loginCustomer = session.getAttribute("loginCustomer");
+	if(session.getAttribute("loginCustomer") != null) {
 	    // HashMap에서 empName 값 가져오기
-	    customerName = (String)loginCustomer.get("name");
+	    String customerName = (String)loginCustomer.get("name");
 	}
 	
-	System.out.println("customerName: " + customerName);
+	System.out.println("customerName: " + customerName); */
 %>
 <style>
 	.shop-logo {
