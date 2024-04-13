@@ -106,9 +106,9 @@
 <body>
 	<!-- main menu -->
 	<div><jsp:include page="/emp/inc/empMenu.jsp"></jsp:include></div>
-	<head>
+	<header>
 		<h1>상품 등록</h1>
-	</head>
+	</header>
 	<main class="bg-light">
 		<form method="post" action="/shop/emp/addProductAction.jsp"
 				enctype="multipart/form-data">

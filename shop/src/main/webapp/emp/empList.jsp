@@ -189,9 +189,9 @@
 	<!-- empMenu.jsp include: 주체(서버) vs redirect: 주체(클라이언트) -->
 	<!-- 주체가 클라이언트가 아니기 때문에 sendRedirect처럼 경로가 /shop/.... 아님 -->
 	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-	<head>
+	<header>
 		<h1>사원 목록</h1>
-	</head>
+	</header>
 	<main class="bg-light">
 		<table class="table table-hover shadow rounded">
 		<thead>

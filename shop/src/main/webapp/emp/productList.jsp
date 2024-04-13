@@ -190,12 +190,6 @@
 	}
 	head {
 	}
-	h1 {
-		text-align: center;
-		margin-bottom: 30px;
-		font-size: 70px;
-		margin-top: 30px;
-	}
 	thead {
 		font-size: 30px;
 	}
@@ -224,7 +218,7 @@
 		height: 70vh;
 		font-size: 20px;
 	}
-	h2 {
+	h1 {
 		margin: 10px;
 	}
 	</style>
@@ -253,102 +247,106 @@
 			}
 		%>
 	</div>
-	<h2>상품 리스트</h2>
-	<div class="d-flex flex-row flex-wrap justify-content-center">
-		<%
-			for(HashMap<String, Object> m2 : productList){
-		%>
-				<div class="card-container">
-					<div class="card" style="width: 23rem;">
-						<h6 class="card-title m-3"><%=(String)(m2.get("category"))%></h6>
-						<%
-							if((String)(m2.get("imagePath")) == null ){
-						%>
-								<img src='/shop/upload/default.jpg' class="card-img-top p-2" alt="...">
-						<%		
-								
-							} else {
-						%>
-								<img src='<%=request.getContextPath()%>/upload/<%=(String)(m2.get("imagePath"))%>' class="card-img-top p-2" alt="...">
-						<%		
-							}
-						%>
-						<div class="card-body">
-							<p class="card-text"><%=(String)(m2.get("productTitle"))%></p>
-							<p class="card-text">
-								제품 소개: 
-									<%
-										String productContent = (String)(m2.get("productContent")); 
-										if(productContent.length() > 20){
-									%>
-											<br>								
-											<%=productContent.substring(0, 20)%><span>...</span>
-									<%		
-										} else {
-									%>
-											<%=productContent%>								
-									<%
+	<header>
+		<h1>상품 리스트</h1>
+	</header>
+	<main>
+		<div class="d-flex flex-row flex-wrap justify-content-center">
+			<%
+				for(HashMap<String, Object> m2 : productList){
+			%>
+					<div class="card-container">
+						<div class="card" style="width: 23rem;">
+							<h6 class="card-title m-3"><%=(String)(m2.get("category"))%></h6>
+							<%
+								if((String)(m2.get("imagePath")) == null ){
+							%>
+									<img src='/shop/upload/default.jpg' class="card-img-top p-2" alt="...">
+							<%		
 									
-										}
-									%>
-							</p>
-							<p class="card-text">남은 수량: <%=(Integer)(m2.get("productAmount"))%></p>
-							<p class="card-text">금액: <%=(Integer)(m2.get("productPrice"))%></p>
-							<a href="#" class="btn btn-primary">제품 상세 보기</a>
+								} else {
+							%>
+									<img src='<%=request.getContextPath()%>/upload/<%=(String)(m2.get("imagePath"))%>' class="card-img-top p-2" alt="...">
+							<%		
+								}
+							%>
+							<div class="card-body">
+								<p class="card-text"><%=(String)(m2.get("productTitle"))%></p>
+								<p class="card-text">
+									제품 소개: 
+										<%
+											String productContent = (String)(m2.get("productContent")); 
+											if(productContent.length() > 20){
+										%>
+												<br>								
+												<%=productContent.substring(0, 20)%><span>...</span>
+										<%		
+											} else {
+										%>
+												<%=productContent%>								
+										<%
+										
+											}
+										%>
+								</p>
+								<p class="card-text">남은 수량: <%=(Integer)(m2.get("productAmount"))%></p>
+								<p class="card-text">금액: <%=(Integer)(m2.get("productPrice"))%></p>
+								<a href="#" class="btn btn-primary">제품 상세 보기</a>
+							</div>
 						</div>
 					</div>
-				</div>
-		<%		
-			}
-		%>
-					
-	</div>
-	
-	<!-- 페이징 -->
-	<nav aria-label="Page navigation"><br>
-		<ul class="pagination justify-content-center ">
-			<%
-				if (currentPage > 1) {
-			%>
-					<li class="page-item">
-						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=1&category=">처음</a>
-					</li>
-					<li class="page-item">	 
-						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-					</li>
-			<%
-				} else {
-			%>	
-					<li class="page-item disabled">
-						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=1">처음</a>
-					</li>
-					<li class="page-item disabled">
-						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-					</li>
-			<%		
-				}
-			
-				if(currentPage < lastPage) {
-			%>
-					<li class="page-item">
-						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
-					</li>
-			<%		
-				} else {
-			%>
-					<li class="page-item disabled">
-						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
-					</li>
-					<li class="page-item disabled">
-						<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
-					</li>
 			<%		
 				}
 			%>
-		</ul>
-	</nav>
+						
+		</div>
+		
+		<!-- 페이징 -->
+		<nav aria-label="Page navigation"><br>
+			<ul class="pagination justify-content-center ">
+				<%
+					if (currentPage > 1) {
+				%>
+						<li class="page-item">
+							<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=1&category=">처음</a>
+						</li>
+						<li class="page-item">	 
+							<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+						</li>
+				<%
+					} else {
+				%>	
+						<li class="page-item disabled">
+							<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=1">처음</a>
+						</li>
+						<li class="page-item disabled">
+							<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+						</li>
+				<%		
+					}
+				
+					if(currentPage < lastPage) {
+				%>
+						<li class="page-item">
+							<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
+						</li>
+				<%		
+					} else {
+				%>
+						<li class="page-item disabled">
+							<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+						</li>
+						<li class="page-item disabled">
+							<a class="page-link btn btn-secondary" href="/shop/emp/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
+						</li>
+				<%		
+					}
+				%>
+			</ul>
+		</nav>
+	</main>
 </body>
 </html>

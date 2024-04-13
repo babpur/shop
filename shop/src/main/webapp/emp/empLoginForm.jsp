@@ -114,8 +114,10 @@
 			<img class="shop-logo" src="/shop/img/shopLogo1.png">
 		</a>
 	</div>
-	<main>
+	<header>
 		<h1>Login</h1>
+	</header>	
+	<main>
 		<div class="form-container">
 			<form method="post" action="/shop/emp/empLoginAction.jsp">
 			<table class="table table-hover table-content shadow rounded">

@@ -44,27 +44,31 @@ rs = stmt.executeQuery();
 <title>Insert title here</title>
 </head>
 <body>
-	<%
-		while(rs.next()){
-	%>	
-		<div>
-			empId: <%=empId %>
-		</div>
-		<div>
-			grade: <%=rs.getString("grade") %>
-		</div>
-		<div>
-			empName: <%=rs.getString("emp_name") %>
-		</div>
-		<div>
-			empJob: <%=rs.getString("emp_job") %>
-		</div>
-		<div>
-			hireDate: <%=rs.getString("hire_date") %>
-		</div>
-	<%
-		}
-	%>
-
+	<header>
+		<h1>직원 상세 정보</h1>
+	</header>
+	<main>
+		<%
+			while(rs.next()){
+		%>	
+				<div>
+					empId: <%=empId %>
+				</div>
+				<div>
+					grade: <%=rs.getString("grade") %>
+				</div>
+				<div>
+					empName: <%=rs.getString("emp_name") %>
+				</div>
+				<div>
+					empJob: <%=rs.getString("emp_job") %>
+				</div>
+				<div>
+					hireDate: <%=rs.getString("hire_date") %>
+				</div>
+		<%
+			}
+		%>
+	</main>
 </body>
 </html>

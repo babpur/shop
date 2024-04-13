@@ -108,9 +108,9 @@
 </head>
 <body>
 	<div><jsp:include page="/emp/inc/empMenu.jsp"></jsp:include></div>
-	<head>
+	<header>
 		<h1>카테고리 목록</h1>
-	</head>
+	</header>
 	<main class="bg-light">
 	<table class="table table-hover shadow rounded">
 		<thead>
