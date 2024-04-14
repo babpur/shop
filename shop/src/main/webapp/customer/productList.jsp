@@ -8,9 +8,9 @@
 	
 	// 인증 분기: 세션 변수 이름 - loginCustomer
 	
-	if(session.getAttribute("loginCustomer") != null) {
+	if(session.getAttribute("loginCustomer") == null) {
 		// 로그인이 되었을 때 productList.jsp로 리다이렉트하겠다.
-		response.sendRedirect("/shop/customer/productList.jsp");
+		response.sendRedirect("/shop/customer/customerLoginForm.jsp");
 		return;
 	}
 %>

@@ -15,13 +15,15 @@
 <%
 	HashMap<String, Object> loginCustomer = (HashMap<String, Object>)session.getAttribute("loginCustomer");
 	String customerName = null;
+	String customerEmail = null;
 	if(loginCustomer != null) {
 	    // HashMap에서 customerName 값 가져오기
 		customerName = (String)loginCustomer.get("customerName");
+		customerEmail = (String)loginCustomer.get("customerEmail");
 	}
 	
 	System.out.println("customerName: " + customerName);
-
+	System.out.println("customerEmail: " + customerEmail);
 %>
 <style>
 	.shop-logo {
@@ -57,6 +59,6 @@
 </div>
 <div class="user-id">
 	<span class="barContent">
-		<a href="/shop/customer/customerOne.jsp">'<%=customerName%>' 님 반갑습니다</a> 
+		<a href="/shop/customer/customerOne.jsp?customerEmail=<%=customerEmail%>">'<%=customerName%>' 님 반갑습니다</a> 
 	</span> 
 </div>
