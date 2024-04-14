@@ -21,6 +21,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div><jsp:include page="/customer/inc/customerMenu.jsp"></jsp:include></div>
 
 </body>
 </html>

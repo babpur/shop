@@ -34,11 +34,15 @@
 	
 	int startRow = (currentPage -1) * rowPerPage;
 	
+	String category = request.getParameter("category");
+	System.out.println("category:" + category);
+	
 	// 전체 상품 
-	String sql1 = "SELECT count(*) cnt FROM product";
+	String sql1 = "SELECT count(*) cnt FROM product where category=?";
 	PreparedStatement stmt1 = null;
 	ResultSet rs1 = null; 
 	stmt1 = conn.prepareStatement(sql1);
+	stmt1.setString(1, category);
 
 	System.out.println("stmt1: " + stmt1);
 	
@@ -88,7 +92,7 @@
 		categoryList.add(m1);
 	}
 
-	String category = request.getParameter("category");
+	String category1 = request.getParameter("category");
 	System.out.println("category: " + category);
 
 	PreparedStatement stmt3 = null;
@@ -110,7 +114,7 @@
 	} else {
 		sql3 = "SELECT * FROM product WHERE category= ? ORDER BY product_no DESC LIMIT ?, ?";
 		stmt3 = conn.prepareStatement(sql3);
-		stmt3.setString(1, category);
+		stmt3.setString(1, category1);
 	    stmt3.setInt(2, startRow);
 	    stmt3.setInt(3, rowPerPage);
 	}
