@@ -92,8 +92,7 @@
 		font-size: 40px;
 	}
 	button {
-		width: 70%;
-		margin-top: 20px;
+		width: 40%;
 		font-size: 30px;
 	}
 	.shop-logo {
@@ -109,8 +108,6 @@
 	.button-size {
 		width: 50%;
 	}	
-	
-	
 	</style>
 </head>
 <body>
@@ -144,8 +141,11 @@
 				
 				<tr>
 					<td colspan="2">
-						<a href="/shop/customer/addCustomerForm.jsp"
-							class="btn btn-outline-secondary">회원 가입</a>
+						<button type="button" class="btn btn-outline-secondary" 
+							onclick="/shop/customer/addCustomerForm.jsp">
+							회원 가입
+						</button>
+						&nbsp;
 						<button type="submit" class="btn btn-secondary button-size">로그인</button>
 					</td>
 				</tr>

@@ -92,8 +92,7 @@
 		font-size: 40px;
 	}
 	button {
-		width: 70%;
-		margin-top: 20px;
+		width: 40%;
 		font-size: 30px;
 	}
 	.shop-logo {
@@ -110,7 +109,7 @@
 </head>
 <body>
 	<div class="commBar bg-dark bg-gradient">
-		 <a href="/shop/emp/empList.jsp">
+		 <a href="/shop/emp/empLoginForm.jsp">
 			<img class="shop-logo" src="/shop/img/shopLogo1.png">
 		</a>
 	</div>
@@ -132,9 +131,14 @@
 				</tr>
 				<br>
 				<tr>
-					<td colspan="2"><button type="submit" class="btn btn-secondary">로그인</button></td>
+					<td colspan="2">
+						<button type="button" class="btn btn-outline-secondary" 
+								onclick="'/shop/emp/addEmpForm.jsp'">
+								회원 가입
+						</button>
+						<button type="submit" class="btn btn-secondary">로그인</button>
+					</td>
 				</tr>
-			
 			</table>
 			</form>
 		</div>

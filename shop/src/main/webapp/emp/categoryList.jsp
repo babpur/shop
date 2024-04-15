@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="shop.dao.*"%>
 
 <!-- Controller Layer-->
 <%
 	System.out.println("----------");
-	System.out.println("empList.jsp");
+	System.out.println("categoryList.jsp");
 	
 	// 인증 분기: 세션 변수 이름 - loginEmp
 	
@@ -15,30 +16,10 @@
 		return;
 	}
 %>	
+
 <!-- model -->
 <%
-	Class.forName("org.mariadb.jdbc.Driver");
-	
-	Connection conn = null;
-	PreparedStatement stmt = null;
-	ResultSet rs = null; 
-	
-	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-
-	String sql = "SELECT category, create_date createDate FROM category";
-	stmt = conn.prepareStatement(sql);
-	rs = stmt.executeQuery();
-	
-	
-	ArrayList<HashMap<String, Object>> categoryList
-		= new ArrayList<HashMap<String, Object>>();
-	
-	while(rs.next()) {
-		HashMap<String, Object> m = new HashMap<String, Object>();
-		m.put("category", rs.getString("category"));
-		m.put("createDate", rs.getString("createDate"));
-		categoryList.add(m); // 
-	}
+	ArrayList<HashMap<String, Object>> categoryList = EmpDAO.selectCategoryList();
 	
 %>
 <!-- view -->

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="shop.dao.*" %>
 
 <!-- Controller Layer-->
 <%
@@ -72,37 +73,8 @@
 	// -> API 사용하여 (JDBC API) 자료 구조(ResultSet) 취득
 	// -> 일반화된 자료 구조로(ArrayList<HashMap> 변경 -> 모델 취득
 
+	ArrayList<HashMap<String, Object>> empList = EmpDAO.selectEmpList(startRow, rowPerPage);
 	
-	PreparedStatement stmt2 = null;
-	ResultSet rs2 = null;
-	/*
-		select emp_id empId, emp_name empName, emp_job empJob, hire_date hireDate active from emp order by active asc, hire_date desc;
-	*/
-	String sql2 = "select emp_id empId, emp_name empName, emp_job empJob, hire_date hireDate, active from emp order by hire_date desc limit ?, ?;";
-
-	stmt2 = conn.prepareStatement(sql2);
-	stmt2.setInt(1, startRow);
-	stmt2.setInt(2, rowPerPage);
-	
-	System.out.println("stmt2: " + stmt2);
-	
-	rs2 = stmt2.executeQuery(); 
-	// JDBC API에 종속된 자료 구조 모델 ResultSet-> 기본 API 자료 구조로 변경(ArrayList)
-	ArrayList<HashMap<String, Object>> list // Object: 모든 타입의 부모
-		= new ArrayList<HashMap<String, Object>>();
-	
-	// ResultSet -> ArrayList<HashMap<String, Object>>
-	while(rs2.next()) {
-		HashMap<String, Object> m = new HashMap<String, Object>();
-		m.put("empId", rs2.getString("empId"));
-		m.put("empName", rs2.getString("empName"));
-		m.put("empJob", rs2.getString("empJob"));
-		m.put("hireDate", rs2.getString("hireDate"));
-		m.put("active", rs2.getString("active"));
-		list.add(m);
-	}
-	
-	// JDBC API 사용이 끝났다면 DB 자원들을 반납
 %>
 
 <!-- View Layer -->
@@ -196,29 +168,30 @@
 		<table class="table table-hover shadow rounded">
 		<thead>
 			<tr>
-				<th>empId</th>
-				<th>empName</th>
-				<th>empJob</th>
-				<th>hireDate</th>
-				<th>active</th>
+				<th>직원 ID</th>
+				<th>직원 이름</th>
+				<th>담당 업무</th>
+				<th>고용 일자</th>
+				<th>계정 활성화</th>
 			</tr>
 		</thead>
 		<tbody>	
 			<%
-				for(HashMap<String, Object> m : list) {
+				for(HashMap<String, Object> emp : empList) {
 			%>
 					<tr>
-						<td><%=(String)(m.get("empId"))%></td>
-						<td><%=(String)(m.get("empName"))%></td>
-						<td><%=(String)(m.get("empJob"))%></td>
-						<td><%=(String)(m.get("hireDate"))%></td>
+						<td><%=(emp.get("empId"))%></td>
+						<td><%=(emp.get("empName"))%></td>
+						<td><%=(emp.get("empJob"))%></td>
+						<td><%=(emp.get("hireDate"))%></td>
 						<td>
 							<%
-								HashMap<String, Object> sm = (HashMap<String, Object>)session.getAttribute("loginEmp");
-								if((Integer) sm.get("grade") > 0) {
+								// 로그인된 계정의 grade가 필요하므로 session에서 값을 가져옴.
+								HashMap<String, Object> m = (HashMap<String, Object>)session.getAttribute("loginEmp");
+								if((Integer)(m.get("grade")) > 0) {
 							%>	
-								<a href="/shop/emp/modifyEmpActive.jsp?empId=<%=(String)(m.get("empId"))%>&active=<%=(String)(m.get("active"))%>">
-									<%=(String)(m.get("active"))%>
+								<a href="/shop/emp/modifyEmpActive.jsp?empId=<%=(emp.get("empId"))%>&active=<%=(emp.get("active"))%>">
+									<%=(emp.get("active"))%>
 									<!-- 스위치 역할을 함 -->
 								</a>
 							<%		

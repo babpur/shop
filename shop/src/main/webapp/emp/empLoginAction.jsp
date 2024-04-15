@@ -2,6 +2,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.net.*" %>
 <%@ page import="java.util.*"%>
+<%@ page import="shop.dao.*" %>
 
 <%
 	System.out.println("----------");
@@ -16,56 +17,24 @@
 	}
 %>
 <%
+	// controller
 	String empId = request.getParameter("empId");
 	String empPw = request.getParameter("empPw"); 
 
 	System.out.println("empId: " + empId);
 	System.out.println("empPw: " + empPw);
-	
-	/* 
-		select emp_id empId from emp where active='ON' and emp_id = ? and emp_pw = password(?)
-	*/
-	String sql = "select emp_id empId, emp_name empName, grade from emp where active='ON' and emp_id = ? and emp_pw = password(?)";
-	
-	Class.forName("org.mariadb.jdbc.Driver");
-	
-	Connection conn = null;
-	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-	
-	PreparedStatement stmt = null;
-	ResultSet rs = null;
-	
-	stmt = conn.prepareStatement(sql);
-	stmt.setString(1, empId);
-	stmt.setString(2, empPw);
-	rs = stmt.executeQuery();
-	
-	System.out.println("stmt: " + stmt);
-	// 실패 empLoginForm.jsp
-	// 성공 empList.jsp
-	
-	if(rs.next()){
-		System.out.println("로그인 성공");
-		// 세션 변수 안에 여러 개의 값을 저장하기 위해서 HashMap을 사용하겠다.
-		HashMap<String, Object> loginEmp = new HashMap<String, Object>();
-		loginEmp.put("empId", rs.getString("empId"));
-		loginEmp.put("empName", rs.getString("empName"));
-		loginEmp.put("grade", rs.getInt("grade"));
-		
-		session.setAttribute("loginEmp", loginEmp);
 
-		// 디버깅 (로그인 세션 변수)
-		HashMap<String, Object> m = (HashMap<String, Object>)session.getAttribute("loginEmp");
-		System.out.println((String)(m.get("empId")));
-		System.out.println((String)(m.get("empName")));
-		System.out.println((Integer)(m.get("grade")));
-		
-		response.sendRedirect("/shop/emp/empList.jsp");
-
-	} else {
+	// model을 호출하는 코드
+	HashMap<String, Object> loginEmp = EmpDAO.empLogin(empId, empPw);
+	
+	if(loginEmp == null){ // 로그인 실패
 		System.out.println("로그인 실패");
 		String errMsg = URLEncoder.encode("잘못된 접근입니다. \n ID와 비밀번호를 확인해 주세요", "utf-8");
 		response.sendRedirect("/shop/emp/empLoginForm.jsp?errMsg=" + errMsg);
+	} else {
+		System.out.println("로그인 성공");
+		session.setAttribute("loginEmp", loginEmp);
+		response.sendRedirect("/shop/emp/empList.jsp");
 		return;
 	}
 %>

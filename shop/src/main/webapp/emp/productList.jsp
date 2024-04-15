@@ -2,6 +2,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.net.*" %>
+<%@ page import="shop.dao.*" %>
 <!-- controller -->
 <%
 	System.out.println("----------");
@@ -67,6 +68,8 @@
 	System.out.println("rowPerPage: " + rowPerPage);
 	System.out.println("startRow: " + startRow);
 	System.out.println("rowPerPage: " + rowPerPage);
+	
+	
 	
 	
 %>

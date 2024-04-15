@@ -3,6 +3,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.net.*" %>
+<%@ page import="shop.dao.*" %>
 <%
 	System.out.println("--------------------");
 	System.out.println("empOne.jsp");
@@ -17,23 +18,11 @@
 %>
 
 <%
+String empId = request.getParameter("empId");
 
-	String empId = request.getParameter("empId");
-	
-	System.out.println(empId);
-	
-	Class.forName("org.mariadb.jdbc.Driver");
-	
-	Connection conn = null;
-	PreparedStatement stmt = null;
-	ResultSet rs = null; 
-	
-	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-	
-	String sql = "SELECT * FROM emp where emp_id=?";
-	stmt = conn.prepareStatement(sql);
-	stmt.setString(1, empId);
-	rs = stmt.executeQuery();
+System.out.println(empId);
+
+ArrayList<HashMap<String, Object>> empOne = EmpDAO.selectEmpOne(empId);
 
 
 %>
@@ -131,14 +120,15 @@
 	<main>
 		<table>
 		<%
-			while(rs.next()){
+			for(HashMap<String, Object> emp : empOne){
+				
 		%>	
 				<tr>
 					<td>
 						직원 ID
 					</td>
 					<td>
-						<%=empId %>
+						<%=emp.get("empId")%>
 					</td>
 				</tr>
 				<tr>
@@ -146,7 +136,7 @@
 						등급
 					</td>
 					<td>
-						<%=rs.getString("grade") %>
+						<%=emp.get("grade") %>
 					</td>
 				</tr>		
 				<tr>
@@ -154,7 +144,7 @@
 						직원 이름
 					</td>
 					<td>
-						<%=rs.getString("emp_name") %>
+						<%=emp.get("empName") %>
 					</td>
 				</tr>
 				<tr>
@@ -162,7 +152,7 @@
 						담당 업무
 					</td>
 					<td>
-						<%=rs.getString("emp_job") %>
+						<%=emp.get("empJob") %>
 					</td>
 				</tr>
 				<tr>
@@ -170,7 +160,7 @@
 						고용일
 					</td>
 					<td>
-						<%=rs.getString("hire_date") %>
+						<%=emp.get("hireDate") %>
 					</td>
 				</tr>		
 		<%
