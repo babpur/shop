@@ -2,6 +2,8 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.net.*" %>
 <%@ page import="java.util.*"%>
+<%@ page import="shop.dao.*" %>
+
 <%
 	System.out.println("--------------------");
 	System.out.println("customerLoginAction.jsp");
@@ -15,56 +17,25 @@
 	}
 %>
 <%	
-	String customerEmail = request.getParameter("customerEmail");
-	String customerPw = request.getParameter("customerPw");
+	String mail = request.getParameter("mail");
+	String pw = request.getParameter("pw");
 	
-	System.out.println("customerEmail: " + customerEmail);
-	System.out.println("customerPw: " + customerPw);
+	System.out.println("customerEmail: " + mail);
+	System.out.println("customerPw: " + pw);
 	
 %>
 <%
-	/* 
-		select mail, pw from customer where mail=?, pw=?
-	*/
-	String sql = "select * from customer where mail=? and pw=password(?)";
+	HashMap<String, Object> loginCustomer = CustomerDAO.login(mail, pw);
 	
-	Class.forName("org.mariadb.jdbc.Driver");
-	
-	Connection conn = null;
-	
-	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");	
-
-	PreparedStatement stmt = null;
-	ResultSet rs = null;
-
-	stmt = conn.prepareStatement(sql);
-	stmt.setString(1, customerEmail);
-	stmt.setString(2, customerPw);
-	
-	rs = stmt.executeQuery();
-	System.out.println("stmt: " + stmt);
-	
-	if(rs.next()){
-		System.out.println("로그인 성공");
-		HashMap<String, Object> loginCustomer = new HashMap<String, Object>();
-		loginCustomer.put("customerEmail", rs.getString("mail"));
-		loginCustomer.put("customerName", rs.getString("name"));
-		loginCustomer.put("customerBirth", rs.getString("birth"));
-		loginCustomer.put("customerGender", rs.getString("gender"));
-		
-		session.setAttribute("loginCustomer", loginCustomer);
-		
-		HashMap<String, Object> m = (HashMap<String, Object>)session.getAttribute("loginCustomer");
-		System.out.println((String)(m.get("customerEmail")));
-		System.out.println((String)(m.get("customerName")));
-		System.out.println((String)(m.get("customerBirth")));
-		System.out.println((String)(m.get("customerGender")));
-		
-		response.sendRedirect("/shop/customer/productList.jsp");
-	} else {
+	if(loginCustomer == null){ // 로그인 실패
 		System.out.println("로그인 실패");
 		String errMsg = URLEncoder.encode("잘못된 접근입니다. \n ID와 비밀번호를 확인해 주세요", "utf-8");
 		response.sendRedirect("/shop/customer/customerLoginForm.jsp?errMsg=" + errMsg);
+	} else {
+		System.out.println("로그인 성공");
+		session.setAttribute("loginCustomer", loginCustoer);
+		response.sendRedirect("/shop/emp/empList.jsp");
 		return;
 	}
+
 %>

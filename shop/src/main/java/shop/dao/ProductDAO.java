@@ -27,7 +27,6 @@ public class ProductDAO {
 				list.add(m);
 			}
 			
-			
 			conn.close();
 			return list;
 	}

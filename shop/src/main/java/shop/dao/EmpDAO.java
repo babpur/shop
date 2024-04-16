@@ -116,7 +116,6 @@ public class EmpDAO {
 	public static int updateEmpActive(String empId, String active) throws Exception {
 		int row = 0;
 		
-		
 		Connection conn = DBHelper.getConnection();
 		String sql = "update emp set active = ? where emp_id = ? and active = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);

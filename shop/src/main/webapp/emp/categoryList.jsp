@@ -16,10 +16,9 @@
 		return;
 	}
 %>	
-
 <!-- model -->
 <%
-	ArrayList<HashMap<String, Object>> categoryList = EmpDAO.selectCategoryList();
+	ArrayList<HashMap<String, Object>> categoryList = CategoryDAO.selectCategoryList();
 	
 %>
 <!-- view -->
@@ -106,9 +105,9 @@
 				for(HashMap<String, Object> m : categoryList){
 			%>
 					<tr>
-						<td><%=(String)(m.get("category"))%></td>
-						<td><%=(String)(m.get("createDate"))%></td>
-						<td><a href="/shop/emp/deleteCategoryAction.jsp?category=<%=(String)(m.get("category"))%>">삭제</a></td>
+						<td><%=(m.get("category"))%></td>
+						<td><%=(m.get("createDate"))%></td>
+						<td><a href="/shop/emp/deleteCategoryAction.jsp?category=<%=(m.get("category"))%>">삭제</a></td>
 					</tr>
 					
 			<%		

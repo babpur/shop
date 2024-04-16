@@ -1,5 +1,8 @@
 package shop.dao;
 
-public class CustomerDAO {
+import java.sql.*;
+import java.util.*;
 
+public class CustomerDAO {
+	
 }

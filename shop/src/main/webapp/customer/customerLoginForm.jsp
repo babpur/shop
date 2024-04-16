@@ -124,18 +124,18 @@
 			<table class="table table-hover table-content shadow rounded">
 				<tr>
 					<td>
-						<label for="customerEmail" >E-MAIL</label>
+						<label for="mail" >E-MAIL</label>
 					</td>
 					<td>
-						<input type="text" name="customerEmail" id="customerEmail">
+						<input type="text" name="mail" id="mail">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="customerPw">PW</label>
+						<label for="pw">PW</label>
 					</td>
 					<td>
-						<input type="password" name="customerPw">
+						<input type="password" name="pw">
 					</td>
 				</tr>
 				
