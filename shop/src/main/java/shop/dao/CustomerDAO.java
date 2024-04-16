@@ -5,4 +5,12 @@ import java.util.*;
 
 public class CustomerDAO {
 	
+	// addCustomerAction.jsp
+	
+	
+	// customerOne.jsp
+	
+	
+	// customerLoginAction.jsp
+	
 }

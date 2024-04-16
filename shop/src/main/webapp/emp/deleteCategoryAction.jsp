@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="shop.dao.*" %>
 
 <!-- Controller Layer-->
 <%
@@ -22,28 +23,13 @@
 %>
 
 <%
-	Class.forName("org.mariadb.jdbc.Driver");
 	
-	Connection conn = null;
-	PreparedStatement stmt = null;
-	
-	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-	
-	String sql = "Delete category from category where category = ?";
-	stmt = conn.prepareStatement(sql);
-	stmt.setString(1,category);
-	
-	
-	System.out.println("stmt: " + stmt);
-	
-	int row = 0;
-	
-	row = stmt.executeUpdate();
+	int row = CategoryDAO.deleteCategory(category);
 	if(row == 1) {
 		System.out.println("카테고리 삭제 성공");
 		
 	} else {
-		System.out.println("카테고리 삭제 성공");
+		System.out.println("카테고리 삭제 실패");
 	}
 	
 	response.sendRedirect("/shop/emp/categoryList.jsp");

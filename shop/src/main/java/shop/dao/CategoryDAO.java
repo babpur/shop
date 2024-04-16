@@ -44,8 +44,20 @@ public class CategoryDAO {
 	
 	
 	// deleteCategoryAction.jsp
-	public static int deleteCategory(String addCategory) throws Exception {
+	public static int deleteCategory(String category) throws Exception {
 		int row = 0;
 		Connection conn = DBHelper.getConnection();
+		
+		String sql = "delete from category where category=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, category);
+		
+		row = stmt.executeUpdate();
+		
+		conn.close();
+		
+		return row;
+		
+	}
 	
 }
