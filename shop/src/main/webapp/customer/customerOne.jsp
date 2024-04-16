@@ -3,6 +3,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.net.*" %>
+<%@ page import="shop.dao. *" %>
 <%
 	System.out.println("----------");
 	System.out.println("customerOne.jsp");
@@ -15,22 +16,11 @@
 	} 
 %>
 <%
-	String customerEmail = request.getParameter("customerEmail");
+	String mail = request.getParameter("customerEmail");
 	
-	System.out.println("customerEmail: " + customerEmail);
-	
-	Class.forName("org.mariadb.jdbc.Driver");
-	
-	Connection conn = null;
-	PreparedStatement stmt = null;
-	ResultSet rs = null; 
-	
-	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-	
-	String sql = "SELECT * FROM customer where mail=?";
-	stmt = conn.prepareStatement(sql);
-	stmt.setString(1, customerEmail);
-	rs = stmt.executeQuery();
+	System.out.println("mail: " + mail);
+
+	ArrayList<HashMap<String, Object>> customerOne = CustomerDAO.selectCustomerOne(mail);
 %>    
 <!DOCTYPE html>
 <html>
@@ -127,14 +117,15 @@
 	<main>
 		<table>
 		<%
-			while(rs.next()){
+			for(HashMap<String, Object> c : customerOne){
+			
 		%>	
 				<tr>
 					<td>
 						회원 ID
 					</td>
 					<td>
-						<%=customerEmail%>
+						<%=c.get("mail")%>
 					</td>
 				</tr>
 				<tr>
@@ -142,7 +133,7 @@
 						회원 이름
 					</td>
 					<td>
-						<%=rs.getString("name") %>
+						<%=c.get("name")%>
 					</td>
 				</tr>		
 				<tr>
@@ -150,7 +141,7 @@
 						생년월일
 					</td>
 					<td>
-						<%=rs.getString("birth") %>
+						<%=c.get("birth")%>
 					</td>
 				</tr>
 				<tr>
@@ -158,7 +149,7 @@
 						성별
 					</td>
 					<td>
-						<%=rs.getString("gender") %>
+						<%=c.get("gender")%>
 					</td>
 				</tr>
 		<%

@@ -20,8 +20,8 @@
 	String mail = request.getParameter("mail");
 	String pw = request.getParameter("pw");
 	
-	System.out.println("customerEmail: " + mail);
-	System.out.println("customerPw: " + pw);
+	System.out.println("mail: " + mail);
+	System.out.println("pw: " + pw);
 	
 %>
 <%
@@ -33,9 +33,8 @@
 		response.sendRedirect("/shop/customer/customerLoginForm.jsp?errMsg=" + errMsg);
 	} else {
 		System.out.println("로그인 성공");
-		session.setAttribute("loginCustomer", loginCustoer);
-		response.sendRedirect("/shop/emp/empList.jsp");
+		session.setAttribute("loginCustomer", loginCustomer);
+		response.sendRedirect("/shop/customer/productList.jsp");
 		return;
 	}
-
 %>

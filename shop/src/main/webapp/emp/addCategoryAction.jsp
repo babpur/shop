@@ -18,13 +18,12 @@
 %>	
 <%
 	// request
-	String addCategory = request.getParameter("addCategory");
+	String category = request.getParameter("addCategory");
 	
-	System.out.println("addCategory:" + addCategory);
+	System.out.println("category:" + category);
 %>
 
 <%
-	String category = addCategory;
 
 	int row = CategoryDAO.insertCategory(category);
 %>

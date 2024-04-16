@@ -98,7 +98,6 @@ public class EmpDAO {
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, empId);
 		ResultSet rs = stmt.executeQuery();
-		rs = stmt.executeQuery();
 		while(rs.next()) {
 			HashMap<String, Object> m = new HashMap<String, Object>();
 			m.put("empId", rs.getString("emp_id"));
