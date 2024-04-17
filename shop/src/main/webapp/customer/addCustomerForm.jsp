@@ -121,6 +121,9 @@
 						<input type="text" id="customerName" name="customerName">
 					</td>
 				</tr>
+				
+				<!-- mail 중복 체크 추가 -->
+				
 				<tr>
 					<td>
 						<label for="customerEmail">E-Mail</label>

@@ -62,6 +62,7 @@
     <a class="barContent" href="/shop/emp/empList.jsp">사원 관리</a>
 	<a class="barContent" href="/shop/emp/categoryList.jsp">카테고리 관리</a>
 	<a class="barContent" href="/shop/emp/productList.jsp">상품 관리</a>
+	<a class="barContent" href="/shop/emp/orderList.jsp">상품 주문 관리</a>
 	<a class="barContent logoutLink" href="/shop/emp/empLogout.jsp">LOGOUT</a>
 </div>
 <div class="user-id">

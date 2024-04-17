@@ -4,6 +4,26 @@ import java.util.*;
 import java.sql.*;
 
 public class ProductDAO {
+	
+	
+	
+	
+	// 
+	
+	
+	// 상품 상세 정보(customer)
+	
+	
+	// 상품 list 페이징(/customer/productList.jsp)
+	
+	
+	
+	// 상품 상세 정보(emp)
+	
+	
+	
+	
+	// 상품 list 페이징(/emp/productList.jsp)
 	public static ArrayList<HashMap<String, Object>> selectProductList(int startRow, int rowPerPage) throws Exception {
 			ArrayList<HashMap<String, Object>> list = 
 					new ArrayList<HashMap<String, Object>>();

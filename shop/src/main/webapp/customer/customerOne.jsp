@@ -152,6 +152,22 @@
 						<%=c.get("gender")%>
 					</td>
 				</tr>
+				<tr>
+					<td colspan="2">
+						<button> <!-- /shop/customer/dropCustomer?mail= -->
+							회원 탈퇴 
+							<!-- 회원 탈퇴 dropCustomerAction-->
+						</button>
+						<button>
+							<!-- pw 수정 editCustomerAction-->
+						</button>
+						
+						<button>
+							<!-- 내 주문 목록 ordersListCustomer -->
+						</button>
+						
+					</td>
+				</tr>
 		<%
 			}
 		%>

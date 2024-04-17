@@ -5,6 +5,48 @@ import java.util.*;
 
 public class CustomerDAO {
 	
+	
+	
+	
+	
+	
+	// editPwAction.jsp
+	public static int updatePw(String mail, String oldPw, String newPw) throws Exception {
+		int row = 0;
+
+		Connection conn = DBHelper.getConnection();
+		String sql = "update customer"
+				+ " set pw = ?"
+				+ " where mail = ? and pw = ?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, newPw);
+		stmt.setString(2, mail);
+		stmt.setString(3, oldPw);
+		
+		row = stmt.executeUpdate();
+		
+		conn.close();
+		return row;
+	}
+	
+	// dropCustomerAction.jsp
+	public static int deleteCustomer(String mail, String pw) throws Exception {
+		int row = 0;
+		
+		Connection conn = DBHelper.getConnection();
+		String sql = "delete from customer where mail = ? and pw = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		stmt.setString(1, mail);
+		stmt.setString(2, pw);
+		
+		conn.close();
+		
+		return row;
+	}
+	
+	
 	// addCustomerAction.jsp
 	public static int insertCustomer(String mail, String pw, String name, String birth, String gender) throws Exception {
 		int row = 0;
@@ -34,6 +76,7 @@ public class CustomerDAO {
 		while(rs.next()) {
 			HashMap<String, Object> m = new HashMap<String, Object>();
 			m.put("mail", rs.getString("mail"));
+			m.put("pw", rs.getString("pw"));
 			m.put("name", rs.getString("name"));
 			m.put("birth", rs.getString("birth"));
 			m.put("gender", rs.getString("gender"));
