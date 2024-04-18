@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>    
 <%@ page import="java.util.*" %>
 <%
 	System.out.println("--------------------");
 	System.out.println("/customer/productOne.jsp");
 	
-	// °í°´ login ÀÎÁõ ºĞ±â
+	// ê³ ê° login ì¸ì¦ ë¶„ê¸°
 	
 	if(session.getAttribute("loginCustomer") == null) {
-		// ·Î±×ÀÎÀÌ µÇ¾úÀ» ¶§ productList.jsp·Î ¸®´ÙÀÌ·ºÆ®ÇÏ°Ú´Ù.
+		// ë¡œê·¸ì¸ì´ ë˜ì—ˆì„ ë•Œ productList.jspë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸í•˜ê² ë‹¤.
 		response.sendRedirect("/shop/customer/customerLoginForm.jsp");
 		return;
 	}
@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>

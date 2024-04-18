@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import = "shop.dao.*" %>
 <%
 	System.out.println("--------------------");
 	System.out.println("dropCustomerAction.jsp");
 	
 	if(session.getAttribute("loginCustomer") == null) {
-		// ·Î±×ÀÎÀÌ µÇ¾úÀ» ¶§ productList.jsp·Î ¸®´ÙÀÌ·ºÆ®ÇÏ°Ú´Ù.
+		// ë¡œê·¸ì¸ì´ ë˜ì—ˆì„ ë•Œ productList.jspë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸í•˜ê² ë‹¤.
 		response.sendRedirect("/shop/customer/customerLoginForm.jsp");
 		return;
 	}
@@ -13,16 +14,16 @@
 
 <%
 	// customerOne -> dropCustomerAction     
-
+	String mail = null;
+	String pw = null;
+	
+	int row = CustomerDAO.deleteCustomer(mail, pw);
+	if(row == 1) {
+		System.out.println("íšŒì› íƒˆí‡´ ì™„ë£Œ");
+		response.sendRedirect("/shop/customer/customerLoginForm.jsp");
+	} else {
+		System.out.println("íšŒì› íƒˆí‡´ ì‹¤íŒ¨");
+		response.sendRedirect("/shop/customer/customerOne.jsp?mail=" + mail);
+		return;
+	}
 %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>

@@ -4,29 +4,6 @@ import java.sql.*;
 import java.util.*;
 
 public class CategoryDAO {
-
-	// categoryList.jsp
-	public static ArrayList<HashMap<String, Object>> selectCategoryList() throws Exception {
-		ArrayList<HashMap<String, Object>> categoryList =
-			new ArrayList<HashMap<String, Object>>();
-				
-		Connection conn = DBHelper.getConnection();
-		String sql = "SELECT category, create_date FROM category";
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		
-		ResultSet rs = stmt.executeQuery();
-		while(rs.next()) {
-			HashMap<String, Object> m = new HashMap<String, Object>();
-			m.put("category", rs.getString("category"));
-			m.put("createDate", rs.getString("create_date"));
-			categoryList.add(m);
-		}
-		
-		conn.close();
-		return categoryList;
-	}
-	
-	
 	
 	// addCategoryAction.jsp
 	public static int insertCategory(String addCategory) throws Exception {
@@ -57,7 +34,27 @@ public class CategoryDAO {
 		conn.close();
 		
 		return row;
+	}
+	
+	// categoryList.jsp
+	public static ArrayList<HashMap<String, Object>> selectCategoryList() throws Exception {
+		ArrayList<HashMap<String, Object>> categoryList =
+			new ArrayList<HashMap<String, Object>>();
+				
+		Connection conn = DBHelper.getConnection();
+		String sql = "SELECT category, create_date FROM category";
+		PreparedStatement stmt = conn.prepareStatement(sql);
 		
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			m.put("category", rs.getString("category"));
+			m.put("createDate", rs.getString("create_date"));
+			categoryList.add(m);
+		}
+		
+		conn.close();
+		return categoryList;
 	}
 	
 }

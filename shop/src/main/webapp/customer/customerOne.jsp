@@ -17,8 +17,10 @@
 %>
 <%
 	String mail = request.getParameter("customerEmail");
+	String pw = request.getParameter("customerPw");
 	
 	System.out.println("mail: " + mail);
+	System.out.println("pw: " + pw);
 
 	ArrayList<HashMap<String, Object>> customerOne = CustomerDAO.selectCustomerOne(mail);
 %>    
@@ -154,7 +156,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<button> <!-- /shop/customer/dropCustomer?mail= -->
+						<button type="button" oneclick="/shop/customer/dropCustomer?mail=<%=mail%>&pw=<%=pw%>">
 							회원 탈퇴 
 							<!-- 회원 탈퇴 dropCustomerAction-->
 						</button>

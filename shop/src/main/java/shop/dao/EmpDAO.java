@@ -54,6 +54,8 @@ public class EmpDAO {
 			resultMap.put("empId", rs.getString("empId"));
 			resultMap.put("empName", rs.getString("empName"));
 			resultMap.put("grade", rs.getInt("grade"));
+		
+		
 		}
 		conn.close();
 		return resultMap;

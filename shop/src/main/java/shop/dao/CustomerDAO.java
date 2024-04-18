@@ -5,11 +5,6 @@ import java.util.*;
 
 public class CustomerDAO {
 	
-	
-	
-	
-	
-	
 	// editPwAction.jsp
 	public static int updatePw(String mail, String oldPw, String newPw) throws Exception {
 		int row = 0;

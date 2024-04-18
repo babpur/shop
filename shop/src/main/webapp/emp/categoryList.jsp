@@ -19,7 +19,6 @@
 <!-- model -->
 <%
 	ArrayList<HashMap<String, Object>> categoryList = CategoryDAO.selectCategoryList();
-	
 %>
 <!-- view -->
 <!DOCTYPE html>
