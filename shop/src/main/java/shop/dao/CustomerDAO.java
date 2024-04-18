@@ -5,14 +5,17 @@ import java.util.*;
 
 public class CustomerDAO {
 	
+	// checkMailAction.jsp
+	
 	// editPwAction.jsp
-	public static int updatePw(String mail, String oldPw, String newPw) throws Exception {
+	public static int updatePw(String mail, String oldPw, String newPw)
+			throws Exception {
 		int row = 0;
 
 		Connection conn = DBHelper.getConnection();
-		String sql = "update customer"
-				+ " set pw = ?"
-				+ " where mail = ? and pw = ?";
+		String sql = "UPDATE customer"
+				+ " SET pw = ?"
+				+ " WHERE mail = ? AND pw = ?";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, newPw);
@@ -26,11 +29,14 @@ public class CustomerDAO {
 	}
 	
 	// dropCustomerAction.jsp
-	public static int deleteCustomer(String mail, String pw) throws Exception {
+	public static int deleteCustomer(String mail, String pw)
+			throws Exception {
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
-		String sql = "delete from customer where mail = ? and pw = ?";
+		String sql = "DELETE"
+				+ " FROM customer"
+				+ " WHERE mail = ? AND pw = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		stmt.setString(1, mail);
@@ -43,11 +49,13 @@ public class CustomerDAO {
 	
 	
 	// addCustomerAction.jsp
-	public static int insertCustomer(String mail, String pw, String name, String birth, String gender) throws Exception {
+	public static int insertCustomer(String mail, String pw, String name, String birth, String gender)
+			throws Exception {
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
-		String sql = "INSERT INTO customer(mail, pw, name, birth, gender) VALUES(?, password(?), ?, ?, ?)";
+		String sql = "INSERT INTO customer(mail, pw, name, birth, gender)"
+				+ " VALUES(?, password(?), ?, ?, ?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, mail);
 		stmt.setString(2, pw);
@@ -60,11 +68,14 @@ public class CustomerDAO {
 	}
 	
 	// customerOne.jsp
-	public static ArrayList<HashMap<String, Object>> selectCustomerOne(String mail) throws Exception {
+	public static ArrayList<HashMap<String, Object>> selectCustomerOne(String mail)
+			throws Exception {
 		ArrayList<HashMap<String, Object>> resultMap =
 				new ArrayList<HashMap<String, Object>>();
 		Connection conn = DBHelper.getConnection();
-		String sql = "select * from customer where mail=?";
+		String sql = "SELECT *"
+				+ " FROM customer"
+				+ " WHERE mail=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, mail);
 		ResultSet rs = stmt.executeQuery();
@@ -82,12 +93,15 @@ public class CustomerDAO {
 	}
 	
 	// customerLoginAction.jsp
-	public static HashMap<String, Object> login(String mail, String pw) throws Exception {
+	public static HashMap<String, Object> login(String mail, String pw)
+			throws Exception {
 		HashMap<String, Object> resultMap = null;
 		
 		// DB 접근
 		Connection conn = DBHelper.getConnection();
-		String sql = "select mail, pw from customer where mail=? and pw=password(?)";
+		String sql = "SELECT mail, pw"
+				+ " FROM customer "
+				+ "WHERE mail=? AND pw=password(?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, mail);
 		stmt.setString(2, pw);

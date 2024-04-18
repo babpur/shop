@@ -15,7 +15,8 @@ public class EmpDAO {
 		
 		// DB 접근
 		Connection conn = DBHelper.getConnection();
-		String sql = "INSERT INTO emp(emp_id, emp_pw, emp_name, emp_job, hire_date) VALUES(?, password(?), ?, ?, ?)";
+		String sql = "INSERT INTO emp(emp_id, emp_pw, emp_name, emp_job, hire_date)"
+				+ " VALUES(?, password(?), ?, ?, ?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, empId);
 		stmt.setString(2, empPw);
@@ -36,13 +37,15 @@ public class EmpDAO {
 	
 	// 호출 코드 HashMap<String, Object> m = EmpDAO.empLogin("admin", "1234");
 	public static HashMap<String, Object> empLogin(String empId, String empPw) 
-													throws Exception{
+			throws Exception{
 													
 		HashMap<String, Object> resultMap = null;
 		
 		// DB 접근 코드
 		Connection conn = DBHelper.getConnection();
-		String sql = "select emp_id empId, emp_name empName, grade from emp where active='ON' and emp_id = ? and emp_pw = password(?)";
+		String sql = "SELECT emp_id empId, emp_name empName, grade"
+				+ " FROM emp"
+				+ " WHERE active='ON' AND emp_id = ? AND emp_pw = password(?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, empId);
 		stmt.setString(2, empPw);
@@ -55,14 +58,14 @@ public class EmpDAO {
 			resultMap.put("empName", rs.getString("empName"));
 			resultMap.put("grade", rs.getInt("grade"));
 		
-		
 		}
 		conn.close();
 		return resultMap;
 	}
 	
 	// empList.jsp
-	public static ArrayList<HashMap<String, Object>> selectEmpList(int startRow, int rowPerPage) throws Exception {
+	public static ArrayList<HashMap<String, Object>> selectEmpList(int startRow, int rowPerPage)
+			throws Exception {
 		ArrayList<HashMap<String, Object>> empList =
 			new ArrayList<HashMap<String, Object>>();
 				
@@ -70,7 +73,9 @@ public class EmpDAO {
 		// DB 접근
 		
 		Connection conn = DBHelper.getConnection();
-		String sql = "select emp_id, grade, emp_name, emp_job, hire_date, active from emp order by hire_date desc limit ?, ?";
+		String sql = "SELECT emp_id, grade, emp_name, emp_job, hire_date, active"
+				+ " FROM emp"
+				+ " ORDER BY hire_date desc limit ?, ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, startRow);
 		stmt.setInt(2, rowPerPage);
@@ -92,11 +97,14 @@ public class EmpDAO {
 	}
 	
 	// empOne.jsp
-	public static ArrayList<HashMap<String, Object>> selectEmpOne(String empId) throws Exception {
+	public static ArrayList<HashMap<String, Object>> selectEmpOne(String empId)
+			throws Exception {
 		ArrayList<HashMap<String, Object>> empOne =
 				new ArrayList<HashMap<String, Object>>();
 		Connection conn = DBHelper.getConnection();
-		String sql = "SELECT * FROM emp where emp_id=?";
+		String sql = "SELECT *"
+				+ " FROM emp"
+				+ " WHERE emp_id=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, empId);
 		ResultSet rs = stmt.executeQuery();
@@ -114,11 +122,14 @@ public class EmpDAO {
 	}
 	
 	// modifyEmpActive.jsp
-	public static int updateEmpActive(String empId, String active) throws Exception {
+	public static int updateEmpActive(String empId, String active)
+			throws Exception {
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
-		String sql = "update emp set active = ? where emp_id = ? and active = ?";
+		String sql = "UPDATE emp"
+				+ " SET active = ?"
+				+ " WHERE emp_id = ? AND active = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		if(active.equals("ON")) {
 			stmt.setString(1, "OFF");

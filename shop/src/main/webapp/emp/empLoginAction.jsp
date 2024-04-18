@@ -8,13 +8,13 @@
 	System.out.println("----------");
 	System.out.println("empLoginAction.jsp");
 	
-	/* // 인증 분기: 세션 변수 이름 - loginEmp
+	 // 인증 분기: 세션 변수 이름 - loginEmp
 	
 	if(session.getAttribute("loginEmp") != null) {
 		// 로그인이 되었을 때 empList.jsp로 리다이렉트하겠다.
 		response.sendRedirect("/shop/emp/empList.jsp");
 		return;
-	} */
+	} 
 %>
 <%
 	// controller

@@ -6,10 +6,12 @@ import java.util.*;
 public class CategoryDAO {
 	
 	// addCategoryAction.jsp
-	public static int insertCategory(String addCategory) throws Exception {
+	public static int insertCategory(String addCategory) 
+			throws Exception {
 		int row = 0;
 		Connection conn = DBHelper.getConnection();
-		String sql = "insert into category(category) values(?)";
+		String sql = "INSERT INTO category(category)"
+				+ " VALUES(?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, addCategory);
 		
@@ -19,13 +21,15 @@ public class CategoryDAO {
 		return row;
 	}
 	
-	
 	// deleteCategoryAction.jsp
-	public static int deleteCategory(String category) throws Exception {
+	public static int deleteCategory(String category)
+			throws Exception {
 		int row = 0;
 		Connection conn = DBHelper.getConnection();
 		
-		String sql = "delete from category where category=?";
+		String sql = "DELETE"
+				+ " FROM category "
+				+ "WHERE category=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, category);
 		
@@ -37,12 +41,14 @@ public class CategoryDAO {
 	}
 	
 	// categoryList.jsp
-	public static ArrayList<HashMap<String, Object>> selectCategoryList() throws Exception {
+	public static ArrayList<HashMap<String, Object>> selectCategoryList()
+			throws Exception {
 		ArrayList<HashMap<String, Object>> categoryList =
 			new ArrayList<HashMap<String, Object>>();
 				
 		Connection conn = DBHelper.getConnection();
-		String sql = "SELECT category, create_date FROM category";
+		String sql = "SELECT category, create_date"
+				+ " FROM category";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		ResultSet rs = stmt.executeQuery();
