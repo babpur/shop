@@ -5,7 +5,55 @@ import java.util.*;
 
 public class CustomerDAO {
 	
+	// customerListByEmp
+	public static ArrayList<HashMap<String, Object>> selectCustomerList(int startRow, int rowPerPage)
+		throws Exception {
+		
+		ArrayList<HashMap<String, Object>> list =
+				new ArrayList<HashMap<String, Object>>();
+		Connection conn = DBHelper.getConnection();
+		String sql = "SELECT mail, name, birth, gender, update_date updateDate, create_date createDate"
+				+ " FROM customer"
+				+ " ORDER BY mail"
+				+ " LIMIT ?, ?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, startRow);
+		stmt.setInt(2, rowPerPage);
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			m.put("mail", rs.getString("mail"));
+			m.put("pw", rs.getString("pw"));
+			list.add(m);
+			
+		}
+		conn.close();
+		return list;
+	}
+	
 	// checkMailAction.jsp
+	public static boolean checkMail(String mail)
+		throws Exception {
+		boolean result = false;
+		
+		Connection conn = DBHelper.getConnection();
+		String sql = "SELECT mail"
+				+ " FROM customer"
+				+ " WHERE mail = ?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, mail);
+		
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			result = true;
+		}
+		
+		conn.close();
+		return result;
+	}
 	
 	// editPwAction.jsp
 	public static int updatePw(String mail, String oldPw, String newPw)
@@ -46,7 +94,6 @@ public class CustomerDAO {
 		
 		return row;
 	}
-	
 	
 	// addCustomerAction.jsp
 	public static int insertCustomer(String mail, String pw, String name, String birth, String gender)

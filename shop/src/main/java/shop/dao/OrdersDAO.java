@@ -5,10 +5,6 @@ import java.sql.*;
 
 public class OrdersDAO {
 	
-	// addOrders
-	
-	
-	
 	// ordersList(고객)
 	public static ArrayList<HashMap<String, Object>> selectOrdersListCustomer(int startRow, int rowPerPage)
 			throws Exception {

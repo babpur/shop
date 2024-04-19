@@ -298,7 +298,7 @@
 								</p>
 								<p class="card-text">남은 수량: <%=(Integer)(m2.get("productAmount"))%></p>
 								<p class="card-text">금액: <%=(Integer)(m2.get("productPrice"))%></p>
-								<a href="#" class="btn btn-primary">제품 상세 보기</a>
+								<a href="/shop/emp/productOne.jsp?" class="btn btn-primary">제품 상세 보기</a>
 							</div>
 						</div>
 					</div>

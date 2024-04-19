@@ -20,10 +20,12 @@ public class DBHelper {
 		  
 		prop.load(fr);
 		 
-		String id = prop.getProperty("id"); String pw = prop.getProperty("pw");
+		String id = prop.getProperty("id"); 
+		String pw = prop.getProperty("pw");
 		 
 		 
-		System.out.println("id: " + id); System.out.println("pw: " + pw);
+		System.out.println("id: " + id); 
+		System.out.println("pw: " + pw);
 		
 
 		
