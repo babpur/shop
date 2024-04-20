@@ -22,18 +22,32 @@ public class ProductDAO {
 		stmt.setInt(1, amount);
 		stmt.setInt(2, productNo);
 		
+		row = stmt.executeUpdate();
+		
 		conn.close();
 		return row;
-		
 	}
 	
 	// 상품 등록 
 	// addProductAction.jsp
-	public static int addProduct(int )
+	public static int insertProduct(String category, String empId, String productTitle, String filename, int productPrice, int productAmount, String productContent)
 		throws Exception {
+		int row = 0;
 		
+		Connection conn = DBHelper.getConnection();
 		String sql = "INSERT INTO product(category, emp_id, product_title, filename, product_price, product_amount, product_content)"
 				+ " VALUES(?, ?, ?, ?, ?, ?, ?)";		
+
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, category); 
+		stmt.setString(2, empId);
+		stmt.setString(3, productTitle);
+		stmt.setString(4, filename);
+		stmt.setInt(5, productPrice);
+		stmt.setInt(6, productAmount);
+		stmt.setString(7, productContent);
+		
+		return row;
 	}
 	
 	
