@@ -15,11 +15,11 @@
 %>
 <%
 
-	String name = request.getParameter("customerName");
-	String mail = request.getParameter("customerEmail");
-	String pw = request.getParameter("customerPw");
-	String birth = request.getParameter("customerBirth");
-	String gender = request.getParameter("customerGender");
+	String name = request.getParameter("name");
+	String mail = request.getParameter("mail");
+	String pw = request.getParameter("pw");
+	String birth = request.getParameter("birth");
+	String gender = request.getParameter("gender");
 
 	System.out.println("name: " + name);
 	System.out.println("mail: " + mail);
@@ -39,14 +39,3 @@
 		System.out.println("회원 가입 실패");
 	}
 %>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title></title>
-</head>
-<body>
-	
-</body>
-</html>

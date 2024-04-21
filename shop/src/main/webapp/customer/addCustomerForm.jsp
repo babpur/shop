@@ -115,10 +115,10 @@
 			<table class="table table-hover table-content shadow rounded">
 				<tr>
 					<td>
-						<label for="customerName">이름</label>
+						<label for="name">이름</label>
 					</td>
 					<td>
-						<input type="text" id="customerName" name="customerName">
+						<input type="text" id="name" name="name">
 					</td>
 				</tr>
 				
@@ -126,35 +126,35 @@
 				
 				<tr>
 					<td>
-						<label for="customerEmail">E-Mail</label>
+						<label for="mail">E-Mail</label>
 					</td>
 					<td>
-						<input type="email" id="customerEmail" name="customerEmail" placeholder="로그인 ID입니다.">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="customerPw">비밀번호</label>
-					</td>
-					<td>
-						<input type="password" id="customerPw" name="customerPw">
+						<input type="email" id="mail" name="mail" placeholder="로그인 ID입니다.">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="customerBirth">생년월일</label>
+						<label for="pw">비밀번호</label>
 					</td>
 					<td>
-						<input type="date" id="customerBirth" name="customerBirth">
+						<input type="password" id="pw" name="pw">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="customerGender">성별</label>
+						<label for="birth">생년월일</label>
 					</td>
 					<td>
-						<input type="radio" id="customerGender" name="customerGender" value="남"> 남
-						<input type="radio" id="customerGender" name="customerGender" value="여"> 여
+						<input type="date" id="birth" name="birth">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="gender">성별</label>
+					</td>
+					<td>
+						<input type="radio" id="gender" name="gender" value="남"> 남
+						<input type="radio" id="gender" name="gender" value="여"> 여
 					</td>
 				</tr>
 				<tr>

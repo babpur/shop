@@ -65,60 +65,43 @@ ArrayList<HashMap<String, Object>> empOne = EmpDAO.selectEmpOne(empId);
 	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/GoryeongStrawberry.woff2') format('woff2');
 	    font-weight: normal;
 	    font-style: normal;
-	     /* https://kor.pngtree.com/back/down?id=MTE1NzkyMA==&type=1&time=1712045765&token=YzUyZTdlMThlZmE0N2MxY2YxMDQ5NTI4OGE4OWRhYjA=&t=0 */
+	    
+	    /* https://kor.pngtree.com/back/down?id=MTE1NzkyMA==&type=1&time=1712045765&token=YzUyZTdlMThlZmE0N2MxY2YxMDQ5NTI4OGE4OWRhYjA=&t=0 */
 	    background-image: url("/shop/img/backgroundLoginForm.png");
 	    background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
 		height: 100vh;
 	}
+	h1 {
+		text-align: center;
+		margin-bottom: 30px;
+		font-size: 70px;
+		margin-top: 30px;
 	}
-	
 	main {
 		text-align: center;
-		padding: 10px;
+		padding: 30px;
+		
 	}
-	head {
-	}
-	thead {
+	th {
 		font-size: 30px;
 	}
-	tbody {
+	td {
 		font-size: 20px;
-	}
-	.form-container {
-		justify-content: center;
-	}
-	.table-content {
-		width: 50%;
-		height: 70%;
-		text-align: center;
-		margin: auto;
-		align-items: center;
-	}
-	.card-container {
-		margin: 10px;
-		text-align: center;
-	}
-	.card-title {
 		text-align: left;
-		font-size: 25px;
-	}
-	.card {
-		height: 70vh;
-		font-size: 20px;
-	}
-	h1 {
-		margin: 10px;
+		margin-left: 30px;
 	}
 	</style>
 </head>
 <body>
+	<!-- main menu -->
+	<div><jsp:include page="/emp/inc/empMenu.jsp"></jsp:include></div>
 	<header>
 		<h1>직원 상세 정보</h1>
 	</header>
-	<main>
-		<table>
+	<main class=bg-light>
+		<table class="table table-hover shadow rounded">
 		<%
 			for(HashMap<String, Object> emp : empOne){
 				

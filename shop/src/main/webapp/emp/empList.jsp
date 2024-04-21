@@ -128,8 +128,6 @@
 		text-align: center;
 		padding: 10px;
 	}
-	head {
-	}
 	h1 {
 		text-align: center;
 		margin-bottom: 30px;

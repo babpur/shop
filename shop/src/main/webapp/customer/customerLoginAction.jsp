@@ -34,6 +34,7 @@
 	} else {
 		System.out.println("로그인 성공");
 		session.setAttribute("loginCustomer", loginCustomer);
+		System.out.println("loginCustomer: " + loginCustomer);
 		response.sendRedirect("/shop/customer/productList.jsp");
 		return;
 	}

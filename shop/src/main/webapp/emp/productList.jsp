@@ -264,7 +264,7 @@
 			%>
 					<div class="card-container">
 						<div class="card" style="width: 23rem;">
-							<h6 class="card-title m-3"><%=(String)(m2.get("category"))%></h6>
+							<h6 class="card-title m-3"><%=(Integer)(m2.get("productNo")) + "_" + (String)(m2.get("category"))%></h6>
 							<%
 								if((String)(m2.get("imagePath")) == null ){
 							%>
@@ -298,7 +298,7 @@
 								</p>
 								<p class="card-text">남은 수량: <%=(Integer)(m2.get("productAmount"))%></p>
 								<p class="card-text">금액: <%=(Integer)(m2.get("productPrice"))%></p>
-								<a href="/shop/emp/productOne.jsp?" class="btn btn-primary">제품 상세 보기</a>
+								<a href="/shop/emp/productOne.jsp?productNo=<%=(Integer)(m2.get("productNo"))%>" class="btn btn-primary">제품 상세 보기</a>
 							</div>
 						</div>
 					</div>

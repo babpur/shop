@@ -115,6 +115,7 @@
 		<h1>회원 상세 정보</h1>
 	</header>
 	<main class="bg-light">
+		<form method="post" action="/shop/customer/editPwAction?mail=<%=mail%>&pw=<%=pw%>">
 		<table class="table table-hover shadow rounded">
 		<%
 			for(HashMap<String, Object> c : customerOne){
@@ -122,47 +123,57 @@
 		%>	
 				<tr>
 					<td>
-						회원 ID
+						<label>회원 ID</label>
 					</td>
 					<td>
-						<%=c.get("mail")%>
+						<input type="text" value="<%=c.get("mail")%>" readonly="readonly" name="mail">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						회원 이름
+						<label for="oldPw">사용 중인 PW</label>
 					</td>
 					<td>
-						<%=c.get("name")%>
+						<input type="password" name="oldPw" id="oldPw">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="newPw">수정할 PW</label>
+					</td>
+					<td>
+						<input type="password" name="newPw" id="newPw">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>회원 이름</label>
+					</td>
+					<td>
+						<input type="text" value="<%=c.get("name")%>" readonly="readonly" name="name">
 					</td>
 				</tr>		
 				<tr>
 					<td>
-						생년월일
+						<label>생년월일</label>
 					</td>
 					<td>
-						<%=c.get("birth")%>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						성별
-					</td>
-					<td>
-						<%=c.get("gender")%>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<button type="button" oneclick="/shop/customer/dropCustomer?mail=<%=mail%>&pw=<%=pw%>">
-							회원 탈퇴 
-						</button>
-						<button type="button" oneclick="/shop/customer/editPwForm?mail=<%=mail%>&pw=<%=pw%>">
-							PW 수정
-						</button>
+						<input type="text" value="<%=c.get("birth")%>" readonly="readonly" name="birth">
 						
-						<button type="button" oneclick="/shop/customer/orderListCustomer?mail=<%=mail%>">
-							내 주문 목록							
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>성별</label>
+					</td>
+					<td>
+						<input type="text" value="<%=c.get("gender")%>" readonly="readonly" name="gender">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button type="submit">
+							PW 수정
 						</button>
 					</td>
 				</tr>
@@ -170,6 +181,7 @@
 			}
 		%>
 		</table>
+		</form>
 	</main>
 </body>
 </html>

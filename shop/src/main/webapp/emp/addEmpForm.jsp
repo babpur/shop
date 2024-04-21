@@ -114,7 +114,7 @@
 			<table class="table table-hover table-content shadow rounded">
 				<tr>
 					<td>
-						<label for="empId">이름</label>
+						<label for="empId">ID</label>
 					</td>
 					<td>
 						<input type="text" id="empId" name="empId">

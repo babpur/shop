@@ -108,6 +108,7 @@ public class ProductDAO {
 			
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
+				String imagePath = null;
 				HashMap<String, Object> m = new HashMap<String, Object>();
 				m.put("productNo", rs.getString("product_no")); // 상품 번호
 				m.put("category", rs.getString("category")); // 상품 카테고리
@@ -116,7 +117,7 @@ public class ProductDAO {
 				m.put("productPrice", rs.getInt("product_price")); // 상품 가격
 				m.put("productAmount", rs.getInt("product_amount")); // 상품 수량
 				m.put("createDate", rs.getString("create_date")); // 상품 등록 일자
-				// m.put("imagePath,", imagePath); // 상품 썸네일
+				m.put("imagePath,", imagePath); // 상품 썸네일
 				
 				list.add(m);
 			}
@@ -167,17 +168,18 @@ public class ProductDAO {
 		stmt.setInt(1, productNo);
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
+			String imagePath = null;
 			HashMap<String, Object> m = new HashMap<String, Object>();
 			m.put("productNo",rs.getInt("product_no"));
-			m.put("category",rs.getInt("category"));
-			m.put("empId",rs.getInt("emp_id"));
-			m.put("productTitle",rs.getInt("product_title"));
-			m.put("productContent",rs.getInt("product_content"));
+			m.put("category",rs.getString("category"));
+			m.put("empId",rs.getString("emp_id"));
+			m.put("productTitle",rs.getString("product_title"));
+			m.put("productContent",rs.getString("product_content"));
 			m.put("productPrice",rs.getInt("product_price"));
 			m.put("productAmount",rs.getInt("product_amount"));
-			m.put("updateDate",rs.getInt("update_date"));
-			m.put("createDate",rs.getInt("create_date"));
-		
+			m.put("updateDate",rs.getString("update_date"));
+			m.put("createDate",rs.getString("create_date"));
+			m.put("imagePath,", imagePath); // 상품 썸네일
 			list.add(m);
 		}
 		conn.close();
@@ -204,6 +206,7 @@ public class ProductDAO {
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				HashMap<String, Object> m = new HashMap<String, Object>();
+				String imagePath = null;
 				m.put("productNo", rs.getString("product_no")); // 상품 번호
 				m.put("category", rs.getString("category")); // 상품 카테고리
 				m.put("productTitle", rs.getString("product_title")); // 상품명
@@ -212,7 +215,7 @@ public class ProductDAO {
 				m.put("productAmount", rs.getInt("product_amount")); // 상품 수량
 				m.put("updateDate", rs.getString("update_date")); // 수정 일자
 				m.put("createDate", rs.getString("create_date")); // 상품 등록 일자
-				// m.put("imagePath,", imagePath); // 상품 썸네일
+				m.put("imagePath,", imagePath); // 상품 썸네일
 				
 				list.add(m);
 			}
