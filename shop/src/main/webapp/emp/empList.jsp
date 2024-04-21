@@ -20,9 +20,7 @@
 	// DB
 	Connection conn = DBHelper.getConnection();
 %>
-
 <%
-	// request 분석
 	// 현재 페이지
 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null) {

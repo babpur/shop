@@ -3,6 +3,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.io.*" %> 
 <%@ page import="java.nio.file.*" %>
+<%@ page import="shop.dao.*" %>
 <%
 	request.setCharacterEncoding("UTF-8"); // 대문자 작성 권장
 
@@ -40,6 +41,12 @@
 	int productAmount = Integer.parseInt(request.getParameter("productAmount"));
 	String productContent = request.getParameter("productContent");
 	
+	System.out.println("category: " + category);
+	System.out.println("productTitle: " + productTitle);
+	System.out.println("productPrice: " + productPrice);
+	System.out.println("productAmount: " + productAmount);
+	System.out.println("productContent: " + productContent);
+
 	Part part = request.getPart("productImg");
 	String originalName = part.getSubmittedFileName();
 	
@@ -56,37 +63,10 @@
 	
 	filename = filename + ext;
 	
-	System.out.println("category: " + category);
-	System.out.println("productTitle: " + productTitle);
-	System.out.println("productPrice: " + productPrice);
-	System.out.println("productAmount: " + productAmount);
-	System.out.println("productContent: " + productContent);
 
-	Class.forName("org.mariadb.jdbc.Driver");
-	
-	Connection conn = null;
-	PreparedStatement stmt = null;
-	ResultSet rs = null; 
-	
-	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-	
 
-	String sql = "INSERT INTO product(category, emp_id, product_title, filename, product_price, product_amount, product_content) VALUES(?, ?, ?, ?, ?, ?, ?)";	
 	
-	stmt = conn.prepareStatement(sql);
-	
-	stmt.setString(1, category);
-	stmt.setString(2, empId);
-	stmt.setString(3, productTitle);
-	stmt.setString(4, filename);
-	stmt.setInt(5, productPrice);
-	stmt.setInt(6, productAmount);
-	stmt.setString(7, productContent);
-	
-	System.out.println("stmt: " + stmt);
-	
-	int row = 0;
-	row = stmt.executeUpdate();
+	int row = ProductDAO.insertProduct(category, empId, productTitle, filename, productPrice, productAmount, productContent);
 	
 	if(row == 1){ // insert 성공 시 -> file upload  
 		// part -> 1) is -> 2) os -> 3) 빈 파일

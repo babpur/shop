@@ -54,21 +54,19 @@ public class ProductDAO {
 	
 	// 상품 상세 정보(customer)
 	// /customer/productOne.jsp
-	public static ArrayList<HashMap<String, Object>> selectProductOneByCustomer()
+	public static ArrayList<HashMap<String, Object>> selectProductOneByCustomer(int productNo)
 		throws Exception {
 		ArrayList<HashMap<String, Object>> list =
 				new ArrayList<HashMap<String, Object>>();
 		
 		Connection conn = DBHelper.getConnection();
 		
-		String sql = "SELECT product_no productNo, category,"
-				+ " product_title productTitle, product_count productCnt,"
-				+ " product_price productPrice, product_amount productAmount,"
-				+ " create_date createDate"
-				+ " FROM prodcut"
+		String sql = "SELECT *"
+				+ " FROM product"
 				+ " WHERE product_no =?";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, productNo);
 		
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
@@ -80,7 +78,7 @@ public class ProductDAO {
 			m.put("productPrice", rs.getString("product_price"));
 			m.put("productAmount", rs.getString("product_amount"));
 			m.put("createDate", rs.getString("create_date"));
-			
+			m.put("imagePath", rs.getString("filename")); // 상품 썸네일
 			list.add(m);
 		}
 		conn.close();
@@ -89,14 +87,14 @@ public class ProductDAO {
 	
 	
 	// 상품 list 페이징(/customer/productList.jsp)
-	public static ArrayList<HashMap<String, Object>> selecetProductCustomerList(int startRow, int rowPerPage)
+	public static ArrayList<HashMap<String, Object>> selectProductCustomerList(int startRow, int rowPerPage)
 			throws Exception {
 		ArrayList<HashMap<String, Object>> list = 
 				new ArrayList<HashMap<String, Object>>();
 				
 			Connection conn = DBHelper.getConnection();
 			
-			String sql = "SELECT category, product_title productTitle, product_content ProductContent,"
+			String sql = "SELECT product_no productNo, category, filename, product_title productTitle, product_content ProductContent,"
 					+ " product_price productPrice, product_amount productAmount, create_date createDate"
 					+ " FROM product"
 					+ " ORDER BY create_date desc"
@@ -108,16 +106,15 @@ public class ProductDAO {
 			
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
-				String imagePath = null;
 				HashMap<String, Object> m = new HashMap<String, Object>();
-				m.put("productNo", rs.getString("product_no")); // 상품 번호
+				m.put("productNo", rs.getInt("productNo")); // 상품 번호
 				m.put("category", rs.getString("category")); // 상품 카테고리
-				m.put("productTitle", rs.getString("product_title")); // 상품명
-				m.put("productContent", rs.getString("product_content")); // 상품 상세 정보
-				m.put("productPrice", rs.getInt("product_price")); // 상품 가격
-				m.put("productAmount", rs.getInt("product_amount")); // 상품 수량
-				m.put("createDate", rs.getString("create_date")); // 상품 등록 일자
-				m.put("imagePath,", imagePath); // 상품 썸네일
+				m.put("productTitle", rs.getString("productTitle")); // 상품명
+				m.put("productContent", rs.getString("productContent")); // 상품 상세 정보
+				m.put("productPrice", rs.getInt("productPrice")); // 상품 가격
+				m.put("productAmount", rs.getInt("productAmount")); // 상품 수량
+				m.put("createDate", rs.getString("createDate")); // 상품 등록 일자
+				m.put("imagePath,", rs.getString("filename")); // 상품 썸네일
 				
 				list.add(m);
 			}
@@ -126,7 +123,7 @@ public class ProductDAO {
 	}
 	
 	// /emp/productList - subMenu
-	public static ArrayList<HashMap<String, Object>> selecetSubMenuList()
+	public static ArrayList<HashMap<String, Object>> selectSubMenuList()
 			throws Exception {
 		ArrayList<HashMap<String, Object>> list = 
 				new ArrayList<HashMap<String, Object>>();
@@ -168,7 +165,6 @@ public class ProductDAO {
 		stmt.setInt(1, productNo);
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
-			String imagePath = null;
 			HashMap<String, Object> m = new HashMap<String, Object>();
 			m.put("productNo",rs.getInt("product_no"));
 			m.put("category",rs.getString("category"));
@@ -179,7 +175,7 @@ public class ProductDAO {
 			m.put("productAmount",rs.getInt("product_amount"));
 			m.put("updateDate",rs.getString("update_date"));
 			m.put("createDate",rs.getString("create_date"));
-			m.put("imagePath,", imagePath); // 상품 썸네일
+			m.put("imagePath,", rs.getString("filename")); // 상품 썸네일
 			list.add(m);
 		}
 		conn.close();
@@ -206,7 +202,6 @@ public class ProductDAO {
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				HashMap<String, Object> m = new HashMap<String, Object>();
-				String imagePath = null;
 				m.put("productNo", rs.getString("product_no")); // 상품 번호
 				m.put("category", rs.getString("category")); // 상품 카테고리
 				m.put("productTitle", rs.getString("product_title")); // 상품명
@@ -215,7 +210,7 @@ public class ProductDAO {
 				m.put("productAmount", rs.getInt("product_amount")); // 상품 수량
 				m.put("updateDate", rs.getString("update_date")); // 수정 일자
 				m.put("createDate", rs.getString("create_date")); // 상품 등록 일자
-				m.put("imagePath,", imagePath); // 상품 썸네일
+				m.put("imagePath,", rs.getString("filename")); // 상품 썸네일
 				
 				list.add(m);
 			}

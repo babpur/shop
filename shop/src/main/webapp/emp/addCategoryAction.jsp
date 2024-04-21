@@ -19,12 +19,9 @@
 <%
 	// request
 	String category = request.getParameter("addCategory");
-	
 	System.out.println("category:" + category);
 %>
-
 <%
-
 	int row = CategoryDAO.insertCategory(category);
 %>
 <%

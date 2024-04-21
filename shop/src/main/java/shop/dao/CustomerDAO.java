@@ -47,9 +47,7 @@ public class CustomerDAO {
 		stmt.setString(1, mail);
 		
 		ResultSet rs = stmt.executeQuery();
-		if(rs.next()) {
-			result = true;
-		}
+		
 		
 		conn.close();
 		return result;

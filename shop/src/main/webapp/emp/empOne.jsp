@@ -18,12 +18,11 @@
 %>
 
 <%
-String empId = request.getParameter("empId");
-
-System.out.println(empId);
-
-ArrayList<HashMap<String, Object>> empOne = EmpDAO.selectEmpOne(empId);
-
+	String empId = request.getParameter("empId");
+	
+	System.out.println(empId);
+	
+	ArrayList<HashMap<String, Object>> empOne = EmpDAO.selectEmpOne(empId);
 
 %>
 <!DOCTYPE html>

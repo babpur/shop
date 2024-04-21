@@ -3,6 +3,27 @@
 	System.out.println("--------------------");
 	System.out.println("addCustomerForm.jsp");
 %>
+<%
+	String checkMail = request.getParameter("checkMail");
+	String ck = request.getParameter("ck");
+	
+	System.out.println(checkMail);
+	System.out.println(ck);
+	
+	if(checkMail == null) {
+		checkMail = "";
+	}
+	if(ck == null) {
+		ck = "";
+	}
+
+	String msg = "";
+	if(ck.equals("T")) {
+		msg = "회원 가입이 가능한 mail입니다.";
+	} else if(ck.equals("F")) {
+		msg = "이미 가입된 mail입니다.";
+	}
+%>
 
 <!DOCTYPE html>
 <html>
@@ -111,59 +132,81 @@
 		<h1>회원 가입</h1>
 	</header>
 	<main>
+			<!-- mail 중복 체크 추가 -->
+		<form method="post" action="checkMailAction.jsp">
+		<table class="table table-hover table-content shadow rounded">
+			<tr>
+				<td>
+					<label for="checkMail">E-Mail 중복 확인</label>
+				</td>
+				<td>
+					<input type="email" id="checkMail" name="checkMail" placeholder="로그인 ID입니다.">
+					<button type="submit">중복 확인</button><%=msg%>
+				</td>
+			</tr>
+		</table>
+		</form><br>
+		
 		<form method="post" action="addCustomerAction.jsp">
-			<table class="table table-hover table-content shadow rounded">
-				<tr>
-					<td>
-						<label for="name">이름</label>
-					</td>
-					<td>
-						<input type="text" id="name" name="name">
-					</td>
-				</tr>
-				
-				<!-- mail 중복 체크 추가 -->
-				
-				<tr>
-					<td>
-						<label for="mail">E-Mail</label>
-					</td>
-					<td>
-						<input type="email" id="mail" name="mail" placeholder="로그인 ID입니다.">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="pw">비밀번호</label>
-					</td>
-					<td>
-						<input type="password" id="pw" name="pw">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="birth">생년월일</label>
-					</td>
-					<td>
-						<input type="date" id="birth" name="birth">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="gender">성별</label>
-					</td>
-					<td>
-						<input type="radio" id="gender" name="gender" value="남"> 남
-						<input type="radio" id="gender" name="gender" value="여"> 여
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<button type="submit">회원 가입</button>
-					</td>
-					
-				</tr>
-			</table>
+		<table class="table table-hover table-content shadow rounded">
+			<tr>
+				<td>
+					<label for="name">이름</label>
+				</td>
+				<td>
+					<input type="text" id="name" name="name">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<label for="mail">E-Mail</label>
+				</td>
+				<td>
+					<%
+						if(ck.equals("T")){
+					%>
+							<input type="email" id="mail" name="mail" value="<%=checkMail%>" readonly="readonly">
+					<%
+						} else {
+					%>
+							<input type="email" id="mail" name="mail" value="" readonly="readonly">		
+					<%
+						}
+					%>							
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="pw">비밀번호</label>
+				</td>
+				<td>
+					<input type="password" id="pw" name="pw">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="birth">생년월일</label>
+				</td>
+				<td>
+					<input type="date" id="birth" name="birth">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="gender">성별</label>
+				</td>
+				<td>
+					<input type="radio" id="gender" name="gender" value="남"> 남
+					<input type="radio" id="gender" name="gender" value="여"> 여
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button type="submit">회원 가입</button>
+				</td>
+			</tr>
+		</table>
 		</form>
 	</main>
 </body>

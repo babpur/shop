@@ -25,7 +25,6 @@
 	System.out.println("empId: " + empId);
 	System.out.println("active: " + active);
 
-	
 	int row = EmpDAO.updateEmpActive(empId, active);
 	if(row > 0 ){
 		System.out.println("ON / OFF 설정이 변경되었습니다.");

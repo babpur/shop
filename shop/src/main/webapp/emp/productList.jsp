@@ -17,18 +17,11 @@
 	}
 %>	
 <%
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection conn = null;
-	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "java1234");
-%>
-
-<%
 	// 현재 페이지
 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null) {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
-	
 	
 	// 한 페이지에 보여질 상품 개수
 	int rowPerPage = 5;
@@ -38,21 +31,22 @@
 	String category = request.getParameter("category");
 	System.out.println("category:" + category);
 	
-	// 전체 상품 
-	String sql1 = "SELECT count(*) cnt FROM product where category=?";
-	PreparedStatement stmt1 = null;
-	ResultSet rs1 = null; 
-	stmt1 = conn.prepareStatement(sql1);
-	stmt1.setString(1, category);
-
-	System.out.println("stmt1: " + stmt1);
+	Connection conn = DBHelper.getConnection();
 	
-	rs1 = stmt1.executeQuery();
+	// 전체 상품 
+	String sql = "SELECT count(*) cnt FROM product";
+	PreparedStatement stmt = null;
+	ResultSet rs = null; 
+	stmt = conn.prepareStatement(sql);
+
+	System.out.println("stmt: " + stmt);
+	
+	rs = stmt.executeQuery();
 	
 	int totalRow = 0;
 	
-	if(rs1.next()){
-		totalRow = rs1.getInt("cnt");
+	if(rs.next()){
+		totalRow = rs.getInt("cnt");
 	}
 	
 	// 마지막 페이지 계산하기 = 전체 상품 수량 / 한 페이지에서 보일 상품의 수량
@@ -68,78 +62,13 @@
 	System.out.println("rowPerPage: " + rowPerPage);
 	System.out.println("startRow: " + startRow);
 	System.out.println("rowPerPage: " + rowPerPage);
-	
-	
-	
-	
 %>
 <!-- model -->
 <%
-	PreparedStatement stmt2 = null;
-	ResultSet rs2 = null; 
 
-	String sql2 ="SELECT category, COUNT(*) cnt FROM product GROUP BY category ORDER BY category asc;";
+	ArrayList<HashMap<String, Object>> subMenuList = ProductDAO.selectSubMenuList();
 	
-	stmt2 = conn.prepareStatement(sql2);
-	
-	System.out.println("stmt2: " + stmt2);
-	
-	rs2 = stmt2.executeQuery();
-	
-	ArrayList<HashMap<String, Object>> categoryList = 
-			new ArrayList<HashMap<String, Object>>();
-	while(rs2.next()){
-		HashMap<String, Object> m1 = new HashMap<String, Object>();
-		m1.put("category", rs2.getString("category"));
-		m1.put("cnt", rs2.getInt("cnt"));
-		categoryList.add(m1);
-	}
-
-	String category1 = request.getParameter("category");
-	System.out.println("category: " + category);
-
-	PreparedStatement stmt3 = null;
-	ResultSet rs3 = null;
-	
-	String sql3 = null;
-
-	/*
-		null이면
-		select * from product
-		null이 아니면
-		selecet * from product where category=?
-	*/
-	if(category == null){
-		sql3 = "SELECT * FROM product ORDER BY product_no DESC LIMIT ?, ?";
-		stmt3 = conn.prepareStatement(sql3);
-		stmt3.setInt(1, startRow);
-	    stmt3.setInt(2, rowPerPage);
-	} else {
-		sql3 = "SELECT * FROM product WHERE category= ? ORDER BY product_no DESC LIMIT ?, ?";
-		stmt3 = conn.prepareStatement(sql3);
-		stmt3.setString(1, category1);
-	    stmt3.setInt(2, startRow);
-	    stmt3.setInt(3, rowPerPage);
-	}
-	System.out.println("stmt3: " + stmt3);
-	
-	rs3 = stmt3.executeQuery();
-	
-	ArrayList<HashMap<String, Object>> productList = 
-			new ArrayList<HashMap<String, Object>>();
-	while(rs3.next()){
-		String imagePath = rs3.getString("filename");
-		HashMap<String, Object> m2 = new HashMap<String, Object>();
-		m2.put("productNo", rs3.getInt("product_no"));
-		m2.put("category", rs3.getString("category"));
-		m2.put("productTitle", rs3.getString("product_title"));
-		m2.put("productContent", rs3.getString("product_content"));
-		m2.put("productPrice", rs3.getInt("product_price"));
-		m2.put("productAmount", rs3.getInt("product_amount"));
-		m2.put("createDate", rs3.getString("create_date"));
-		m2.put("imagePath,", imagePath);
-		productList.add(m2);
-	}
+	ArrayList<HashMap<String, Object>> productList = ProductDAO.selectProductList(startRow, rowPerPage);
 
 %>
 <!-- view -->
@@ -243,11 +172,11 @@
 	<div>
 		<a href="/shop/emp/productList.jsp">전체 상품</a>
 		<%
-			for(HashMap m1 : categoryList){
+			for(HashMap m : subMenuList){
 		%>
-				<a href="/shop/emp/productList.jsp?category=<%=(String)(m1.get("category"))%>">
-					<%=(String)(m1.get("category"))%>
-					(<%=(Integer)(m1.get("cnt"))%>)
+				<a href="/shop/emp/productList.jsp?category=<%=(m.get("category"))%>">
+					<%=(m.get("category"))%>
+					(<%=(m.get("cnt"))%>)
 				</a>		
 		<%		
 				
@@ -260,29 +189,29 @@
 	<main>
 		<div class="d-flex flex-row flex-wrap justify-content-center">
 			<%
-				for(HashMap<String, Object> m2 : productList){
+				for(HashMap<String, Object> p : productList){
 			%>
 					<div class="card-container">
 						<div class="card" style="width: 23rem;">
-							<h6 class="card-title m-3"><%=(Integer)(m2.get("productNo")) + "_" + (String)(m2.get("category"))%></h6>
+							<h6 class="card-title m-3"><%=(p.get("productNo")) + "_" + (p.get("category"))%></h6>
 							<%
-								if((String)(m2.get("imagePath")) == null ){
+								if((p.get("imagePath")) == null ){
 							%>
 									<img src='/shop/upload/default.jpg' class="card-img-top p-2" alt="...">
 							<%		
 									
 								} else {
 							%>
-									<img src='<%=request.getContextPath()%>/upload/<%=(String)(m2.get("imagePath"))%>' class="card-img-top p-2" alt="...">
+									<img src='<%=request.getContextPath()%>/upload/<%=(p.get("imagePath"))%>' class="card-img-top p-2" alt="...">
 							<%		
 								}
 							%>
 							<div class="card-body">
-								<p class="card-text"><%=(String)(m2.get("productTitle"))%></p>
+								<p class="card-text"><%=(p.get("productTitle"))%></p>
 								<p class="card-text">
 									제품 소개: 
 										<%
-											String productContent = (String)(m2.get("productContent")); 
+											String productContent = (String)(p.get("productContent")); 
 											if(productContent.length() > 20){
 										%>
 												<br>								
@@ -296,9 +225,9 @@
 											}
 										%>
 								</p>
-								<p class="card-text">남은 수량: <%=(Integer)(m2.get("productAmount"))%></p>
-								<p class="card-text">금액: <%=(Integer)(m2.get("productPrice"))%></p>
-								<a href="/shop/emp/productOne.jsp?productNo=<%=(Integer)(m2.get("productNo"))%>" class="btn btn-primary">제품 상세 보기</a>
+								<p class="card-text">남은 수량: <%=(p.get("productAmount"))%></p>
+								<p class="card-text">금액: <%=(p.get("productPrice"))%></p>
+								<a href="/shop/emp/productOne.jsp?productNo=<%=(p.get("productNo"))%>" class="btn btn-primary">제품 상세 보기</a>
 							</div>
 						</div>
 					</div>

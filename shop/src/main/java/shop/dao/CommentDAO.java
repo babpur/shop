@@ -2,9 +2,6 @@ package shop.dao;
 
 public class CommentDAO {
 	
-	
-	
-	
 	// 후기 입력이 가능한 사람 조회
 	/*
 	 * String sql = "SELECT *" + " FROM orders" + " WHERE mail = ?" +

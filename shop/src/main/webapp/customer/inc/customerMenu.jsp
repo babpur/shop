@@ -24,6 +24,7 @@
 	
 	System.out.println("name: " + name);
 	System.out.println("mail: " + mail);
+	
 %>
 <style>
 	.shop-logo {

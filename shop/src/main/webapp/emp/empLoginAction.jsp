@@ -30,7 +30,7 @@
 	if(loginEmp == null){ // 로그인 실패
 		System.out.println("로그인 실패");
 		String errMsg = URLEncoder.encode("잘못된 접근입니다. \n ID와 비밀번호를 확인해 주세요", "utf-8");
-		response.sendRedirect("/shop/emp/empLoginForm.jsp?errMsg=" + errMsg);
+		response.sendRedirect("/shop/emp/empLoginAction.jsp?errMsg=" + errMsg);
 	} else {
 		System.out.println("로그인 성공");
 		session.setAttribute("loginEmp", loginEmp);
