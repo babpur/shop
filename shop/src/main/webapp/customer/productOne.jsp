@@ -135,7 +135,7 @@
 	<header>
 		<h1>상품 상세 정보</h1>
 	</header>
-	
+	<a href="/shop/customer/productList.jsp">뒤로 가기</a>
 	<main class="bg-light">
 		<table class="table table-hover shadow rounded">
 		
@@ -189,17 +189,74 @@
 				}
 			%>
 		</table>
-			<a href="/shop/customer/productList.jsp">뒤로 가기</a>
-			<a href="/shop/customer/addOrders.jsp?">상품 주문하기</a>
+		
+		<h2>상품 주문하기</h2>
+		<form method="post" action="/shop/customer/addOrders.jsp?">
+		<table>
+			<tr>
+				<td>
+					<input type="hidden" value="<%=mail%>">
+				</td>
+				<td>
+					<input type="hidden" value="<%=mail%>">
+				</td>
+			</tr>
+		
+			<tr>
+				<td>
+					<label>주문 수량</label>
+				</td>
+				<td>
+					<input type="number" name="ordersAmount">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>
+						배송지 입력
+					</label>
+				</td>
+				<td>
+					<input type="number" name="ordersAmount">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button type="submit">상품 주문하기</a>
+				</td>		
+			</tr>
+		</table>
+		</form>
+
 
 		<form method="post" action="/shop/customer/addComment.jsp">
 		<h2>상품 구매 후기</h2>
 		<table class="table table-hover">
 			<tr>
+				<td><input type="hidden" value='<%=productNo%>'></td>
 				<td><%=mail%></td>
 				<td>
-					<textarea rows="5" cols="30"></textarea>
+					<textarea rows="5" cols="30" name="content"></textarea>
+				</td>
+				<td>
+					상품 구매 후기
+					<select name="score">
+						<!-- test -->
+						<!-- 까먹지 말고 반복문으로 바꾸기 -->
+						<option value="">=== 선택 ===
+						<option value="1">1
+						<option value="2">2
+						<option value="3">3
+						<option value="4">4
+						<option value="5">5
+						<option value="6">6
+						<option value="7">7
+						<option value="8">8
+						<option value="9">9
+						<option value="10">10
+					</select>
 					<button type="submit">댓글 등록</button>
+					<button type="button" oneclick="/shop/customer/productOne.jsp?productNo<%=productNo%>&">후기 삭제</button>
 				</td>
 			</tr>
 		</table>

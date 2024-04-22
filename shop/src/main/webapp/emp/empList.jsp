@@ -34,16 +34,16 @@
 	int startRow = (currentPage-1) * rowPerPage;
 	
 	// 전체 직원의 수
-	String sql1 = "SELECT count(*) cnt FROM emp";
-	PreparedStatement stmt1 = null;
-	ResultSet rs1 = null; 
-	stmt1 = conn.prepareStatement(sql1);
-	rs1 = stmt1.executeQuery();
+	String sql = "SELECT count(*) cnt FROM emp";
+	PreparedStatement stmt = null;
+	ResultSet rs = null; 
+	stmt = conn.prepareStatement(sql);
+	rs = stmt.executeQuery();
 	
 	int totalRow = 0;
 	
-	if(rs1.next()){
-		totalRow = rs1.getInt("cnt");
+	if(rs.next()){
+		totalRow = rs.getInt("cnt");
 	}
 	
 	// 마지막 페이지 계산하기 = 전체 회원수 / 한 페이지에서 보이는 인원수
@@ -67,7 +67,7 @@
 	// 모델: 특수한 형태의 데이터 (RDBMS: mariadb)
 	// -> API 사용하여 (JDBC API) 자료 구조(ResultSet) 취득
 	// -> 일반화된 자료 구조로(ArrayList<HashMap> 변경 -> 모델 취득
-
+	
 	ArrayList<HashMap<String, Object>> empList = EmpDAO.selectEmpList(startRow, rowPerPage);
 	
 %>

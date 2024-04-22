@@ -38,4 +38,25 @@ public class OrdersDAO {
 		
 		return list;
 	}
+	
+	
+	// addOrders.jsp
+	
+	public static int insertOrders(String mail, int totalAmount, int totalPrice, String address)
+		throws Exception {
+		int row = 0;
+		
+		Connection conn = DBHelper.getConnection();
+		String sql = "INSERT INTO orders(mail, total_amount, total_price, address)"
+				+ " VALUES (?, ?, ?, ?)";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, mail);
+		stmt.setInt(2, totalAmount);
+		stmt.setInt(3, totalPrice);
+		stmt.setString(4, address);
+		
+		conn.close();
+		return row;
+	}
 }

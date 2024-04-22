@@ -18,12 +18,12 @@
 	String mail = null;
 	if(loginCustomer != null) {
 	    // HashMap에서 customerName 값 가져오기
-		name = (String)loginCustomer.get("name");
 		mail = (String)loginCustomer.get("mail");
+	    name = (String)loginCustomer.get("name");
 	}
-	
 	System.out.println("name: " + name);
 	System.out.println("mail: " + mail);
+	System.out.println("loginCustomer: " + loginCustomer);
 	
 %>
 <style>

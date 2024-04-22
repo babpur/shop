@@ -6,7 +6,7 @@
 <%@ page import="shop.dao. *" %>
 <%
 	System.out.println("----------");
-	System.out.println("customerOne.jsp");
+	System.out.println("editPwForm.jsp");
 	
  	// 인증 분기: 세션 변수 이름 - loginCustomer
 	if(session.getAttribute("loginCustomer") == null) {

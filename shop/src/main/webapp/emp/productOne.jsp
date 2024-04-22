@@ -17,6 +17,7 @@
 	}
 %>
 <%
+	// productNo: emp/productList.jsp -> emp/productOne.jsp
 	int productNo = Integer.parseInt(request.getParameter("productNo"));
 
 	System.out.println("productNo: " + productNo);

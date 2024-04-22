@@ -117,7 +117,7 @@
 	<main class="bg-light">
 		<table class="table table-hover shadow rounded">
 		<%
-			for(HashMap<String, Object> c : customerOne){
+			for(HashMap<String, Object> m : customerOne){
 			
 		%>	
 				<tr>
@@ -125,7 +125,7 @@
 						회원 ID
 					</td>
 					<td>
-						<%=c.get("mail")%>
+						<%=m.get("mail")%>
 					</td>
 				</tr>
 				<tr>
@@ -133,7 +133,7 @@
 						회원 이름
 					</td>
 					<td>
-						<%=c.get("name")%>
+						<%=m.get("name")%>
 					</td>
 				</tr>		
 				<tr>
@@ -141,7 +141,7 @@
 						생년월일
 					</td>
 					<td>
-						<%=c.get("birth")%>
+						<%=m.get("birth")%>
 					</td>
 				</tr>
 				<tr>
@@ -149,7 +149,7 @@
 						성별
 					</td>
 					<td>
-						<%=c.get("gender")%>
+						<%=m.get("gender")%>
 					</td>
 				</tr>
 				<tr>
@@ -157,7 +157,7 @@
 						<button type="button" oneclick="/shop/customer/dropCustomer?mail=<%=mail%>&pw=<%=pw%>">
 							회원 탈퇴 
 						</button>
-						<button type="button" oneclick="/shop/customer/editPwForm?mail=<%=mail%>&pw=<%=pw%>">
+						<button type="button" oneclick="/shop/customer/editPwForm?mail=<%=mail%>">
 							PW 수정
 						</button>
 						

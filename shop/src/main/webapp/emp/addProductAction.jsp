@@ -5,10 +5,11 @@
 <%@ page import="java.nio.file.*" %>
 <%@ page import="shop.dao.*" %>
 <%
-	request.setCharacterEncoding("UTF-8"); // 대문자 작성 권장
 
 	System.out.println("----------");
 	System.out.println("addProductAction.jsp");
+	
+	request.setCharacterEncoding("UTF-8"); // 대문자 작성 권장
 	
 	// 인증 분기: 세션 변수 이름 - loginEmp
 	

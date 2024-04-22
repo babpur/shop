@@ -22,9 +22,10 @@
 	    empName = (String)loginEmp.get("empName");
 	    empId = (String)loginEmp.get("empId");
 	}
-	
 	System.out.println("empName: " + empName);
 	System.out.println("empId: " + empId);
+	System.out.println("loginEmp: " + loginEmp);
+	
 %>
 
 <style>
@@ -62,7 +63,7 @@
     <a class="barContent" href="/shop/emp/empList.jsp">사원 관리</a>
 	<a class="barContent" href="/shop/emp/categoryList.jsp">카테고리 관리</a>
 	<a class="barContent" href="/shop/emp/productList.jsp">상품 관리</a>
-	<a class="barContent" href="/shop/emp/orderList.jsp">상품 주문 관리</a>
+	<a class="barContent" href="/shop/emp/ordersList.jsp">상품 주문 관리</a>
 	<a class="barContent logoutLink" href="/shop/emp/empLogout.jsp">LOGOUT</a>
 </div>
 <div class="user-id">

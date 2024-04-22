@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="shop.dao.*"%>
+
+    
 <%
 	System.out.println("--------------------");
 	System.out.println("/customer/addOrders.jsp");
@@ -12,17 +15,15 @@
 		return;
 	}
 %>    
+<%
+	String mail = null;
+	int totalAmount = 0;
+	int totalPrice = 0;
+	String address = null;
+%>
+
 	<!-- productList -> productOne -> 'addOrders' -->
 <%
-
+	int row = OrdersDAO.insertOrders(mail, totalAmount, totalPrice, address);
+	
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>

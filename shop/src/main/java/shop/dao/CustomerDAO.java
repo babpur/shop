@@ -132,6 +132,7 @@ public class CustomerDAO {
 			m.put("birth", rs.getString("birth"));
 			m.put("gender", rs.getString("gender"));
 			
+			resultMap.add(m);
 		}
 		conn.close();
 		return resultMap;
@@ -144,7 +145,7 @@ public class CustomerDAO {
 		
 		// DB 접근
 		Connection conn = DBHelper.getConnection();
-		String sql = "SELECT mail, pw"
+		String sql = "SELECT mail, pw, name"
 				+ " FROM customer "
 				+ "WHERE mail=? AND pw=password(?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -155,6 +156,7 @@ public class CustomerDAO {
 			resultMap = new HashMap<String, Object>();
 			resultMap.put("mail", rs.getString("mail"));
 			resultMap.put("pw", rs.getString("pw"));
+			resultMap.put("name", rs.getString("name"));
 		}
 		conn.close();
 		return resultMap;

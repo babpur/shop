@@ -37,4 +37,5 @@
 		response.sendRedirect("/shop/emp/empList.jsp");
 		return;
 	}
+	
 %>
