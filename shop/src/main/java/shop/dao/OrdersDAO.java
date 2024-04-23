@@ -10,15 +10,24 @@ public class OrdersDAO {
 			throws Exception {
 		ArrayList<HashMap<String, Object>> list =
 			new ArrayList<HashMap<String, Object>>();
+		
+		Connection conn = DBHelper.getConnection();
 		String sql = "SELECT o.orders_no ordersNo,"
 				+ " o.product_no productNo, p.product_title productTitle"
 				+ " INNER JOIN product p "
 				+ " ON o.product_no = p.product_no"
 				+ " ORDER BY o.orders_no desc"
 				+ " LIMIT ?, ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, startRow);
+		stmt.setInt(2, rowPerPage);
 		
-		// 빈칸 채우기
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			
+		}
 		
+		conn.close();
 		return list;
 	}
 	
@@ -27,15 +36,36 @@ public class OrdersDAO {
 			throws Exception {
 		ArrayList<HashMap<String, Object>> list =
 			new ArrayList<HashMap<String, Object>>();
+		Connection conn = DBHelper.getConnection();
 		String sql = "SELECT o.orders_no ordersNo,"
-				+ " o.product_no productNo, p.product_title productTitle"
+				+ " o.product_no productNo, p.product_title productTitle,"
+				+ " o.total_amount totalAmount, p.product_price productPrice,"
+				+ " o.address adress, o.create_date createDate, total_price totalPrice,"
+				+ " state"
+				+ " FROM orders o"
 				+ " INNER JOIN product p "
 				+ " ON o.product_no = p.product_no"
 				+ " ORDER BY o.orders_no desc"
 				+ " LIMIT ?, ?";
-	
-		// 빈칸 채우기
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, startRow);
+		stmt.setInt(2, rowPerPage);
+		ResultSet rs = stmt.executeQuery();
 		
+		while(rs.next()) {
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("ordersNo", rs.getInt("ordersNo"));
+			map.put("productNo", rs.getInt("productNo"));
+			map.put("productTitle", rs.getString("productTitle"));
+			map.put("productTitle", rs.getString("productTitle"));
+			map.put("productTitle", rs.getString("productTitle"));
+			map.put("productTitle", rs.getString("productTitle"));
+			map.put("productTitle", rs.getString("productTitle"));
+			map.put("productTitle", rs.getString("productTitle"));
+			map.put("state", rs.getString("state"));
+			
+		}
+		conn.close();
 		return list;
 	}
 	

@@ -153,26 +153,25 @@
 				<td>상품 가격</td>
 				<td>주소</td>
 				<td>주문 일자</td>
+				<td>총 가격</td>
 				<td>배송 상태</td>
-				<!-- <td>총 가격</td> -->
 			</tr>
-			
-			<%
-				for(HashMap<String, Object> m : list){
-			%>
-					<tr>
-						<td><%=m.get("ordersNo")%></td>
-						<td><%=m.get("productNo")%>_<%=m.get("productTitle")%></td>
-						<td><%=m.get("totalAmount")%></td>
-						<td><%=m.get("totalPrice")%></td>
-						<td><%=m.get("address") %></td>
-						<td><%=m.get("createDate") %></td>
-						<td><%=m.get("state")%></td>
-						<%-- <td><%=m.get("totalPrice")%></td> --%>
-					</tr>
-			<%		
-				}
-			%>
+				<%
+					for(HashMap<String, Object> m : list){
+				%>
+						<tr>
+							<td><%=m.get("ordersNo")%></td>
+							<td><%=m.get("productNo")%>_<%=m.get("productTitle")%></td>
+							<td><%=m.get("totalAmount")%></td>
+							<td><%=m.get("totalPrice")%></td>
+							<td><%=m.get("address") %></td>
+							<td><%=m.get("createDate") %></td>
+							<td><%=m.get("totalPrice")%></td>
+							<td><%=m.get("state")%></td>
+						</tr>
+				<%		
+					}
+				%>
 		</table>
 	</main>
 	

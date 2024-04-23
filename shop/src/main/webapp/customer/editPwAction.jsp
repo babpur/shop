@@ -21,6 +21,6 @@
 		
 	} else {
 		System.out.println("비밀번호가 변경되지 않았습니다.");
-		response.sendRedirect("/shop/customer/editPwForm.jsp?mail=" + mail);
+		response.sendRedirect("/shop/customer/customerOne.jsp?mail=" + mail);
 	}
 %>    

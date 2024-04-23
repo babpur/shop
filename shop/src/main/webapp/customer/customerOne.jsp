@@ -166,7 +166,13 @@
 				<td>PW 수정</td>
 			</tr>
 			<tr>
-				<td><input type="password" name="newPw"></td>
+				<td><input type="hidden" name="mail" value="<%=mail%>"></td>
+			</tr>
+			<tr>
+				<td><input type="password" name="oldPw" placeholder="현재 pw를 입력해 주세요."></td>
+			</tr>
+			<tr>
+				<td><input type="password" name="newPw" placeholder="변경하실 pw를 입력해 주세요."></td>
 			</tr>
 			<tr>
 				<td>
@@ -176,7 +182,7 @@
 		</table>
 		</form>		
 			
-		<form method="post" action="/shop/customer/dropCustomer.jsp">
+		<form method="post" action="/shop/customer/dropCustomerAction.jsp">
 		<table>
 			<tr>
 				<td colspan="2">회원 탈퇴</td>
@@ -185,7 +191,12 @@
 				<td>PW 확인</td>
 			</tr>
 			<tr>
-				<td><input type="password" name=""></td>
+				<td><input type="hidden" name="mail" value="<%=mail%>"></td>
+			</tr>
+			<tr>
+				<td><input type="password" name="pw" placeholder="pw를 입력해 주세요."></td>
+			</tr>
+			<tr>
 			</tr>
 			<tr>
 				<td>

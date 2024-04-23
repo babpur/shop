@@ -122,8 +122,8 @@
 		margin: 10px;
 	}
 	img {
-		width: 200px;
-		height: 500px;
+		width: 150px;
+		height: 400px;
 	}
 	</style>
 	
@@ -191,8 +191,8 @@
 		</table>
 		
 		<h2>상품 주문하기</h2>
-		<form method="post" action="/shop/customer/addOrders.jsp">
-		<table>
+		<form method="post" action="/shop/customer/addOrdersAction.jsp">
+		<table class="table table-hover shadow rounded">
 			<tr>
 				<td>
 					<input type="hidden" value="<%=mail%>">
@@ -217,7 +217,7 @@
 					</label>
 				</td>
 				<td>
-					<input type="number" name="address">
+					<input type="text" name="address">
 				</td>
 			</tr>
 			<tr>
