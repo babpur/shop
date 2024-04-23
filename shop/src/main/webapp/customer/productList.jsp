@@ -219,7 +219,7 @@ ArrayList<HashMap<String, Object>> productList = ProductDAO.selectProductCustome
 								</p>
 								<p class="card-text">남은 수량: <%=(p.get("productAmount"))%></p>
 								<p class="card-text">금액: <%=(p.get("productPrice"))%></p>
-								<a href="/shop/customer/productOne.jsp?productNo=<%=p.get("productNo")%>" class="btn btn-primary">제품 상세 보기</a>
+								<a href="/shop/customer/productOne.jsp?productNo=<%=p.get("productNo")%>" class="btn btn-outline-secondary">제품 상세 보기</a>
 							</div>
 						</div>
 					</div>

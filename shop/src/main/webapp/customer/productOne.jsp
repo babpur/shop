@@ -148,7 +148,7 @@
 							<%
 								if((String)(p.get("imagePath")) == null ){
 							%>
-									<img src='/shop/upload/default.jpg' class="card-img-top p-2" alt="...">
+									<img src="/shop/upload/default.jpg" class="card-img-top p-2" alt="...">
 							<%		
 									
 								} else {
@@ -158,31 +158,31 @@
 								}
 							%>
 						</td>
-						<td>productNo</td>
+						<td>상품 번호</td>
 						<td><%=p.get("productNo")%></td>
 					</tr>
 					<tr>
-						<td>category</td>
+						<td>카테고리</td>
 						<td><%=p.get("category")%></td>
 					</tr>
 					<tr>
-						<td>productTitle</td>
+						<td>상품명</td>
 						<td><%=p.get("productTitle")%></td>
 					</tr>
 					<tr>
-						<td>productContent</td>
+						<td>상품 설명</td>
 						<td><%=p.get("productContent")%></td>
 					</tr>
 					<tr>
-						<td>productPrice</td>
+						<td>상품 가격</td>
 						<td><%=p.get("productPrice")%></td>
 					</tr>
 					<tr>
-						<td>productAmount</td>
+						<td>상품 수량</td>
 						<td><%=p.get("productAmount")%></td>
 					</tr>
 					<tr>
-						<td>createDate</td>
+						<td>등록 일자</td>
 						<td><%=p.get("createDate")%></td>
 					</tr>
 			<%		
@@ -191,7 +191,7 @@
 		</table>
 		
 		<h2>상품 주문하기</h2>
-		<form method="post" action="/shop/customer/addOrders.jsp?">
+		<form method="post" action="/shop/customer/addOrders.jsp">
 		<table>
 			<tr>
 				<td>
@@ -217,50 +217,18 @@
 					</label>
 				</td>
 				<td>
-					<input type="number" name="ordersAmount">
+					<input type="number" name="address">
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button type="submit">상품 주문하기</a>
+					<button type="submit">상품 주문하기</button>
 				</td>		
 			</tr>
 		</table>
 		</form>
-
-
-		<form method="post" action="/shop/customer/addComment.jsp">
-		<h2>상품 구매 후기</h2>
-		<table class="table table-hover">
-			<tr>
-				<td><input type="hidden" value='<%=productNo%>'></td>
-				<td><%=mail%></td>
-				<td>
-					<textarea rows="5" cols="30" name="content"></textarea>
-				</td>
-				<td>
-					상품 구매 후기
-					<select name="score">
-						<!-- test -->
-						<!-- 까먹지 말고 반복문으로 바꾸기 -->
-						<option value="">=== 선택 ===
-						<option value="1">1
-						<option value="2">2
-						<option value="3">3
-						<option value="4">4
-						<option value="5">5
-						<option value="6">6
-						<option value="7">7
-						<option value="8">8
-						<option value="9">9
-						<option value="10">10
-					</select>
-					<button type="submit">댓글 등록</button>
-					<button type="button" oneclick="/shop/customer/productOne.jsp?productNo<%=productNo%>&">후기 삭제</button>
-				</td>
-			</tr>
-		</table>
-		</form>
+		
+		<!-- 구매 후기 view만 출력 -->
 	</main>
 </body>
 </html>

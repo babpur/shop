@@ -136,7 +136,7 @@
 							<%
 								if((String)(p.get("imagePath")) == null ){
 							%>
-									<img src='/shop/upload/default.jpg' class="card-img-top p-2" alt="...">
+									<img src="/shop/upload/default.jpg" class="card-img-top p-2" alt="...">
 							<%		
 									
 								} else {
@@ -146,44 +146,50 @@
 								}
 							%>
 						</td>
-						<td>productNo</td>
+						<td>상품 번호</td>
 						<td><%=p.get("productNo")%></td>
 					</tr>
 					<tr>
-						<td>category</td>
+						<td>카테고리</td>
 						<td><%=p.get("category")%></td>
 					</tr>
 					<tr>
-						<td>empId</td>
+						<td>직원 ID</td>
 						<td><%=p.get("empId")%></td>
 					</tr>
 					<tr>
-						<td>productTitle</td>
+						<td>상품명</td>
 						<td><%=p.get("productTitle")%></td>
 					</tr>
 					<tr>
-						<td>productContent</td>
+						<td>상품 설명</td>
 						<td><%=p.get("productContent")%></td>
 					</tr>
 					<tr>
-						<td>productPrice</td>
+						<td>상품 가격</td>
 						<td><%=p.get("productPrice")%></td>
 					</tr>
 					<tr>
-						<td>productAmount</td>
+						<td>상품 수량</td>
 						<td><%=p.get("productAmount")%></td>
 					</tr>
 					<tr>
-						<td>updateDate</td>
+						<td>수정 일자</td>
 						<td><%=p.get("updateDate")%></td>
 					</tr>
 					<tr>
-						<td>createDate</td>
+						<td>최초 등록 일자</td>
 						<td><%=p.get("createDate")%></td>
 					</tr>
 			<%		
 				}
 			%>
+		</table>
+		
+		<!-- 구매 후기 View -->
+		<!-- comment 삭제 버튼 -->
+		<table>
+		
 		</table>
 	</main>
 </body>

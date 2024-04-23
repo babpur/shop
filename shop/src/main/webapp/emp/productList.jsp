@@ -164,11 +164,10 @@
 	<div><jsp:include page="/emp/inc/empMenu.jsp"></jsp:include></div>
 	
 	<!-- sub menu: 카테고리별 상품 리스트 -->
-	<aside>
-		<div>
-			<a href="/shop/emp/addProductForm.jsp">상품 등록</a>
-		</div>
-	</aside>
+	
+	<div>
+		<a href="/shop/emp/addProductForm.jsp">상품 등록</a>
+	</div>
 	<div>
 		<a href="/shop/emp/productList.jsp">전체 상품</a>
 		<%
@@ -227,7 +226,7 @@
 								</p>
 								<p class="card-text">남은 수량: <%=(p.get("productAmount"))%></p>
 								<p class="card-text">금액: <%=(p.get("productPrice"))%></p>
-								<a href="/shop/emp/productOne.jsp?productNo=<%=(p.get("productNo"))%>" class="btn btn-primary">제품 상세 보기</a>
+								<a href="/shop/emp/productOne.jsp?productNo=<%=(p.get("productNo"))%>" class="btn btn-outline-secondary">제품 상세 보기</a>
 							</div>
 						</div>
 					</div>

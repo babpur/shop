@@ -20,6 +20,7 @@
 	if(result) {
 		result = true;
 		response.sendRedirect("/shop/customer/addCustomerForm.jsp?checkMail=" + checkMail + "&ck=F");
-	}
+	} else {
 		response.sendRedirect("/shop/customer/addCustomerForm.jsp?checkMail=" + checkMail + "&ck=T");
+	}
 %>

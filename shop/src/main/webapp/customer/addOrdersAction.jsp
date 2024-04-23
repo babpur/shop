@@ -16,14 +16,15 @@
 	}
 %>    
 <%
-	String mail = null;
-	int totalAmount = 0;
-	int totalPrice = 0;
-	String address = null;
+	String mail = request.getParameter("mail");
+	int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
+	int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
+	String address = request.getParameter("address");
 %>
 
 	<!-- productList -> productOne -> 'addOrders' -->
 <%
 	int row = OrdersDAO.insertOrders(mail, totalAmount, totalPrice, address);
-	
+
+
 %>

@@ -152,24 +152,48 @@
 						<%=m.get("gender")%>
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2">
-						<button type="button" oneclick="/shop/customer/dropCustomer?mail=<%=mail%>&pw=<%=pw%>">
-							회원 탈퇴 
-						</button>
-						<button type="button" oneclick="/shop/customer/editPwForm?mail=<%=mail%>">
-							PW 수정
-						</button>
-						
-						<button type="button" oneclick="/shop/customer/orderListCustomer?mail=<%=mail%>">
-							내 주문 목록							
-						</button>
-					</td>
-				</tr>
 		<%
 			}
 		%>
 		</table>
+		
+		<!-- 작업 완료 후 editPwForm.jsp 삭제 -->
+		
+		<!-- 크기 / 가운데 정렬 후 주석 삭제 -->
+		<form method="post" action="/shop/customer/editPwAction.jsp">
+		<table>
+			<tr>
+				<td>PW 수정</td>
+			</tr>
+			<tr>
+				<td><input type="password" name="newPw"></td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit">PW 수정</button>
+				</td>
+			</tr>
+		</table>
+		</form>		
+			
+		<form method="post" action="/shop/customer/dropCustomer.jsp">
+		<table>
+			<tr>
+				<td colspan="2">회원 탈퇴</td>
+			</tr>
+			<tr>
+				<td>PW 확인</td>
+			</tr>
+			<tr>
+				<td><input type="password" name=""></td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit">회원 탈퇴</button>
+				</td>
+			</tr>
+		</table>
+		</form>		
 	</main>
 </body>
 </html>
