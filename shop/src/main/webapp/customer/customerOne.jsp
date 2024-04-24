@@ -157,7 +157,6 @@
 		%>
 		</table>
 		
-		<!-- 작업 완료 후 editPwForm.jsp 삭제 -->
 		
 		<!-- 크기 / 가운데 정렬 후 주석 삭제 -->
 		<form method="post" action="/shop/customer/editPwAction.jsp">

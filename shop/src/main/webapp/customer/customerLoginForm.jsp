@@ -141,12 +141,11 @@
 				
 				<tr>
 					<td colspan="2">
-						<button type="button" class="btn btn-outline-secondary" 
-							onclick="/shop/customer/addCustomerForm.jsp">
-							회원 가입
-						</button>
-						&nbsp;
 						<button type="submit" class="btn btn-secondary button-size">로그인</button>
+						&nbsp;
+						<a class="btn btn-outline-secondary" href="/shop/customer/addCustomerForm.jsp">
+							회원 가입
+						</a>
 					</td>
 				</tr>
 			</table>

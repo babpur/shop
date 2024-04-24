@@ -141,7 +141,7 @@
 				</td>
 				<td>
 					<input type="email" id="checkMail" name="checkMail" placeholder="로그인 ID입니다.">
-					<button type="submit">중복 확인</button><%=msg%>
+					<button type="submit">중복 확인</button><br><%=msg%>
 				</td>
 			</tr>
 		</table>

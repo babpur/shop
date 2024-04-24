@@ -13,7 +13,11 @@ public class OrdersDAO {
 		
 		Connection conn = DBHelper.getConnection();
 		String sql = "SELECT o.orders_no ordersNo,"
-				+ " o.product_no productNo, p.product_title productTitle"
+				+ " o.product_no productNo, p.product_title productTitle,"
+				+ " o.total_amount totalAmount, p.product_price productPrice,"
+				+ " o.address adress, o.create_date createDate, total_price totalPrice,"
+				+ " state"
+				+ " From orders o"
 				+ " INNER JOIN product p "
 				+ " ON o.product_no = p.product_no"
 				+ " ORDER BY o.orders_no desc"
@@ -57,35 +61,37 @@ public class OrdersDAO {
 			map.put("ordersNo", rs.getInt("ordersNo"));
 			map.put("productNo", rs.getInt("productNo"));
 			map.put("productTitle", rs.getString("productTitle"));
-			map.put("productTitle", rs.getString("productTitle"));
-			map.put("productTitle", rs.getString("productTitle"));
-			map.put("productTitle", rs.getString("productTitle"));
-			map.put("productTitle", rs.getString("productTitle"));
-			map.put("productTitle", rs.getString("productTitle"));
+			map.put("totalAmount", rs.getString("totalAmount"));
+			map.put("totalPrice", rs.getString("totalPrice"));
+			map.put("address", rs.getString("address"));
+			map.put("createDate", rs.getString("createDate"));
+			map.put("updateDate", rs.getString("updateDate"));
 			map.put("state", rs.getString("state"));
-			
+			list.add(map);
 		}
 		conn.close();
 		return list;
 	}
 	
-	
 	// addOrders.jsp
 	
-	public static int insertOrders(String mail, int totalAmount, int totalPrice, String address)
+	public static int insertOrders(String mail, int productNo, int totalAmount, int productPrice, String address)
 		throws Exception {
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
-		String sql = "INSERT INTO orders(mail, total_amount, total_price, address)"
-				+ " VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO orders(mail, product_no, total_amount, total_price, address)"
+				+ " VALUES (?, ?, ?, ?,? )";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
+		int totalPrice = (productPrice)*(totalAmount);
 		stmt.setString(1, mail);
-		stmt.setInt(2, totalAmount);
-		stmt.setInt(3, totalPrice);
-		stmt.setString(4, address);
+		stmt.setInt(2, productNo);
+		stmt.setInt(3, totalAmount);
+		stmt.setInt(4, totalPrice);
+		stmt.setString(5, address);
 		
+		row = stmt.executeUpdate();
 		conn.close();
 		return row;
 	}

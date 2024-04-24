@@ -32,19 +32,19 @@
 	
 	Connection conn = DBHelper.getConnection();
 	// 전체 상품 
-	String sql1 = "SELECT count(*) cnt FROM product ";
-	PreparedStatement stmt1 = null;
-	ResultSet rs1 = null; 
-	stmt1 = conn.prepareStatement(sql1);
+	String sql = "SELECT count(*) cnt FROM product ";
+	PreparedStatement stmt = null;
+	ResultSet rs = null; 
+	stmt = conn.prepareStatement(sql);
 
-	System.out.println("stmt1: " + stmt1);
+	System.out.println("stmt: " + stmt);
 	
-	rs1 = stmt1.executeQuery();
+	rs = stmt.executeQuery();
 	
 	int totalRow = 0;
 	
-	if(rs1.next()){
-		totalRow = rs1.getInt("cnt");
+	if(rs.next()){
+		totalRow = rs.getInt("cnt");
 	}
 	
 	// 마지막 페이지 계산하기 = 전체 상품 수량 / 한 페이지에서 보일 상품의 수량
@@ -219,7 +219,7 @@ ArrayList<HashMap<String, Object>> productList = ProductDAO.selectProductCustome
 								</p>
 								<p class="card-text">남은 수량: <%=(p.get("productAmount"))%></p>
 								<p class="card-text">금액: <%=(p.get("productPrice"))%></p>
-								<a href="/shop/customer/productOne.jsp?productNo=<%=p.get("productNo")%>" class="btn btn-outline-secondary">제품 상세 보기</a>
+								<a href="/shop/customer/productOne.jsp?productNo=<%=p.get("productNo")%>&productPrice=<%=p.get("productPrice") %>" class="btn btn-outline-secondary">제품 상세 보기</a>
 							</div>
 						</div>
 					</div>

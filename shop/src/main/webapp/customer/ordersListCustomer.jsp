@@ -7,7 +7,7 @@
 
 <%
 	System.out.println("--------------------");
-	System.out.println("/customer/ordersList.jsp");
+	System.out.println("/customer/ordersListCustomer.jsp");
 	
 	// 인증 분기: 세션 변수 이름 - loginCustomer
 	
@@ -18,15 +18,10 @@
 	}
 %>
 <%
-	HashMap<String, Object> loginCustomer = (HashMap<String, Object>)session.getAttribute("loginCustomer");
-	String mail = null;
-	if(loginCustomer != null) {
-	    // HashMap에서 customerName 값 가져오기
-		mail = (String)loginCustomer.get("mail");
-	}
+	String mail = request.getParameter("mail");
+
 	System.out.println("mail: " + mail);
-	System.out.println("loginCustomer: " + loginCustomer);
-%>	
+%>
 <%
 	// 현재 페이지
 	int currentPage = 1;
@@ -109,7 +104,6 @@
 						<td><%=m.get("address") %></td>
 						<td><%=m.get("createDate") %></td>
 						<td><%=m.get("state")%></td>
-						<%-- <td><%=m.get("totalPrice")%></td> --%>
 					</tr>
 			<%		
 				}
@@ -118,40 +112,7 @@
 		</table>
 		
 		<!-- 주문 목록에서 '배송 완료'된 상품의 후기 작성하기 -> productOne에서 댓글 확인 -->
-		<form method="post" action="/shop/customer/addComment.jsp">
-		<h2>상품 구매 후기</h2>
-		<table class="table table-hover">
-			<tr>
-				
-				
-				<!-- 세션에서 메일 가져오기 -->
-				<td><%=mail%></td>
-				<td>
-					<textarea rows="5" cols="30" name="content"></textarea>
-				</td>
-				<td>
-					상품 구매 후기
-					<select name="score">
-						<!-- test -->
-						<!-- 까먹지 말고 반복문으로 바꾸기 -->
-						<option value="">=== 선택 ===
-						<option value="1">1
-						<option value="2">2
-						<option value="3">3
-						<option value="4">4
-						<option value="5">5
-						<option value="6">6
-						<option value="7">7
-						<option value="8">8
-						<option value="9">9
-						<option value="10">10
-					</select>
-					<button type="submit">후기 등록</button>
-				</td>
-			</tr>
-		</table>
-		</form>
-	
+		
 	</main>
 </body>
 </html>

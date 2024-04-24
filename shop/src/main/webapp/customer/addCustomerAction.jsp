@@ -31,6 +31,7 @@
 <%
 	
 	int row = CustomerDAO.insertCustomer(mail, pw, name, birth, gender);
+	System.out.println("row: " + row);
 	if(row == 1){
 		response.sendRedirect("/shop/customer/customerLoginForm.jsp");		
 		System.out.println("회원 가입 성공");

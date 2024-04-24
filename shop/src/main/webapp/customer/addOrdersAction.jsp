@@ -5,7 +5,7 @@
     
 <%
 	System.out.println("--------------------");
-	System.out.println("/customer/addOrders.jsp");
+	System.out.println("/customer/addOrdersAction.jsp");
 	
 	// 인증 분기: 세션 변수 이름 - loginCustomer
 	
@@ -17,14 +17,29 @@
 %>    
 <%
 	String mail = request.getParameter("mail");
+	int productNo = Integer.parseInt(request.getParameter("productNo"));
+	int productPrice = Integer.parseInt(request.getParameter("productPrice"));
+	
+	
 	int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
-	int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
 	String address = request.getParameter("address");
+	
+	System.out.println("mail: " + mail);
+	System.out.println("productNo: " + productNo);
+	System.out.println("productPrice: " + productPrice);
+	System.out.println("totalAmount: " + totalAmount);
+	System.out.println("address: " + address);
 %>
 
 	<!-- productList -> productOne -> 'addOrders' -->
 <%
-	int row = OrdersDAO.insertOrders(mail, totalAmount, totalPrice, address);
+	int row = OrdersDAO.insertOrders(mail, productNo, totalAmount, productPrice, address);
 
-
+	if(row == 1) {
+		// 구매 성공 시 구매 목록으로 이동
+		response.sendRedirect("/shop/customer/orderListCustomer.jsp?mail=" + mail);
+	} else {
+		// 구매 실패 시 상품 상세 정보
+		response.sendRedirect("/shop/customer/productOne.jsp?mail=" + mail);
+	}
 %>

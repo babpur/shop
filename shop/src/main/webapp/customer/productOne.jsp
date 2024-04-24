@@ -29,9 +29,10 @@
 
 <%
 	int productNo = Integer.parseInt(request.getParameter("productNo"));
+	int productPrice = Integer.parseInt(request.getParameter("productPrice"));
 	
 	System.out.println("productNo: " + productNo);
-	
+	System.out.println("productPrice: " + productPrice);	
 	ArrayList<HashMap<String, Object>> productOne = ProductDAO.selectProductOneByCustomer(productNo);
 %>    
 <!DOCTYPE html>
@@ -142,6 +143,7 @@
 			<!--  -->
 			<%
 				for(HashMap<String, Object> p : productOne) {
+			
 			%>
 					<tr>
 						<td rowspan="9">
@@ -192,22 +194,17 @@
 		
 		<h2>상품 주문하기</h2>
 		<form method="post" action="/shop/customer/addOrdersAction.jsp">
+			<input type="hidden" value="<%=mail%>" name="mail">
+			<input type="hidden" value="<%=productPrice%>" name="productPrice">
+			<input type="hidden" value="<%=productNo%>" name="productNo">
 		<table class="table table-hover shadow rounded">
-			<tr>
-				<td>
-					<input type="hidden" value="<%=mail%>">
-				</td>
-				<td>
-					<input type="hidden" value="<%=mail%>">
-				</td>
-			</tr>
 		
 			<tr>
 				<td>
 					<label>주문 수량</label>
 				</td>
 				<td>
-					<input type="number" name="ordersAmount">
+					<input type="number" name="totalAmount">
 				</td>
 			</tr>
 			<tr>

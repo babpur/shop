@@ -60,8 +60,8 @@ public class CustomerDAO {
 
 		Connection conn = DBHelper.getConnection();
 		String sql = "UPDATE customer"
-				+ " SET pw = ?"
-				+ " WHERE mail = ? AND pw = ?";
+				+ " SET pw = password(?)"
+				+ " WHERE mail = ? AND pw = password(?)";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, newPw);
@@ -82,17 +82,19 @@ public class CustomerDAO {
 		Connection conn = DBHelper.getConnection();
 		String sql = "DELETE"
 				+ " FROM customer"
-				+ " WHERE mail = ? AND pw = ?";
+				+ " WHERE mail = ? AND pw = password(?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		stmt.setString(1, mail);
 		stmt.setString(2, pw);
 		
+		row = stmt.executeUpdate();
 		conn.close();
 		
 		return row;
 	}
 	
+	//
 	// addCustomerAction.jsp
 	public static int insertCustomer(String mail, String pw, String name, String birth, String gender)
 			throws Exception {
@@ -108,9 +110,12 @@ public class CustomerDAO {
 		stmt.setString(4, birth);
 		stmt.setString(5, gender);
 		
+		row = stmt.executeUpdate();
+		
 		conn.close();
 		return row;
 	}
+	
 	
 	// customerOne.jsp
 	public static ArrayList<HashMap<String, Object>> selectCustomerOne(String mail)
@@ -146,8 +151,8 @@ public class CustomerDAO {
 		// DB 접근
 		Connection conn = DBHelper.getConnection();
 		String sql = "SELECT mail, pw, name"
-				+ " FROM customer "
-				+ "WHERE mail=? AND pw=password(?)";
+				+ " FROM customer"
+				+ " WHERE mail=? AND pw=password(?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, mail);
 		stmt.setString(2, pw);
