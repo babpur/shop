@@ -14,8 +14,8 @@ public class ProductDAO {
 		Connection conn = DBHelper.getConnection();
 		
 		String sql = "UPDATE product"
-				+ " SET product_amount = ?"
-				+ " WHERE product_no =?";
+				+ " SET product_amount = product_amount - ?"
+				+ " WHERE product_no = ?";
 
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
@@ -29,6 +29,7 @@ public class ProductDAO {
 	}
 	
 	// 상품 등록 
+
 	// addProductAction.jsp
 	public static int insertProduct(String category, String empId, String productTitle, String filename, int productPrice, int productAmount, String productContent)
 		throws Exception {
