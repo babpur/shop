@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="shop.dao.*"%>
 <%@ page import="java.util.*" %>
+<%@ page import="java.net.*" %>
 <%@ page import="java.sql.*" %>
 
 
@@ -19,7 +20,11 @@
 %>
 <%
 	String mail = request.getParameter("mail");
-
+	int productNo = Integer.parseInt(request.getParameter("productNo"));
+	int totalAmount = Integer.parseInt(request.getParameter("amount"));
+	int productPrice = Integer.parseInt(request.getParameter("productPrice"));
+	String address = request.getParameter("address");
+	
 	System.out.println("mail: " + mail);
 %>
 <%
@@ -68,7 +73,6 @@
 <%
 	
 	ArrayList<HashMap<String, Object>> list = OrdersDAO.selectOrdersListCustomer(startRow, rowPerPage);
-
 %>
 <!DOCTYPE html>
 <html>

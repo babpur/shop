@@ -30,6 +30,7 @@ public class ProductDAO {
 	
 	
 	// 상품 등록 
+
 	// addProductAction.jsp
 	public static int insertProduct(String category, String empId, String productTitle, String filename, int productPrice, int productAmount, String productContent)
 		throws Exception {
