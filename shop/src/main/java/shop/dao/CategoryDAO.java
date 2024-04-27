@@ -8,6 +8,9 @@ public class CategoryDAO {
 	// addCategoryAction.jsp
 	public static int insertCategory(String addCategory) 
 			throws Exception {
+		
+		System.out.println("CategoryDAO.insertCategory addCategory: " + addCategory);
+		
 		int row = 0;
 		Connection conn = DBHelper.getConnection();
 		String sql = "INSERT INTO category(category)"
@@ -24,6 +27,9 @@ public class CategoryDAO {
 	// deleteCategoryAction.jsp
 	public static int deleteCategory(String category)
 			throws Exception {
+		
+		System.out.println("CategoryDAO.deleteCategory category: " + category);
+		
 		int row = 0;
 		Connection conn = DBHelper.getConnection();
 		

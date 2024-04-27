@@ -11,6 +11,13 @@ public class EmpDAO {
 	// addEmpAction.jsp
 	public static int insertEmp(String empId,String empPw, String empName, String empJob, String hireDate) 
 			throws Exception{
+		
+		System.out.println("ProductDAO.insertEmp empId: " + empId);
+		System.out.println("ProductDAO.insertEmp empPw: " + empPw);
+		System.out.println("ProductDAO.insertEmp empName: " + empName);
+		System.out.println("ProductDAO.insertEmp empJob: " + empJob);
+		System.out.println("ProductDAO.insertEmp hireDate: " + hireDate);
+		
 		int row = 0;
 		
 		// DB 접근
@@ -38,6 +45,9 @@ public class EmpDAO {
 	// 호출 코드 HashMap<String, Object> m = EmpDAO.empLogin("admin", "1234");
 	public static HashMap<String, Object> empLogin(String empId, String empPw) 
 			throws Exception{
+		
+		System.out.println("ProductDAO.empLogin empId: " + empId);
+		System.out.println("ProductDAO.empLogin empPw: " + empPw);
 													
 		HashMap<String, Object> resultMap = null;
 		
