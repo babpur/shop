@@ -14,7 +14,7 @@ public class ProductDAO {
 		Connection conn = DBHelper.getConnection();
 		
 		String sql = "UPDATE product"
-				+ " SET product_amount = ?"
+				+ " SET product_amount = + -?"
 				+ " WHERE product_no =?";
 
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -27,6 +27,7 @@ public class ProductDAO {
 		conn.close();
 		return row;
 	}
+	
 	
 	// 상품 등록 
 	// addProductAction.jsp
@@ -49,8 +50,6 @@ public class ProductDAO {
 		
 		return row;
 	}
-	
-	
 	
 	// 상품 상세 정보(customer)
 	// /customer/productOne.jsp

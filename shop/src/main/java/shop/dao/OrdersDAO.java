@@ -74,14 +74,13 @@ public class OrdersDAO {
 	}
 	
 	// addOrders.jsp
-	
 	public static int insertOrders(String mail, int productNo, int totalAmount, int productPrice, String address)
 		throws Exception {
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
-		String sql = "INSERT INTO orders(mail, product_no, total_amount, total_price, address)"
-				+ " VALUES (?, ?, ?, ?,? )";
+		String sql = "INSERT INTO orders(mail, product_no, total_amount, total_price, address, state)"
+				+ " VALUES (?, ?, ?, ?, ?, '주문 완료')";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		int totalPrice = (productPrice)*(totalAmount);
@@ -90,7 +89,6 @@ public class OrdersDAO {
 		stmt.setInt(3, totalAmount);
 		stmt.setInt(4, totalPrice);
 		stmt.setString(5, address);
-		
 		row = stmt.executeUpdate();
 		conn.close();
 		return row;
