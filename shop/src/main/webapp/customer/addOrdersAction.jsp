@@ -21,6 +21,7 @@
 	int productNo = Integer.parseInt(request.getParameter("productNo"));
 	int productPrice = Integer.parseInt(request.getParameter("productPrice"));
 	int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
+	int totalPrice = productPrice * totalAmount;
 	String address = request.getParameter("address");
 	
 	System.out.println("mail: " + mail);
@@ -31,25 +32,22 @@
 %>
 
 	<!-- productList -> productOne -> 'addOrders' -->
-<%
-	int row = OrdersDAO.insertOrders(mail, productNo, totalAmount, productPrice, address);
+<%	
+	String msg = null;
 
-	if(row == 1) {
-		int amount = 0;
-		int updateAmountRow = ProductDAO.updateProductAmount(productNo, amount);
-		if(updateAmountRow == 1) {
-			amount = totalAmount;
-			response.sendRedirect("/shop/customer/orderListCustomer.jsp?mail=" + mail + "&productNo=" + productNo + "&amount=" + amount + "&productPrice=" + productPrice + "&address=" + URLEncoder.encode(address, "UTF-8"));
-			System.out.println("상품 수량 업데이트 성공");
+	
+	int row1 = OrdersDAO.insertOrders(mail, productNo, totalAmount, productPrice, address);
+	int row2 = ProductDAO.updateProductAmount(productNo, totalAmount);
+	
+	// row1과 row2가 둘 다 실행된다면 상품 주문 성공
+	if(row1 == 1 && row2 == 1) {
+			System.out.println("상품 주문 성공");
+			msg = URLEncoder.encode("상품 주문에 성공하였습니다.", "UTF-8");
+			response.sendRedirect("/shop/customer/ordersListCustomer.jsp?mail=" + mail + "&" + "msg=" + msg);
 			// 구매 성공 시 구매 목록으로 이동
 		} else {
-			response.sendRedirect("/shop/customer/productOne.jsp?mail=" + mail);
-			System.out.println("상품 수량 업데이트 실패");
-			// 수량 업데이트 변동 없으면 주문 실패.
+			System.out.println("상품 주문 실패");
+			msg = URLEncoder.encode("상품 주문에 실패하였습니다.", "UTF-8");
+			response.sendRedirect("/shop/customer/productOne.jsp?productNo="+ productNo + "msg= " + msg);
 		}
-		
-	} else {
-		// 구매 실패 시 상품 상세 정보
-		response.sendRedirect("/shop/customer/productOne.jsp?mail=" + mail);
-	}
 %>

@@ -7,20 +7,26 @@ public class ProductDAO {
 	
 	// 상품 주문 시 수량 증감
 	// /customer/addOrdersAction.jsp
-	public static int updateProductAmount(int productNo, int amount) 
+	public static int updateProductAmount(int productNo, int totalAmount) 
 		throws Exception {
+		
+		System.out.println("ProductDAO.updateProductAmount productNo" + productNo);
+		System.out.println("ProductDAO.updateProductAmount totalAmount" + totalAmount);
+		
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
 		
 		String sql = "UPDATE product"
-				+ " SET product_amount = + -?"
+				+ " SET product_amount = product_amount - ?"
 				+ " WHERE product_no =?";
 
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
-		stmt.setInt(1, amount);
+		stmt.setInt(1, totalAmount);
 		stmt.setInt(2, productNo);
+		
+		System.out.println("ProductDAO.updateProductAmount stmt: " + stmt);
 		
 		row = stmt.executeUpdate();
 		
@@ -34,6 +40,15 @@ public class ProductDAO {
 	// addProductAction.jsp
 	public static int insertProduct(String category, String empId, String productTitle, String filename, int productPrice, int productAmount, String productContent)
 		throws Exception {
+		
+		System.out.println("ProductDAO.insertProduct category: " + category);
+		System.out.println("ProductDAO.insertProduct category: " + empId);
+		System.out.println("ProductDAO.insertProduct productTitle: " + productTitle);
+		System.out.println("ProductDAO.insertProduct filename: " + filename);
+		System.out.println("ProductDAO.insertProduct productPrice: " + productPrice);
+		System.out.println("ProductDAO.insertProduct productAmount: " + productAmount);
+		System.out.println("ProductDAO.insertProduct productContent: " + productContent);
+		
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
@@ -49,6 +64,7 @@ public class ProductDAO {
 		stmt.setInt(6, productAmount);
 		stmt.setString(7, productContent);
 		
+		System.out.println("ProductDAO.insertProduct stmt: " + stmt);
 		return row;
 	}
 	
@@ -56,6 +72,10 @@ public class ProductDAO {
 	// /customer/productOne.jsp
 	public static ArrayList<HashMap<String, Object>> selectProductOneByCustomer(int productNo)
 		throws Exception {
+		
+		System.out.println("ProductDAO.selectProductOneByCustomer productNo: " + productNo);
+		
+		
 		ArrayList<HashMap<String, Object>> list =
 				new ArrayList<HashMap<String, Object>>();
 		

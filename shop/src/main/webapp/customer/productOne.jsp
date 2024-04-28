@@ -33,7 +33,17 @@
 	
 	System.out.println("productNo: " + productNo);
 	System.out.println("productPrice: " + productPrice);	
+	
 	ArrayList<HashMap<String, Object>> productOne = ProductDAO.selectProductOneByCustomer(productNo);
+	
+	// 후기 작성이 가능한지 
+	ArrayList<HashMap<String, Object>> writeComment = CommentDAO.reviewWriteList(mail, productNo);
+	
+	// 후기 list 출력
+	ArrayList<HashMap<String, Object>> commentList = CommentDAO.selectCommentList(productNo);
+	// 후기 작성 가능 여부 확인
+	String stateCk = CommentDAO.reviewStateCk(mail, productNo);
+	System.out.println("stateCk: " + stateCk);
 %>    
 <!DOCTYPE html>
 <html>
@@ -225,7 +235,77 @@
 		</table>
 		</form>
 		
-		<!-- 구매 후기 view만 출력 -->
+		<h2>상품 후기</h2>
+		<%
+			if(stateCk.equals("배송 완료")){
+		%>
+				<form method="post" action="/shop/customer/addCommentAction.jsp">
+					<input type="hidden" value="<%=mail%>" name="mail">
+					<input type="hidden" value="<%=productNo%>" name="productNo">
+					<div>
+						주문 번호
+						<select name="ordersNo">
+							<%
+								for(HashMap w : writeComment){
+							%>
+									<option value="<%=(Integer)w.get("ordersNo")%>">
+										<%=(Integer)w.get("ordersNo")%> (구매 일자<%=(String)w.get("createDate")%>)
+									</option>
+							<%
+								}
+							%>
+						</select>
+					</div>
+					<div>
+						별점&nbsp;
+						<select name="score">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select>
+					</div><br>
+					<div>
+						<textarea name="content" maxlength="100" style="width: 500px; height: 70px;" placeholder="후기 작성(최대 100자까지 입력)"></textarea>
+					</div>
+					<div>&nbsp;
+					<button style="margin-top: 20px;">후기 작성하기</button></div>
+				</form>
+		<%
+			}else{
+		%>
+				<div>상품을 구매하신 고객께서만 후기를 작성할 수 있습니다.</div>
+		<%
+			}
+		%>
+		
+		<div>
+			<%
+				for(HashMap c : commentList){
+					String star = "&#11088;";
+			%>
+					<div>
+						<%=star.repeat((Integer)c.get("score"))%><br>
+						<%=(String)c.get("content")%><br>
+						상품 구매: <%=(String)c.get("orderCreateDate")%><br><br>
+						리뷰 등록: <%=(String)c.get("commentCreateDate")%><br>
+						<form method="post" action="/shop/customer/deleteCommentAction.jsp">
+							<input type="hidden" name="mail" value="<%=mail%>">
+							<input type="hidden" name="productNo" value="<%=productNo%>">
+							<input type="hidden" name="ordersNo" value="<%=(Integer)c.get("ordersNo")%>">
+						<button>리뷰 삭제</button>
+						</form>
+					</div>
+			<%	
+				}
+			%>
+		</div>
 	</main>
 </body>
 </html>

@@ -20,11 +20,7 @@
 %>
 <%
 	String mail = request.getParameter("mail");
-	int productNo = Integer.parseInt(request.getParameter("productNo"));
-	int totalAmount = Integer.parseInt(request.getParameter("amount"));
-	int productPrice = Integer.parseInt(request.getParameter("productPrice"));
-	String address = request.getParameter("address");
-	
+
 	System.out.println("mail: " + mail);
 %>
 <%
@@ -42,10 +38,12 @@
 	
 	Connection conn = DBHelper.getConnection();
 	// 전체 주문의 수
-	String sql = "SELECT count(*) cnt FROM emp";
+	String sql = "SELECT count(*) cnt FROM orders WHERE mail = ?";
 	PreparedStatement stmt = null;
 	ResultSet rs = null; 
 	stmt = conn.prepareStatement(sql);
+	stmt.setString(1, mail);
+	
 	rs = stmt.executeQuery();
 	
 	int totalRow = 0;
@@ -72,7 +70,9 @@
 <!-- customerOne -> ordersList--> 
 <%
 	
-	ArrayList<HashMap<String, Object>> list = OrdersDAO.selectOrdersListCustomer(startRow, rowPerPage);
+	ArrayList<HashMap<String, Object>> list = OrdersDAO.selectOrdersListCustomer(mail, startRow, rowPerPage);
+	
+
 %>
 <!DOCTYPE html>
 <html>
@@ -85,10 +85,10 @@
 	<header></header>
 	
 	<main>
-		<table>
+		<table border="1">
 			<tr>
 				<td>주문 번호</td>
-				<td>상품명</td>
+				<td>상품 번호</td>
 				<td>주문 수량</td>
 				<td>상품 가격</td>
 				<td>주소</td>
@@ -101,17 +101,27 @@
 				for(HashMap<String, Object> m : list){
 			%>
 					<tr>
-						<td><%=m.get("orderNo")%></td>
-						<td><%=m.get("productNo")%>_<%=m.get("productTitle")%></td>
+						<td><%=m.get("ordersNo")%></td>
+						<td><%=m.get("productNo")%></td>
 						<td><%=m.get("totalAmount")%></td>
 						<td><%=m.get("totalPrice")%></td>
 						<td><%=m.get("address") %></td>
 						<td><%=m.get("createDate") %></td>
-						<td><%=m.get("state")%></td>
+						<td>
+							<form method="post" action="/shop/customer/updateStateAction.jsp">
+								<input type="hidden" name="mail" value="<%=mail%>">
+								<input type="hidden" name="ordersNo" value="<%=m.get("ordersNo")%>">
+								<input type="hidden" name="oldState" value="<%=m.get("state") %>">
+								<select name="newState">
+									<option value="<%=m.get("state")%>"><%=m.get("state")%></option>
+									<option value="배송 완료">배송 완료</option>
+								</select>
+							<button type="submit">상태 수정</button>	
+							</form>
+						</td>	
 					</tr>
 			<%		
 				}
-			
 			%>
 		</table>
 		
