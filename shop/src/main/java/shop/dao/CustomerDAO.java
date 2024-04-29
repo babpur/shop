@@ -25,7 +25,10 @@ public class CustomerDAO {
 		while(rs.next()) {
 			HashMap<String, Object> m = new HashMap<String, Object>();
 			m.put("mail", rs.getString("mail"));
-			m.put("pw", rs.getString("pw"));
+			m.put("name", rs.getString("name"));
+			m.put("birth", rs.getString("birth"));
+			m.put("gender", rs.getString("gender"));
+			m.put("createDate", rs.getString("createDate"));
 			list.add(m);
 			
 		}

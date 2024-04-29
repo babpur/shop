@@ -82,7 +82,6 @@
 				<td>생일</td>
 				<td>성별</td>
 				<td>회원 가입 일자</td>
-				<td>회원 정보 수정 일자</td>
 			</tr>
 			<%
 				for(HashMap<String, Object> l : list){
@@ -93,7 +92,6 @@
 						<td><%=l.get("birth") %></td>
 						<td><%=l.get("gender") %></td>
 						<td><%=l.get("createDate") %></td>
-						<td><%=l.get("updateDate") %></td>
 					</tr>
 			<%		
 				}

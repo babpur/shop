@@ -73,7 +73,7 @@ public class OrdersDAO {
 		String sql = "SELECT o.orders_no ordersNo,"
 				+ " o.product_no productNo, p.product_title productTitle,"
 				+ " o.total_amount totalAmount, p.product_price productPrice,"
-				+ " o.address adress, o.create_date createDate, total_price totalPrice,"
+				+ " o.address address, o.create_date createDate, total_price totalPrice,"
 				+ " state"
 				+ " FROM orders o"
 				+ " INNER JOIN product p "
@@ -94,7 +94,6 @@ public class OrdersDAO {
 			map.put("totalPrice", rs.getString("totalPrice"));
 			map.put("address", rs.getString("address"));
 			map.put("createDate", rs.getString("createDate"));
-			map.put("updateDate", rs.getString("updateDate"));
 			map.put("state", rs.getString("state"));
 			list.add(map);
 		}
