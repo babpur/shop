@@ -167,7 +167,19 @@
 							<td><%=m.get("address") %></td>
 							<td><%=m.get("createDate") %></td>
 							<td><%=m.get("totalPrice")%></td>
-							<td><%=m.get("state")%></td>
+							<td>
+								<form method="post" action="modifyStateAction.jsp">
+								<select> <!--  -->
+									<option value="<%=m.get("state")%>" selected="selected">
+										<%=m.get("state")%>
+									</option>
+									<option value="배송 중">
+										배송 중
+									</option>
+								</select>
+								<button type="submit"></button>
+								</form>
+							</td>
 						</tr>
 				<%		
 					}
