@@ -29,6 +29,29 @@ public class OrdersDAO {
 		return row;
 	}
 	
+	// emp에서 주문 완료된 state를 배송 중으로 변경
+	// /emp/orderList.jsp
+	public static int updateStateOrderEmp(int ordersNo, String newState) throws Exception{
+		int row = 0;
+		
+		Connection conn = DBHelper.getConnection();
+		PreparedStatement stmt = null;
+		String sql = "UPDATE orders SET state = ?,"
+				+ " create_date = create_date,"
+				+ " update_date = NOW()"
+				+ " WHERE orders_no = ?";
+		
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, newState);
+		stmt.setInt(2, ordersNo);
+		
+		System.out.println("updateStateOrderEmp: " + stmt);
+		
+		row = stmt.executeUpdate();
+		
+		conn.close();
+		return row;
+	}
 	// ordersList(고객)
 	public static ArrayList<HashMap<String, Object>> selectOrdersListCustomer(String mail, int startRow, int rowPerPage)
 			throws Exception {

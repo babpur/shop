@@ -169,7 +169,8 @@
 							<td><%=m.get("totalPrice")%></td>
 							<td>
 								<form method="post" action="modifyStateAction.jsp">
-								<select> <!--  -->
+								<input type="hidden" value="<%=m.get("ordersNo")%>">
+								<select name="newState"> <!--  -->
 									<option value="<%=m.get("state")%>" selected="selected">
 										<%=m.get("state")%>
 									</option>
