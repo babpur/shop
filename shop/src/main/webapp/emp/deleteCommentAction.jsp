@@ -14,6 +14,11 @@
 	}
 %>	    
 <%
+	int ordersNo = Integer.parseInt(request.getParameter("ordersNo"));	
+	int productNo = Integer.parseInt(request.getParameter("ordersNo"));
+	
+	System.out.println("ordersNo: " + ordersNo);
+	System.out.println("productNo: " + productNo);
 	
 	int row = CommentDAO.deleteComment(ordersNo);
 	
@@ -25,14 +30,3 @@
 		response.sendRedirect("/shop/customer/productOne.jsp?productNo=" + productNo);
 	}
 %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>

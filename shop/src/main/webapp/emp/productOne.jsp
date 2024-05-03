@@ -23,6 +23,7 @@
 	System.out.println("productNo: " + productNo);
 	
 	ArrayList<HashMap<String, Object>> productOne = ProductDAO.selectProductOneByEmp(productNo);
+	ArrayList<HashMap<String, Object>> commentList = CommentDAO.selectCommentList(productNo);
 %>
 	
 <!DOCTYPE html>
@@ -186,11 +187,26 @@
 			%>
 		</table>
 		
-		<!-- 구매 후기 View -->
-		<!-- comment 삭제 버튼 -->
-		<table>
-		
-		</table>
+				<div>
+			<%
+				for(HashMap c : commentList){
+					String star = "&#11088;";
+			%>
+					<div>
+						<%=star.repeat((Integer)c.get("score"))%><br>
+						<%=(String)c.get("content")%><br>
+						상품 구매: <%=(String)c.get("orderCreateDate")%><br><br>
+						리뷰 등록: <%=(String)c.get("commentCreateDate")%><br>
+						<form method="post" action="/shop/emp/deleteCommentAction.jsp">
+							<input type="hidden" name="productNo" value="<%=productNo%>">
+							<input type="hidden" name="ordersNo" value="<%=(Integer)c.get("ordersNo")%>">
+						<button>리뷰 삭제</button>
+						</form>
+					</div>
+			<%	
+				}
+			%>
+		</div>
 	</main>
 </body>
 </html>
