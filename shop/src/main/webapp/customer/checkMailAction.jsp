@@ -4,9 +4,16 @@
 <%
 	System.out.println("----------");
 	System.out.println("checkMailAction");
-%>
-<!-- addCustomerForm -> 'chechMailAction' -->    
 
+	// 인증 분기: 세션 변수 이름 - loginCustomer
+
+	if(session.getAttribute("loginCustomer") != null) {
+	// 로그인이 되지 않았을 때 productList.jsp로 리다이렉트하겠다.
+		response.sendRedirect("/shop/customer/productList.jsp");
+		return;
+	}
+ %>
+<!-- addCustomerForm -> 'chechMailAction' -->    
 <%
 	String checkMail = request.getParameter("checkMail");
 	System.out.println("checkMail: " + checkMail);

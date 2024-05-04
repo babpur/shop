@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="shop.dao.*"%>
 <%@ page import="java.net.*" %>
-
-    
 <%
 	System.out.println("--------------------");
 	System.out.println("/customer/addOrdersAction.jsp");

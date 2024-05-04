@@ -5,7 +5,7 @@
 <!-- Controller Layer-->
 <%
 	System.out.println("----------");
-	System.out.println("modifyEmpAction.jsp");
+	System.out.println("modifyEmpActive.jsp");
 	
 	// 인증 분기: 세션 변수 이름 - loginEmp
 	

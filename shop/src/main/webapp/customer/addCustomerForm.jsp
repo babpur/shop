@@ -2,8 +2,7 @@
 <%
 	System.out.println("--------------------");
 	System.out.println("addCustomerForm.jsp");
-%>
-<%
+	
 	String checkMail = request.getParameter("checkMail");
 	String ck = request.getParameter("ck");
 	
