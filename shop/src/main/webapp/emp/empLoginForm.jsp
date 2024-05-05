@@ -142,6 +142,7 @@
 			</table>
 			</form>
 		</div>
+		<a href="/shop/customer/customerLoginForm.jsp">고객 로그인 전환</a>
 	</main>
 </body>
 </html>

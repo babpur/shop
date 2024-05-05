@@ -150,6 +150,7 @@
 				</tr>
 			</table>
 		</form>
+		<a href="/shop/emp/empLoginForm.jsp">직원 로그인 전환</a>
 	</main>
 </body>
 </html>

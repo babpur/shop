@@ -12,7 +12,7 @@ public class DBHelper {
 		
 		Connection conn = null;
 		
-		FileReader fr = new FileReader("C:\\dev\\auth\\mariadb.properties"); 
+		FileReader fr = new FileReader("C:\\dev\\goodee\\auth\\mariadb.properties"); 
 
 		Properties prop = new Properties();
 		 
