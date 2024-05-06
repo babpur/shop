@@ -69,13 +69,85 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+	<title></title>
+	<!-- bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<!-- bootstrap -->
+	<style>
+	@font-face {
+		/* 고령딸기체 */	
+	    font-family: 'GoryeongStrawberry';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/GoryeongStrawberry.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	a {
+		text-decoration: none;
+	}
+	a:link {
+		color: #000000;
+	}
+	a:visied {
+		color: #000000;
+	}
+	a:hover {
+		color: #000000;
+	}
+	a:active {
+		color: #FFFFFF;
+		background-color: #000000;
+	}
+	body {
+		/* 고령딸기체 전체 적용 */	
+	    font-family: 'GoryeongStrawberry';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/GoryeongStrawberry.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	    
+	    /* https://kor.pngtree.com/back/down?id=MTE1NzkyMA==&type=1&time=1712045765&token=YzUyZTdlMThlZmE0N2MxY2YxMDQ5NTI4OGE4OWRhYjA=&t=0 */
+	    background-image: url("/shop/img/backgroundLoginForm.png");
+	    background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100vh;
+	}
+	
+	main {
+		text-align: center;
+		padding: 10px;
+	}
+	h1 {
+		text-align: center;
+		margin-bottom: 30px;
+		font-size: 70px;
+		margin-top: 30px;
+	}
+	thead {
+		font-size: 30px;
+	}
+	tbody {
+		font-size: 20px;
+	}
+	.form-container {
+		justify-content: center;
+	}
+	.table-content {
+		width: 50%;
+		height: 70%;
+		text-align: center;
+		margin: auto;
+		align-items: center;
+	}
+	</style>
 </head>
 <body>
+	<div><jsp:include page="/emp/inc/empMenu.jsp"></jsp:include></div>
+	
 	<header><h1>고객 리스트</h1></header>
 	
-	<main>
-		<table>
+	<main class="bg-light">
+		<table class="table table-hover shadow rounded">
 			<tr>
 				<td>메일</td>
 				<td>고객명</td>
