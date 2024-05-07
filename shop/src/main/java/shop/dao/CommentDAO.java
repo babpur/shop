@@ -9,6 +9,9 @@ public class CommentDAO {
 	public static String reviewStateCk(String mail, int productNo) throws Exception{
 		String stateCk = null;
 		
+		System.out.println("reviewStateCk commetDAO mail: " + mail);
+		System.out.println("reviewStateCk commetDAO mail: " + productNo);
+		
 		Connection conn = DBHelper.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -54,7 +57,7 @@ public class CommentDAO {
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, mail);
 		stmt.setInt(2, productNo);
-		System.out.println("reviewWriteList commetDAO" + stmt);
+		System.out.println("reviewWriteList commetDAO: " + stmt);
 		
 		rs = stmt.executeQuery();
 		
@@ -74,6 +77,9 @@ public class CommentDAO {
 	public static ArrayList<HashMap<String, Object>> selectCommentList(int productNo) 
 			throws Exception{
 		ArrayList<HashMap<String, Object>> commentList = new ArrayList<HashMap<String,Object>>();
+		
+		
+		System.out.println("CommentDAO.selectCommentList productNo: " + productNo);
 		
 		Connection conn = DBHelper.getConnection();
 		PreparedStatement stmt = null;
@@ -110,6 +116,9 @@ public class CommentDAO {
 	// 고객이 작성한 후기를 삭제하면 다시 state를 '배송 완료'로 변경 
 	public static int deleteCommentState(int ordersNo) 
 			throws Exception{
+		
+		System.out.println("CommentDAO.deleteCommentState ordersNo: " + ordersNo);
+		
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
@@ -117,6 +126,8 @@ public class CommentDAO {
 		String sql = "UPDATE orders SET state = '배송 완료' WHERE orders_no = ?";
 		stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, ordersNo);
+		
+		System.out.println("CommentDAO.deleteCommentState: " + stmt);
 		
 		row = stmt.executeUpdate();
 		
@@ -127,11 +138,16 @@ public class CommentDAO {
 	// deleteCommentAction.jsp
 	public static int deleteComment(int ordersNo)
 		throws Exception {
+		
+		System.out.println("CommentDAO.deleteComment ordersNo: " + ordersNo);
+		
 		int row = 0;
 		Connection conn = DBHelper.getConnection();
 		String sql = "DELETE" + " FROM comment" + " WHERE orders_no = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, ordersNo);
+		
+		System.out.println("CommentDAO.deleteComment: " + stmt);
 		
 		row = stmt.executeUpdate();
 		conn.close();
@@ -140,7 +156,13 @@ public class CommentDAO {
 	
 	// addCommentAction.jsp
 	// 후기 입력
-	public static int insertComment(int ordersNo, int score, String content) throws Exception{
+	public static int insertComment(int ordersNo, int score, String content) 
+			throws Exception{
+		
+		System.out.println("CommentDAO.insertComment ordersNo: " + ordersNo);
+		System.out.println("CommentDAO.insertComment score: " + score);
+		System.out.println("CommentDAO.insertComment content: " + content);
+		
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
@@ -152,6 +174,8 @@ public class CommentDAO {
 		stmt.setInt(1, ordersNo);
 		stmt.setInt(2, score);
 		stmt.setString(3, content);
+		
+		System.out.println("CommentDAO.insertComment: " + stmt);
 		
 		row = stmt.executeUpdate();
 		

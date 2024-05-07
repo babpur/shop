@@ -18,6 +18,7 @@ public class CategoryDAO {
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, addCategory);
 		
+		System.out.println("CategoryDAO.insertCategory: " + stmt);
 		row = stmt.executeUpdate();
 		
 		conn.close();
@@ -38,7 +39,7 @@ public class CategoryDAO {
 				+ "WHERE category=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, category);
-		
+		System.out.println("CategoryDAO.deleteCategory: " + stmt);
 		row = stmt.executeUpdate();
 		
 		conn.close();
