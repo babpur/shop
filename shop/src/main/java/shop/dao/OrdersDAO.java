@@ -7,7 +7,10 @@ public class OrdersDAO {
 	
 	// 배송 받은 고객이 state를 배송 완료로 변경
 	// /customer/ordersList
-	public static int updateStateOrder(int ordersNo, String newState) throws Exception{
+	public static int updateStateOrder(int ordersNo, String newState) 
+			throws Exception{
+		System.out.println("OrdersDAO.updateStateOrder ordersNo: " + ordersNo);
+		System.out.println("OrdersDAO.updateStateOrder newState: " + newState);
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
@@ -21,7 +24,7 @@ public class OrdersDAO {
 		stmt.setString(1, newState);
 		stmt.setInt(2, ordersNo);
 		
-		System.out.println("updateStateOrder: " + stmt);
+		System.out.println("OrdersDAO.updateStateOrder: " + stmt);
 		
 		row = stmt.executeUpdate();
 		
@@ -31,7 +34,12 @@ public class OrdersDAO {
 	
 	// emp에서 주문 완료된 state를 배송 중으로 변경
 	// /emp/orderList.jsp
-	public static int updateStateOrderEmp(int ordersNo, String newState) throws Exception{
+	public static int updateStateOrderEmp(int ordersNo, String newState) 
+			throws Exception{
+		
+		System.out.println("OrdersDAO.updateStateOrderEmp ordersNo: " + ordersNo);
+		System.out.println("OrdersDAO.updateStateOrderEmp newState: " + newState);
+		
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
@@ -45,7 +53,7 @@ public class OrdersDAO {
 		stmt.setString(1, newState);
 		stmt.setInt(2, ordersNo);
 		
-		System.out.println("updateStateOrderEmp: " + stmt);
+		System.out.println("OrdersDAO.updateStateOrderEmp: " + stmt);
 		
 		row = stmt.executeUpdate();
 		
@@ -55,6 +63,11 @@ public class OrdersDAO {
 	// ordersList(고객)
 	public static ArrayList<HashMap<String, Object>> selectOrdersListCustomer(String mail, int startRow, int rowPerPage)
 			throws Exception {
+		
+		System.out.println("OrdersDAO.selectOrdersListCustomer mail: " + mail);
+		System.out.println("OrdersDAO.selectOrdersListCustomer startRow: " + startRow);
+		System.out.println("OrdersDAO.selectOrdersListCustomer rowPerPage: " + rowPerPage);
+		
 		ArrayList<HashMap<String, Object>> list =
 			new ArrayList<HashMap<String, Object>>();
 		
@@ -68,6 +81,8 @@ public class OrdersDAO {
 		stmt.setString(1, mail);
 		stmt.setInt(2, startRow);
 		stmt.setInt(3, rowPerPage);
+		
+		System.out.println("OrdersDAO.selectOrdersListCustomer: " + stmt);
 		
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
@@ -90,6 +105,10 @@ public class OrdersDAO {
 	// ordersList (직원)
 	public static ArrayList<HashMap<String, Object>> selectOrdersListAll(int startRow, int rowPerPage)
 			throws Exception {
+		
+		System.out.println("OrdersDAO.selectOrdersListAll startRow: " + startRow);
+		System.out.println("OrdersDAO.selectOrdersListAll rowPerPage: " + rowPerPage);
+		
 		ArrayList<HashMap<String, Object>> list =
 			new ArrayList<HashMap<String, Object>>();
 		Connection conn = DBHelper.getConnection();
@@ -106,6 +125,8 @@ public class OrdersDAO {
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, startRow);
 		stmt.setInt(2, rowPerPage);
+		
+		System.out.println("OrdersDAO.seletOrdersListAll: " + stmt);
 		ResultSet rs = stmt.executeQuery();
 		
 		while(rs.next()) {
@@ -127,6 +148,12 @@ public class OrdersDAO {
 	// addOrders.jsp
 	public static int insertOrders(String mail, int productNo, int totalAmount, int totalPrice, String address)
 		throws Exception {
+		
+		System.out.println("OrdersDAO.insertOrders mail: " + mail);
+		System.out.println("OrdersDAO.insertOrders productNo: " + productNo);
+		System.out.println("OrdersDAO.insertOrders totalAmount: " + totalAmount);
+		System.out.println("OrdersDAO.insertOrders totalPrice: " + totalPrice);
+		System.out.println("OrdersDAO.insertOrders address: " + address);
 		int row = 0;
 		
 		Connection conn = DBHelper.getConnection();
@@ -139,6 +166,9 @@ public class OrdersDAO {
 		stmt.setInt(3, totalAmount);
 		stmt.setInt(4, totalPrice);
 		stmt.setString(5, address);
+		
+		System.out.println("OrdersDAO.insertOrders:" + stmt);
+		
 		row = stmt.executeUpdate();
 		conn.close();
 		return row;
