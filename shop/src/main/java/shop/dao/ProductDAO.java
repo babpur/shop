@@ -88,6 +88,8 @@ public class ProductDAO {
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, productNo);
 		
+		System.out.println("ProductDAO.selectProductOneByCustomer: " + stmt);
+		
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			HashMap<String, Object> m = new HashMap<String, Object>();
@@ -109,6 +111,10 @@ public class ProductDAO {
 	// 상품 list 페이징(/customer/productList.jsp)
 	public static ArrayList<HashMap<String, Object>> selectProductCustomerList(int startRow, int rowPerPage)
 			throws Exception {
+		
+		System.out.println("ProductDAO.selectProductCustomerList startRow: " + startRow);
+		System.out.println("ProductDAO.selectProductCustomerList rowPerPage: " + rowPerPage);
+		
 		ArrayList<HashMap<String, Object>> list = 
 				new ArrayList<HashMap<String, Object>>();
 				
@@ -124,6 +130,7 @@ public class ProductDAO {
 			stmt.setInt(1, startRow);
 			stmt.setInt(2, rowPerPage);
 			
+			System.out.println("ProductDAO.selectCustomerList: " + stmt);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				HashMap<String, Object> m = new HashMap<String, Object>();
@@ -145,6 +152,7 @@ public class ProductDAO {
 	// /emp/productList - subMenu
 	public static ArrayList<HashMap<String, Object>> selectSubMenuList()
 			throws Exception {
+		
 		ArrayList<HashMap<String, Object>> list = 
 				new ArrayList<HashMap<String, Object>>();
 		
@@ -154,8 +162,10 @@ public class ProductDAO {
 			+ " FROM product"
 			+ " GROUP BY category"
 			+ " ORDER BY category asc;";	
+		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
+		
 		while(rs.next()) {
 			HashMap<String, Object> m = 
 					new HashMap<String, Object>();
@@ -173,6 +183,9 @@ public class ProductDAO {
 	// /emp/productOne.jsp
 	public static ArrayList<HashMap<String, Object>> selectProductOneByEmp(int productNo)
 		throws Exception {
+		
+		System.out.println("ProductDAO.selectProductOneByEmp productNo: " + productNo);
+		
 		ArrayList<HashMap<String, Object>> list = 
 				new ArrayList<HashMap<String, Object>>();
 		
@@ -183,6 +196,9 @@ public class ProductDAO {
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, productNo);
+		
+		System.out.println("ProductDAO.selectProductOneByEmp: " + stmt);
+		
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {
 			HashMap<String, Object> m = new HashMap<String, Object>();
@@ -205,7 +221,11 @@ public class ProductDAO {
 	// 상품 list 페이징(/emp/productList.jsp)
 	public static ArrayList<HashMap<String, Object>> selectProductList(int startRow, int rowPerPage)
 			throws Exception {
-			ArrayList<HashMap<String, Object>> list = 
+		
+		System.out.println("ProductDAO.selectProductList startRow: " + startRow);
+		System.out.println("ProductDAO.selectProductList rowPerPage: " + rowPerPage);
+		
+		ArrayList<HashMap<String, Object>> list = 
 					new ArrayList<HashMap<String, Object>>();
 			
 			Connection conn = DBHelper.getConnection();
@@ -218,6 +238,8 @@ public class ProductDAO {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, startRow);
 			stmt.setInt(2, rowPerPage);
+			
+			System.out.println("ProductDAO.selectProductList: " + stmt);
 			
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
