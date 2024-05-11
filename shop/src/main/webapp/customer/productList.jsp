@@ -236,19 +236,19 @@ ArrayList<HashMap<String, Object>> productList = ProductDAO.selectProductCustome
 					if (currentPage > 1) {
 				%>
 						<li class="page-item">
-							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=1&category=">처음</a>
+							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=1&category=<%=category%>">처음</a>
 						</li>
 						<li class="page-item">	 
-							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>">이전</a>
 						</li>
 				<%
 					} else {
 				%>	
 						<li class="page-item disabled">
-							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=1">처음</a>
+							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=1&category=<%=category%>">처음</a>
 						</li>
 						<li class="page-item disabled">
-							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>">이전</a>
 						</li>
 				<%		
 					}
@@ -256,19 +256,19 @@ ArrayList<HashMap<String, Object>> productList = ProductDAO.selectProductCustome
 					if(currentPage < lastPage) {
 				%>
 						<li class="page-item">
-							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>">다음</a>
 						</li>
 						<li class="page-item">
-							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
+							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=lastPage%>&category=<%=category%>">마지막</a>
 						</li>
 				<%		
 					} else {
 				%>
 						<li class="page-item disabled">
-							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>">다음</a>
 						</li>
 						<li class="page-item disabled">
-							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=lastPage%>">마지막</a>
+							<a class="page-link btn btn-secondary" href="/shop/customer/productList.jsp?currentPage=<%=lastPage%>&category=<%=category%>">마지막</a>
 						</li>
 				<%		
 					}
