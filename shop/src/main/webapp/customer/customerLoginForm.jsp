@@ -127,7 +127,7 @@
 						<label for="mail" >E-MAIL</label>
 					</td>
 					<td>
-						<input type="text" name="mail" id="mail">
+						<input type="text" name="mail" id="mail" placeholder="아이디를 입력해 주세요">
 					</td>
 				</tr>
 				<tr>
@@ -135,7 +135,7 @@
 						<label for="pw">PW</label>
 					</td>
 					<td>
-						<input type="password" name="pw">
+						<input type="password" name="pw" placeholder="비밀번호를 입력해 주세요">
 					</td>
 				</tr>
 				
