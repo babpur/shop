@@ -120,36 +120,40 @@
 		<h1>로그인</h1>
 	</header>
 	<main>
-		<form method="post" action="/shop/customer/customerLoginAction.jsp">
-			<table class="table table-hover table-content shadow rounded">
-				<tr>
-					<td>
-						<label for="mail" >E-MAIL</label>
-					</td>
-					<td>
-						<input type="text" name="mail" id="mail" placeholder="아이디를 입력해 주세요">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="pw">PW</label>
-					</td>
-					<td>
-						<input type="password" name="pw" placeholder="비밀번호를 입력해 주세요">
-					</td>
-				</tr>
-				
-				<tr>
-					<td colspan="2">
-						<button type="submit" class="btn btn-secondary button-size">로그인</button>
-						&nbsp;
-						<a class="btn btn-outline-secondary" href="/shop/customer/addCustomerForm.jsp">
-							회원 가입
-						</a>
-					</td>
-				</tr>
-			</table>
-		</form>
+		<div class="formContainer">
+			<form method="post" action="/shop/customer/customerLoginAction.jsp">
+				<div class="loginInputForm">
+					<table class="table table-hover table-content shadow rounded">
+						<tr>
+							<th>
+								<label for="mail" >E-MAIL</label>
+							</th>
+							<td>
+								<input type="text" name="mail" id="mail" placeholder="아이디를 입력해 주세요">
+							</td>
+						</tr>
+						<tr>
+							<th>
+								<label for="pw">PW</label>
+							</th>
+							<td>
+								<input type="password" name="pw" placeholder="비밀번호를 입력해 주세요">
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2">
+								<button type="submit" class="btn btn-secondary button-size">로그인</button>
+								&nbsp;
+								<a class="btn btn-outline-secondary" href="/shop/customer/addCustomerForm.jsp">
+									회원 가입
+								</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</form>
+		</div>
 		<a href="/shop/emp/empLoginForm.jsp">직원 로그인 전환</a>
 	</main>
 </body>
