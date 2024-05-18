@@ -154,7 +154,7 @@
 				</div>
 			</form>
 		</div>
-		<a href="/shop/emp/empLoginForm.jsp">직원 로그인 전환</a>
+		<button type="button" onclick="location.href = /shop/emp/empLoginForm.jsp">직원 로그인 전환</button>
 	</main>
 </body>
 </html>
