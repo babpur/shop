@@ -142,7 +142,7 @@
 			</table>
 			</form>
 		</div>
-		<a href="/shop/customer/customerLoginForm.jsp">고객 로그인 전환</a>
+		<button type="button" onclick="location.href='/shop/customer/customerLoginForm.jsp'">고객 로그인 전환</button>
 	</main>
 </body>
 </html>
