@@ -145,7 +145,7 @@
 							<td colspan="2">
 								<button type="submit" class="btn btn-secondary button-size">로그인</button>
 								&nbsp;
-								<a class="btn btn-outline-secondary" href="/shop/customer/addCustomerForm.jsp">
+								<button type="button" class= "btn btn-outline-secondary" onclick="location.href='/shop/customer/addCustomerForm.jsp'">
 									회원 가입
 								</a>
 							</td>

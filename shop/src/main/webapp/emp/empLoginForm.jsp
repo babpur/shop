@@ -133,7 +133,7 @@
 				<tr>
 					<td colspan="2">
 						<button type="button" class="btn btn-outline-secondary" 
-								onclick="'/shop/emp/addEmpForm.jsp'">
+								onclick="location.href='/shop/emp/addEmpForm.jsp'">
 								회원 가입
 						</button>
 						<button type="submit" class="btn btn-secondary">로그인</button>
