@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="shop.dao.*"%>
+<!-- Controller Layer -->
 <%
 	System.out.println("--------------------");
 	System.out.println("addCommentAction.jsp");
@@ -12,30 +12,37 @@
 		response.sendRedirect("/shop/customer/productList.jsp");
 		return;
 	}
-%>
-
-<%
+	
+	// productOne -> addCommentAction으로 넘어온 값
 	int ordersNo = Integer.parseInt(request.getParameter("ordersNo"));
 	int productNo = Integer.parseInt(request.getParameter("productNo"));
 	String content = request.getParameter("content");
-	int score = Integer.parseInt(request.getParameter("score"));
+	String scoreStr = request.getParameter("score");
 	
-	int row = CommentDAO.insertComment(ordersNo, score, content);
-	if(row == 1 ){
-		System.out.println("후기 작성 성공");
-	} else {
-		System.out.println("후기 작성 실패");
+	// 댓글 내용이 null이거나 공백일 경우, errorMsg를 반환
+	String errorMsg = null;
+	int score = 0;
+	if(content == null || content.isEmpty() || scoreStr == null || scoreStr.isEmpty() ) {
+		errorMsg = "내용을 입력해 주세요";
 	}
-	response.sendRedirect("/shop/customer/productList.jsp");
+	
+	// score를 str로 받은 뒤 null이 아닐 경우 int로 강제 형 변환
+	if(scoreStr != null) {
+		score = Integer.parseInt(scoreStr);
+	}
+%>
+<!-- Model Layer -->
+<%
+	int row = 0;
+	if(content != null) {
+		row = CommentDAO.insertComment(ordersNo, score, content);
+		if(row == 1 ){
+			System.out.println("후기 작성 성공");
+		} else {
+			System.out.println("후기 작성 실패");
+			response.sendRedirect("/shop/customer/productList.jsp?productNo=" + productNo + "&" + "errorMsg=" + errorMsg);
+		}
+		response.sendRedirect("/shop/customer/productList.jsp?productNo=" + productNo);
+	}
+	response.sendRedirect("/shop/customer/productList.jsp?productNo=" + productNo);
 %>    
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>

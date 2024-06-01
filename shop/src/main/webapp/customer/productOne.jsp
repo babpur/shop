@@ -30,9 +30,11 @@
 <%
 	int productNo = Integer.parseInt(request.getParameter("productNo"));
 	int productPrice = Integer.parseInt(request.getParameter("productPrice"));
+	String errorMsg = request.getParameter("errorMsg");
 	
 	System.out.println("productNo: " + productNo);
 	System.out.println("productPrice: " + productPrice);	
+	System.out.println("errorMsg:" + errorMsg);
 	
 	ArrayList<HashMap<String, Object>> productOne = ProductDAO.selectProductOneByCustomer(productNo);
 	
@@ -295,6 +297,13 @@
 						<%=(String)c.get("content")%><br>
 						상품 구매: <%=(String)c.get("orderCreateDate")%><br><br>
 						리뷰 등록: <%=(String)c.get("commentCreateDate")%><br>
+						<%
+							if(errorMsg != null){
+						%>
+								<div><%=errorMsg%></div>
+						<%		
+							}
+						%>
 						<form method="post" action="/shop/customer/deleteCommentAction.jsp">
 							<input type="hidden" name="mail" value="<%=mail%>">
 							<input type="hidden" name="productNo" value="<%=productNo%>">
