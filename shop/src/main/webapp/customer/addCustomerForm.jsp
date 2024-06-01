@@ -2,10 +2,11 @@
 <%
 	System.out.println("--------------------");
 	System.out.println("addCustomerForm.jsp");
+
 	
 	String checkMail = request.getParameter("checkMail");
 	String ck = request.getParameter("ck");
-	
+	String errorMsg = request.getParameter("errorMsg");
 	System.out.println(checkMail);
 	System.out.println(ck);
 	
@@ -206,6 +207,13 @@
 				</td>
 			</tr>
 		</table>
+		<%
+			if(errorMsg != null){
+		%>
+				<div><%=errorMsg%></div>
+		<%
+			}
+		%>
 		</form>
 	</main>
 </body>

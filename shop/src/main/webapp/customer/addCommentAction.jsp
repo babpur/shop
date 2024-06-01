@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="shop.dao.*"%>
+<%@ page import="java.net.*"%>
 <!-- Controller Layer -->
 <%
 	System.out.println("--------------------");
@@ -18,6 +19,12 @@
 	int productNo = Integer.parseInt(request.getParameter("productNo"));
 	String content = request.getParameter("content");
 	String scoreStr = request.getParameter("score");
+	
+	// 디버깅
+	System.out.println("ordersNo: " + ordersNo);
+	System.out.println("productNo: " + productNo);
+	System.out.println("content: " + content);
+	System.out.println("score: " + scoreStr);
 	
 	// 댓글 내용이 null이거나 공백일 경우, errorMsg를 반환
 	String errorMsg = null;
@@ -40,6 +47,7 @@
 			System.out.println("후기 작성 성공");
 		} else {
 			System.out.println("후기 작성 실패");
+			errorMsg = URLEncoder.encode( errorMsg, "utf-8");
 			response.sendRedirect("/shop/customer/productList.jsp?productNo=" + productNo + "&" + "errorMsg=" + errorMsg);
 		}
 		response.sendRedirect("/shop/customer/productList.jsp?productNo=" + productNo);
