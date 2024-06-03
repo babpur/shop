@@ -22,6 +22,12 @@
 	int totalPrice = productPrice * totalAmount;
 	String address = request.getParameter("address");
 	
+	String errorMsg = null;
+	
+	if(productPrice == 0 || totalAmount == 0 || address == null || address.isEmpty()) {
+		errorMsg = "주문 정보를 입력해 주세요";
+	}
+	
 	System.out.println("mail: " + mail);
 	System.out.println("productNo: " + productNo);
 	System.out.println("productPrice: " + productPrice);
