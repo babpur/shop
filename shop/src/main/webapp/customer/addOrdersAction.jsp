@@ -44,7 +44,7 @@
 	int row2 = ProductDAO.updateProductAmount(productNo, totalAmount);
 	
 	// row1과 row2가 둘 다 실행된다면 상품 주문 성공
-	if(row1 == 1 && row2 == 1) {
+	if(row1 == 1 && row2 == 1 && errorMsg == null) {
 			System.out.println("상품 주문 성공");
 			msg = URLEncoder.encode("상품 주문에 성공하였습니다.", "UTF-8");
 			response.sendRedirect("/shop/customer/ordersListCustomer.jsp?mail=" + mail + "&" + "msg=" + msg);
@@ -52,6 +52,7 @@
 		} else {
 			System.out.println("상품 주문 실패");
 			msg = URLEncoder.encode("상품 주문에 실패하였습니다.", "UTF-8");
-			response.sendRedirect("/shop/customer/productOne.jsp?productNo="+ productNo + "msg= " + msg);
+			errorMsg = URLEncoder.encode(errorMsg, "UTF-8");
+			response.sendRedirect("/shop/customer/productOne.jsp?productNo="+ productNo + "errorMsg= " + errorMsg);
 		}
 %>
