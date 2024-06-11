@@ -15,6 +15,9 @@
 		response.sendRedirect("/shop/emp/empLoginForm.jsp");
 		return;
 	}
+	
+	String errorMsg = request.getParameter("errorMsg");
+	
 %>	
 <!-- model -->
 <%
@@ -120,6 +123,13 @@
 		<input type="text" name="addCategory" id="addCategory">
 		<button type="submit" class="btn btn-secondary">추가</button>
 	</form>
+	<%
+		if(errorMsg != null) {
+	%>
+			<div><%=errorMsg%></div>	
+	<%	
+		}
+	%>
 	</main>
 </body>
 </html>
