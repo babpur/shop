@@ -136,7 +136,7 @@
 								onclick="location.href='/shop/emp/addEmpForm.jsp'">
 								회원 가입
 						</button>
-						<button type="submit" class="btn btn-secondary">로그인</button>
+						<button type="submit" id="loginBtn" class="btn btn-secondary">로그인</button>
 					</td>
 				</tr>
 			</table>
@@ -144,5 +144,24 @@
 		</div>
 		<button type="button" onclick="location.href='/shop/customer/customerLoginForm.jsp'">고객 로그인 전환</button>
 	</main>
+	
+	<script>
+		window.addEventListener('load', function() {
+			let loginBtn = document.querySelector('#loginBtn')
+			let empId = documet.querySelecetor('[name=:empId]').value.trim();
+			let empPw = documet.querySelecetor('[name=:empPw]').value.trim();
+		})
+		
+		if(empId === ''){
+			alert('로그인 ID를 입력해 주세요');
+			event.preventDefault();
+			return;
+		}
+		if(empPw === ''){
+			alert('로그인 PW를 입력해 주세요');
+			event.preventDefault();
+			return;
+		}
+	</script>
 </body>
 </html>
