@@ -154,12 +154,42 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<button type="submit">회원 가입</button>
+						<button id="addEmpBtn" type="submit">회원 가입</button>
 					</td>
-					
 				</tr>
 			</table>
 		</form>
 	</main>
+	<script>
+		window.addEventListenener('load', function() {
+			let addEmpBtn = document.querySelector('#addEmpBtn'); 
+			let empId = document.querySelector('[name=:empId]').value.trim();
+			let empPw = document.querySelector('[name=:empPw]').value.trim();
+			let empName = document.querySelector('[name=:empName]').value.trim();
+			let empJob = document.querySelector('[name=:empJob]').value.trim();
+			
+			if(empId === '') {
+				alert('ID를 입력해 주세요.');
+				event.preventDefault();
+				return;
+			}
+			if(empPw === '') {
+				alert('PW를 입력해 주세요.');
+				event.preventDefault();
+				return;
+			}
+			if(empName === '') {
+				alert('이름을 입력해 주세요.');
+				event.preventDefault();
+				return;
+			}
+			if(empJob === '') {
+				alert('부서를 입력해 주세요.');
+				event.preventDefault();
+				return;
+			}
+		})
+		}
+	</script>
 </body>
 </html>
