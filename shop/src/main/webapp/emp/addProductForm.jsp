@@ -163,50 +163,6 @@
 				</tr>
 			</table>
 		</form>
-		<script>
-		window.addEventListenener('load', function() {
-			let addProductBtn = document.querySelector('#addProductBtn'); 
-			let category = document.querySelector('[name=:category]').value.trim();
-			let productTitle = document.querySelector('[name=:productTitle]').value.trim();
-			let productImg = document.querySelector('[name=:productImg]').value.trim();
-			let productPrice = document.querySelector('[name=:productPrice]').value.trim();
-			let productAmount = document.querySelector('[name=:productAmount]').value.trim();
-			let productContent = document.querySelector('[name=:productContent]').value.trim();
-			
-			
-			if(category === '') {
-				alert('카테고리를 선택해 주세요.');
-				event.preventDefault();
-				return;
-			}
-			if(productTitle === '') {
-				alert('상품 제목을 입력해 주세요.');
-				event.preventDefault();
-				return;
-			}
-			if(productImg === '') {
-				alert('상품 이미지를 등록해 주세요.');
-				event.preventDefault();
-				return;
-			}
-			if(productPrice === '') {
-				alert('상품 금액을 입력해 주세요.');
-				event.preventDefault();
-				return;
-			}
-			if(productAmount === '') {
-				alert('상품 수량을 입력해 주세요.');
-				event.preventDefault();
-				return;
-			}
-			if(productContent === '') {
-				alert('상품 내용을 입력해 주세요.');
-				event.preventDefault();
-				return;
-			}
-		})
-		}
-	</script>	
 	</main>
 </body>
 </html>
