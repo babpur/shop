@@ -127,8 +127,6 @@
 	
 	<main class="bg-light">
 		<table class="table table-hover shadow rounded">
-		
-			<!--  -->
 			<%
 				for(HashMap<String, Object> p : productOne) {
 			%>

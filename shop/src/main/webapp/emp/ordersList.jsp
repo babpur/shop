@@ -170,7 +170,7 @@
 							<td>
 								<form method="post" action="modifyStateAction.jsp">
 								<input type="hidden" value="<%=m.get("ordersNo")%>">
-								<select name="newState"> <!--  -->
+								<select name="newState"> 
 									<option value="<%=m.get("state")%>" selected="selected">
 										<%=m.get("state")%>
 									</option>
